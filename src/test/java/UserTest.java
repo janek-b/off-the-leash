@@ -88,4 +88,55 @@ public class UserTest {
     assertEquals(null, user.getCheckedIn());
   }
 
+  @Test
+  public void getReviews_returnsAllReviewsForAUser() {
+    User user = new User("Fred");
+    user.save();
+    Park testPark = new Park("park", "park-location", "medium", true, true);
+    testPark.save();
+    Review testReview1 = new Review(user.getId(), testPark.getId(), "review title1", "review text1");
+    testReview1.save();
+    Review testReview2 = new Review(user.getId(), testPark.getId(), "review title2", "review text2");
+    testReview2.save();
+    Review testReview3 = new Review(1, 1, "review title3", "review text3");
+    testReview3.save();
+    Review[] reviews = new Review[] {testReview1, testReview2};
+    assertTrue(user.getReviews().containsAll(Arrays.asList(reviews)));
+    assertFalse(user.getReviews().contains(testReview3));
+  }
+
+  @Test
+  public void getFavoriteParks_returnsListOfParksAUserHasUpvoted() {
+    User user = new User("Fred");
+    user.save();
+    Park testPark = new Park("park1", "park-location1", "medium1", true, true);
+    testPark.save();
+    Park testPark2 = new Park("park2", "park-location2", "medium2", true, true);
+    testPark2.save();
+    Park testPark3 = new Park("park3", "park-location3", "medium3", true, true);
+    testPark3.save();
+    testPark.upVote(user);
+    testPark2.upVote(user);
+    Park[] parks = new Park[] {testPark, testPark2};
+    assertTrue(user.getFavoriteParks().containsAll(Arrays.asList(parks)));
+    assertFalse(user.getFavoriteParks().contains(testPark3));
+  }
+
+  @Test
+  public void getLeastFavoriteParks_returnsListOfParksAUserHasUpvoted() {
+    User user = new User("Fred");
+    user.save();
+    Park testPark = new Park("park1", "park-location1", "medium1", true, true);
+    testPark.save();
+    Park testPark2 = new Park("park2", "park-location2", "medium2", true, true);
+    testPark2.save();
+    Park testPark3 = new Park("park3", "park-location3", "medium3", true, true);
+    testPark3.save();
+    testPark.downVote(user);
+    testPark2.downVote(user);
+    Park[] parks = new Park[] {testPark, testPark2};
+    assertTrue(user.getLeastFavoriteParks().containsAll(Arrays.asList(parks)));
+    assertFalse(user.getLeastFavoriteParks().contains(testPark3));
+  }
+
 }
