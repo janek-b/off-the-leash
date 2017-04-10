@@ -84,4 +84,13 @@ public class Park {
     }
   }
 
+  public static Park find(int id) {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM parks WHERE id = :id;";
+      return con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Park.class);
+    }
+  }
+
 }

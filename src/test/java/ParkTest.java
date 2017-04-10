@@ -74,4 +74,27 @@ public class ParkTest {
     assertTrue(Park.all().get(1).equals(testPark2));
   }
 
+  @Test
+  public void save_assignsAnId() {
+    Park testPark = new Park("park", "park-location", "medium", true, true);
+    testPark.save();
+    assertEquals(testPark.getId(), Park.all().get(0).getId());
+  }
+
+  @Test
+  public void getId_returnsAnObjectsId() {
+    Park testPark = new Park("park", "park-location", "medium", true, true);
+    testPark.save();
+    assertTrue(testPark.getId() > 0);
+  }
+
+  @Test
+  public void find_returnsParkWithMatchingId() {
+    Park testPark = new Park("park", "park-location", "medium", true, true);
+    testPark.save();
+    Park testPark2 = new Park("park", "park-location", "medium", true, true);
+    testPark2.save();
+    assertTrue(Park.find(testPark2.getId()).equals(testPark2));
+  }
+
 }
