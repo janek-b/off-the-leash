@@ -15,8 +15,22 @@ public class Park {
   private boolean fenced;
   private boolean small;
 
-  public Park() {
+  public Park(String name, String location, String size, boolean fenced, boolean small) {
+    this.name = name;
+    this.location = location;
+    this.size = size;
+  }
 
+  public String getName() {
+    return this.name;
+  }
+
+  public String getLocation() {
+    return this.location;
+  }
+
+  public String getSize() {
+    return this.size;
   }
 
 }
