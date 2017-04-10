@@ -154,7 +154,7 @@ CREATE TABLE reviews (
     userid integer,
     parkid integer,
     title character varying,
-    review character varying
+    content character varying
 );
 
 
@@ -340,7 +340,7 @@ SELECT pg_catalog.setval('parks_id_seq', 1, false);
 -- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY reviews (id, userid, parkid, title, review) FROM stdin;
+COPY reviews (id, userid, parkid, title, content) FROM stdin;
 \.
 
 

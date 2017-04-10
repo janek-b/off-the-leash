@@ -30,7 +30,7 @@ If the above does not work, use these commands to create the DB tables.
 * `CREATE TABLE parks (id serial PRIMARY KEY, name varchar, location varchar, size varchar, fenced boolean, small boolean, upVote int, downVote int);`
 * `CREATE TABLE users (id serial PRIMARY KEY, name varchar);`
 * `CREATE TABLE dogs (id serial PRIMARY KEY, userId int, name varchar, gender varchar, altered boolean, breed varchar);`
-* `CREATE TABLE reviews (id serial PRIMARY KEY, userId int, parkId int, title varchar, review varchar);`
+* `CREATE TABLE reviews (id serial PRIMARY KEY, userId int, parkId int, title varchar, content varchar);`
 * `CREATE TABLE checkins (id serial PRIMARY KEY, userId int, parkId int, checkin timestamp, checkout timestamp);`
 * `CREATE TABLE votes (id serial PRIMARY KEY, userId int, parkId int, direction varchar);`
 

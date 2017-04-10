@@ -12,10 +12,29 @@ public class Review {
   private int userId;
   private int parkId;
   private String title;
-  private String review;
+  private String content;
 
-  public Review(int userId, int parkId, String title, String review) {
+  public Review(int userId, int parkId, String title, String content) {
+    this.userId = userId;
+    this.parkId = parkId;
+    this.title = title;
+    this.content = content;
+  }
 
+  public int getUserId() {
+    return this.userId;
+  }
+
+  public int getParkId() {
+    return this.parkId;
+  }
+
+  public String getTitle() {
+    return this.title;
+  }
+
+  public String getContent() {
+    return this.content;
   }
 
 }
