@@ -113,4 +113,31 @@ public class User implements BasicMethodsInterface {
         .executeUpdate();
     }
   }
+
+  public List<Review> getReviews() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM reviews WHERE userId = :id;";
+      return con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeAndFetch(Review.class);
+    }
+  }
+
+  public List<Park> getFavoriteParks() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT parks.* FROM parks JOIN votes ON (parks.id = votes.parkId) WHERE votes.userId = :id AND votes.direction = 'up';";
+      return con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeAndFetch(Park.class);
+    }
+  }
+
+  public List<Park> getLeastFavoriteParks() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT parks.* FROM parks JOIN votes ON (parks.id = votes.parkId) WHERE votes.userId = :id AND votes.direction = 'down';";
+      return con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeAndFetch(Park.class);
+    }
+  }
 }
