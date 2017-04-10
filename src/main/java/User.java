@@ -25,4 +25,15 @@ public class User {
     return id;
   }
 
+  @Override
+  public boolean equals(Object otherUser){
+    if (!(otherUser instanceof User)) {
+      return false;
+    } else {
+      User newUser = (User) otherUser;
+      return this.getName().equals(newUser.getName());
+    }
+  }
+
+
 }

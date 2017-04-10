@@ -24,4 +24,11 @@ public class UserTest {
     assertEquals("Willow", newUser.getName());
   }
 
+  public void equals_returnsTrueIfUserNameIsSame() {
+    User newUser = new User("Willow");
+    User anotherUser = new User("Willow");
+    assertTrue(newUser.equals(anotherUser));
+  }
+
+
 }
