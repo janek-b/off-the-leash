@@ -20,10 +20,10 @@ public class ReviewTest {
     assertTrue(testReview instanceof Review);
   }
 
-  @Test
-  public void getUserId_returnsReviewUserIdCorrectly() {
-    Review testReview = new Review(1, 1, "review title", "review text");
-    assertEquals(1, testReview.getUserId());
-  }
+  // @Test
+  // public void getUserId_returnsReviewUserIdCorrectly() {
+  //   Review testReview = new Review(1, 1, "review title", "review text");
+  //   assertEquals(1, testReview.getUserId());
+  // }
 
 }

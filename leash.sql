@@ -116,7 +116,9 @@ CREATE TABLE parks (
     location character varying,
     size character varying,
     fenced boolean,
-    small boolean
+    small boolean,
+    upvote integer,
+    downvote integer
 );
 
 
@@ -152,8 +154,7 @@ CREATE TABLE reviews (
     userid integer,
     parkid integer,
     title character varying,
-    review character varying,
-    rating integer
+    review character varying
 );
 
 
@@ -214,6 +215,41 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
+-- Name: votes; Type: TABLE; Schema: public; Owner: Guest
+--
+
+CREATE TABLE votes (
+    id integer NOT NULL,
+    userid integer,
+    parkid integer,
+    direction character varying
+);
+
+
+ALTER TABLE votes OWNER TO "Guest";
+
+--
+-- Name: votes_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+--
+
+CREATE SEQUENCE votes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE votes_id_seq OWNER TO "Guest";
+
+--
+-- Name: votes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+--
+
+ALTER SEQUENCE votes_id_seq OWNED BY votes.id;
+
+
+--
 -- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
@@ -246,6 +282,13 @@ ALTER TABLE ONLY reviews ALTER COLUMN id SET DEFAULT nextval('reviews_id_seq'::r
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
+--
+
+ALTER TABLE ONLY votes ALTER COLUMN id SET DEFAULT nextval('votes_id_seq'::regclass);
 
 
 --
@@ -282,7 +325,7 @@ SELECT pg_catalog.setval('dogs_id_seq', 1, false);
 -- Data for Name: parks; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY parks (id, name, location, size, fenced, small) FROM stdin;
+COPY parks (id, name, location, size, fenced, small, upvote, downvote) FROM stdin;
 \.
 
 
@@ -297,7 +340,7 @@ SELECT pg_catalog.setval('parks_id_seq', 1, false);
 -- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY reviews (id, userid, parkid, title, review, rating) FROM stdin;
+COPY reviews (id, userid, parkid, title, review) FROM stdin;
 \.
 
 
@@ -321,6 +364,21 @@ COPY users (id, name) FROM stdin;
 --
 
 SELECT pg_catalog.setval('users_id_seq', 1, false);
+
+
+--
+-- Data for Name: votes; Type: TABLE DATA; Schema: public; Owner: Guest
+--
+
+COPY votes (id, userid, parkid, direction) FROM stdin;
+\.
+
+
+--
+-- Name: votes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+--
+
+SELECT pg_catalog.setval('votes_id_seq', 1, false);
 
 
 --
@@ -361,6 +419,14 @@ ALTER TABLE ONLY reviews
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: votes_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
+--
+
+ALTER TABLE ONLY votes
+    ADD CONSTRAINT votes_pkey PRIMARY KEY (id);
 
 
 --
