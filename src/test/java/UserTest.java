@@ -30,5 +30,12 @@ public class UserTest {
     assertTrue(newUser.equals(anotherUser));
   }
 
+  public void save_savesUserInfotoDatabase() {
+    User newUser = new User("Willow");
+    newUser.save();
+    User otherUser = User.all().get(0);
+    assertEquals(newUser.getId(), otherUser.getId());
+  }
+
 
 }
