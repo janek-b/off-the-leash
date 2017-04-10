@@ -57,7 +57,7 @@ public class User implements BasicMethodsInterface {
       User user  = con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetchFirst(User.class);
-        return user;
+      return user;
     }
   }
 
