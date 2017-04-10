@@ -2,7 +2,7 @@
 
 #### _off-the-leash, 04-10-2017_
 
-#### By _**Janek Brandt, Chris Finney, Jahan Walsh and Grace Stuart**_
+#### By _**<a href="https://github.com/janek-b">Janek Brandt</a>, <a href="https://github.com/finneywhat">Chris Finney</a>,<a href="https://github.com/jwalsh370">Jahan Walsh</a> and <a href="https://github.com/gstuart">Grace Stuart</a>**_
 
 ## Description
 _Example text for the description of the project_
