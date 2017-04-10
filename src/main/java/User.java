@@ -81,4 +81,63 @@ public class User implements BasicMethodsInterface {
          .executeUpdate();
     }
   }
+
+  public Park getCheckedIn() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT parks.* FROM parks JOIN checkins ON (parks.id = checkins.parkId) JOIN users ON (checkins.userId = users.id) WHERE users.id = :id AND checkins.checkout IS NULL;";
+      return con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeAndFetchFirst(Park.class);
+    }
+  }
+
+  public void checkIn(Park park) {
+    if (this.getCheckedIn() == null) {
+      try (Connection con = DB.sql2o.open()) {
+        String sql = "INSERT INTO checkins (userId, parkId, checkin) VALUES (:userId, :parkId, now());";
+        con.createQuery(sql)
+        .addParameter("userId", this.id)
+        .addParameter("parkId", park.getId())
+        .executeUpdate();
+      }
+    }
+  }
+
+  public void checkOut() {
+    Park park = this.getCheckedIn();
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE checkins SET checkout = now() WHERE (userId, parkId) = (:userId, :parkId);";
+      con.createQuery(sql)
+        .addParameter("userId", this.id)
+        .addParameter("parkId", park.getId())
+        .executeUpdate();
+    }
+  }
+
+  public List<Review> getReviews() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM reviews WHERE userId = :id;";
+      return con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeAndFetch(Review.class);
+    }
+  }
+
+  public List<Park> getFavoriteParks() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT parks.* FROM parks JOIN votes ON (parks.id = votes.parkId) WHERE votes.userId = :id AND votes.direction = 'up';";
+      return con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeAndFetch(Park.class);
+    }
+  }
+
+  public List<Park> getLeastFavoriteParks() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT parks.* FROM parks JOIN votes ON (parks.id = votes.parkId) WHERE votes.userId = :id AND votes.direction = 'down';";
+      return con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeAndFetch(Park.class);
+    }
+  }
 }
