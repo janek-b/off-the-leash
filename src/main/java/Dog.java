@@ -16,8 +16,36 @@ public class Dog {
   private String breed;
 
 
-  public Dog() {
+  public Dog(String name, String gender, String breed, boolean altered, int userId) {
+    this.name = name;
+    this.gender = gender;
+    this.breed = breed;
+    this.altered = altered;
+    this.userId = userId;
+  }
 
+  public String getName() {
+    return name;
+  }
+
+  public String getGender() {
+    return gender;
+  }
+
+  public String getbreed() {
+    return breed;
+  }
+
+  public boolean altered(){
+    return false;
+  }
+
+  public int getUserId() {
+    return userId;
+  }
+
+  public int getId() {
+    return id;
   }
 
 }
