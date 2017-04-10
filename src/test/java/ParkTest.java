@@ -169,4 +169,19 @@ public class ParkTest {
     assertFalse(testPark.getReviews().contains(testReview3));
   }
 
+  @Test
+  public void getCurrentVisitors_returnsTheCurrentNumberOfCheckedInUsers() {
+    Park testPark = new Park("park", "park-location", "medium", true, true);
+    testPark.save();
+    User user1 = new User("Fred");
+    user1.save();
+    User user2 = new User("Frank");
+    user2.save();
+    user1.checkIn(testPark);
+    user2.checkIn(testPark);
+    assertEquals((Integer) 2, testPark.getCurrentVisitors());
+    user1.checkOut();
+    assertEquals((Integer) 1, testPark.getCurrentVisitors());
+  }
+
 }

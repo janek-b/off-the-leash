@@ -92,16 +92,19 @@ public class User implements BasicMethodsInterface {
   }
 
   public void checkIn(Park park) {
-    try (Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO checkins (userId, parkId, checkin) VALUES (:userId, :parkId, now());";
-      con.createQuery(sql)
+    if (this.getCheckedIn() == null) {
+      try (Connection con = DB.sql2o.open()) {
+        String sql = "INSERT INTO checkins (userId, parkId, checkin) VALUES (:userId, :parkId, now());";
+        con.createQuery(sql)
         .addParameter("userId", this.id)
         .addParameter("parkId", park.getId())
         .executeUpdate();
+      }
     }
   }
 
-  public void checkOut(Park park) {
+  public void checkOut() {
+    Park park = this.getCheckedIn();
     try (Connection con = DB.sql2o.open()) {
       String sql = "UPDATE checkins SET checkout = now() WHERE (userId, parkId) = (:userId, :parkId);";
       con.createQuery(sql)

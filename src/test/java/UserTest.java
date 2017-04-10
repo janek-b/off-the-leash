@@ -84,7 +84,7 @@ public class UserTest {
     testPark.save();
     user.checkIn(testPark);
     assertEquals(testPark, user.getCheckedIn());
-    user.checkOut(testPark);
+    user.checkOut();
     assertEquals(null, user.getCheckedIn());
   }
 
