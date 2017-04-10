@@ -30,5 +30,13 @@ public class DogTest {
     assertEquals(1, newDog.getUserId());
   }
 
+  @Test
+  public void equals_returnsTrueIfUserNameIsSame() {
+    Dog newDog = new Dog("Rufus", "Male", "greyhound", false, 1);
+    Dog dog = new Dog("Rufus", "Male", "greyhound", false, 1);
+    assertTrue(newDog.equals(dog));
+  }
+
+
 
 }

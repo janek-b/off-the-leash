@@ -48,4 +48,18 @@ public class Dog {
     return id;
   }
 
+  @Override
+  public boolean equals(Object otherDog){
+    if (!(otherDog instanceof Dog)) {
+      return false;
+    } else {
+      Dog newDog = (Dog) otherDog;
+      return this.getName().equals(newDog.getName()) &&
+      this.getGender().equals(newDog.getGender()) &&
+      this.getBreed().equals(newDog.getBreed()) &&
+      // this.altered().equals(newDog.altered()) &&
+      this.getUserId() == (newDog.getUserId());
+    }
+  }
+
 }
