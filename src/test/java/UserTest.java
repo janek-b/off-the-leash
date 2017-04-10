@@ -14,4 +14,9 @@ public class UserTest {
   @Rule
   public DatabaseRule database = new DatabaseRule();
 
+  public void User_objectInstantiatesCorrectly_True() {
+    User newUser = new User("Willow");
+    assertEquals(true, newUser instanceof User);
+  }
+
 }
