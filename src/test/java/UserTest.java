@@ -19,4 +19,9 @@ public class UserTest {
     assertEquals(true, newUser instanceof User);
   }
 
+  public void User_getNameRetrievesName_True() {
+    User newUser = new User("Willow");
+    assertEquals("Willow", newUser.getName());
+  }
+
 }
