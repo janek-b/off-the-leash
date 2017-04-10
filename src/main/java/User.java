@@ -52,4 +52,14 @@ public class User implements BasicMethodsInterface {
       return con.createQuery(sql).executeAndFetch(User.class);
     }
   }
+
+  public static User find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM users WHERE id = :id;";
+      User user  = con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(User.class);
+        return user;
+    }
+  }
 }
