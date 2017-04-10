@@ -58,4 +58,12 @@ public class UserTest {
     assertEquals("Freddie", user.getName());
   }
 
+  @Test
+  public void delete_deletesUser() {
+    User user = new User("Fred");
+    user.save();
+    user.delete();
+    assertEquals(0, User.all().size());
+  }
+
 }
