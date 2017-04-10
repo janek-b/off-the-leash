@@ -118,4 +118,40 @@ public class ParkTest {
     assertEquals(null, Park.find(testPark.getId()));
   }
 
+  @Test
+  public void upVote_increasesUpVoteCount() {
+    Park testPark = new Park("park", "park-location", "medium", true, true);
+    testPark.save();
+    User testUser = new User("testUser");
+    testUser.save();
+    assertEquals(0, testPark.getUpVotes());
+    testPark.upVote(testUser);
+    assertEquals(1, testPark.getUpVotes());
+    testPark.upVote(testUser);
+    assertEquals(0, testPark.getUpVotes());
+    testPark.upVote(testUser);
+    assertEquals(1, testPark.getUpVotes());
+    testPark.downVote(testUser);
+    assertEquals(0, testPark.getUpVotes());
+    assertEquals(1, testPark.getDownVotes());
+  }
+
+  @Test
+  public void downVote_increasesUpVoteCount() {
+    Park testPark = new Park("park", "park-location", "medium", true, true);
+    testPark.save();
+    User testUser = new User("testUser");
+    testUser.save();
+    assertEquals(0, testPark.getDownVotes());
+    testPark.downVote(testUser);
+    assertEquals(1, testPark.getDownVotes());
+    testPark.downVote(testUser);
+    assertEquals(0, testPark.getDownVotes());
+    testPark.downVote(testUser);
+    assertEquals(1, testPark.getDownVotes());
+    testPark.upVote(testUser);
+    assertEquals(0, testPark.getDownVotes());
+    assertEquals(1, testPark.getUpVotes());
+  }
+
 }
