@@ -235,4 +235,22 @@ public class Park implements BasicMethodsInterface {
     }
   }
 
+  public List<Review> getReviews() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM reviews WHERE parkId = :id;";
+      return con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeAndFetch(Review.class);
+    }
+  }
+
+  public Integer getCurrentVisitors() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT COUNT(users.id) FROM users JOIN checkins ON (users.id = checkins.userId) JOIN parks ON (checkins.parkId = parks.id) WHERE parks.id = :id AND checkins.checkout IS NULL;";
+      return con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeScalar(Integer.class);
+    }
+  }
+
 }
