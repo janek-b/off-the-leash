@@ -97,4 +97,17 @@ public class ParkTest {
     assertTrue(Park.find(testPark2.getId()).equals(testPark2));
   }
 
+  @Test
+  public void update_updatesParkPropertiesInDB() {
+    Park testPark = new Park("park", "park-location", "medium", true, true);
+    testPark.save();
+    testPark.update("park1", "park-locations", "large", false, false);
+    assertEquals("park1", Park.find(testPark.getId()).getName());
+    assertEquals("park1", testPark.getName());
+    assertEquals("park-locations", Park.find(testPark.getId()).getLocation());
+    assertEquals("large", Park.find(testPark.getId()).getSize());
+    assertEquals(false, Park.find(testPark.getId()).isFenced());
+    assertEquals(false, Park.find(testPark.getId()).hasSmallDogsArea());
+  }
+
 }

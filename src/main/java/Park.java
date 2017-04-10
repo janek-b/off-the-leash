@@ -93,4 +93,23 @@ public class Park {
     }
   }
 
+  public void update(String name, String location, String size, boolean fenced, boolean small) {
+    this.name = name;
+    this.location = location;
+    this.size = size;
+    this.fenced = fenced;
+    this.small = small;
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE parks SET (name, location, size, fenced, small) = (:name, :location, :size, :fenced, :small) WHERE id = :id;";
+      con.createQuery(sql)
+        .addParameter("name", this.name)
+        .addParameter("location", this.location)
+        .addParameter("size", this.size)
+        .addParameter("fenced", this.fenced)
+        .addParameter("small", this.small)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
+  }
+
 }
