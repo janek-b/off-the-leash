@@ -37,7 +37,7 @@ public class Dog {
   }
 
   public boolean altered(){
-    return false;
+    return altered;
   }
 
   public int getUserId() {
@@ -93,7 +93,7 @@ public class Dog {
     }
   }
 
-  public void update(int UserId, String name, String gender,  String breed, boolean altered){
+  public void update(String name, String gender,  String breed, boolean altered, int userId){
     this.userId = userId;
     this.name = name;
     this.gender = gender;
@@ -101,32 +101,40 @@ public class Dog {
     this.altered = altered;
 
     try(Connection con = DB.sql2o.open()) {
-      String name = "UPDATE dogs SET name = :name WHERE id = :id;";
-      String gender ="UPDATE dogs SET gender = :gender WHERE id = :id;";
-      String breed = "UPDATE dogs SET breed = :breed WHERE id = :id;";
-      boolean altered ="UPDATE dogs SET altered = :altered WHERE id = :id;";
-      int userId = "UPDATE dogs SET userId = :userId WHERE id = :id";
-      con.createQuery(name)
-        .addParameter("name", name)
-        .addParameter("id", id)
-        .executeUpdate();
-      con.createQuery(gender)
-        .addParameter("gender", gender)
-        .addParameter("id", id)
-        .executeUpdate();
-      con.createQuery(breed)
-        .addParameter("breed", breed)
-        .addParameter("id", id)
-        .executeUpdate();
-      con.createQuery(altered)
-        .addParameter("altered", altered)
-        .addParameter("id", id)
-        .executeUpdate();
-      con.createQuery(userId)
-        .addParameter("userId", userId)
-        .addParameter("id", id)
-        .executeUpdate();
-
+      String update = "UPDATE dogs SET (name, gender, breed, altered, userId) = (:name, :gender, :breed, :altered, :userId) WHERE id = :id;";
+      con.createQuery(update)
+         .addParameter("name", name)
+         .addParameter("gender", gender)
+         .addParameter("breed", breed)
+         .addParameter("altered", altered)
+         .addParameter("userId", userId)
+         .addParameter("id", this.id)
+         .executeUpdate();
+      // String name = "UPDATE dogs SET name = :name WHERE id = :id;";
+      // String gender ="UPDATE dogs SET gender = :gender WHERE id = :id;";
+      // String breed = "UPDATE dogs SET breed = :breed WHERE id = :id;";
+      // boolean altered ="UPDATE dogs SET altered = :altered WHERE id = :id;";
+      // int userId = "UPDATE dogs SET userId = :userId WHERE id = :id";
+      // con.createQuery(name)
+      //   .addParameter("name", name)
+      //   .addParameter("id", id)
+      //   .executeUpdate();
+      // con.createQuery(gender)
+      //   .addParameter("gender", gender)
+      //   .addParameter("id", id)
+      //   .executeUpdate();
+      // con.createQuery(breed)
+      //   .addParameter("breed", breed)
+      //   .addParameter("id", id)
+      //   .executeUpdate();
+      // con.createQuery(altered)
+      //   .addParameter("altered", altered)
+      //   .addParameter("id", id)
+      //   .executeUpdate();
+      // con.createQuery(userId)
+      //   .addParameter("userId", userId)
+      //   .addParameter("id", id)
+      //   .executeUpdate();
     }
   }
 

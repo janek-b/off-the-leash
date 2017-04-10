@@ -62,7 +62,7 @@ public class DogTest {
     assertEquals("Randy", dog.getName());
     assertEquals("Female", dog.getGender());
     assertEquals("dalmation", dog.getBreed());
-    assertEquals("true", dog.altered());
+    assertEquals(true, dog.altered());
     assertEquals(2, dog.getUserId());
   }
 
