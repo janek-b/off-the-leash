@@ -82,4 +82,13 @@ public class ReviewTest {
     assertTrue(testReview.getId() > 0);
   }
 
+  @Test
+  public void find_returnsReviewWithMatchingId() {
+    Review testReview = new Review(1, 1, "review title", "review text");
+    testReview.save();
+    Review testReview2 = new Review(1, 1, "review title", "review text");
+    testReview2.save();
+    assertTrue(Review.find(testReview2.getId()).equals(testReview2));
+  }
+
 }
