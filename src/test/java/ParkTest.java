@@ -154,4 +154,19 @@ public class ParkTest {
     assertEquals(1, testPark.getUpVotes());
   }
 
+  @Test
+  public void getReviews_returnsAllReviewsForAPark() {
+    Park testPark = new Park("park", "park-location", "medium", true, true);
+    testPark.save();
+    Review testReview1 = new Review(1, testPark.getId(), "review title1", "review text1");
+    testReview1.save();
+    Review testReview2 = new Review(1, testPark.getId(), "review title2", "review text2");
+    testReview2.save();
+    Review testReview3 = new Review(1, 1, "review title3", "review text3");
+    testReview3.save();
+    Review[] reviews = new Review[] {testReview1, testReview2};
+    assertTrue(testPark.getReviews().containsAll(Arrays.asList(reviews)));
+    assertFalse(testPark.getReviews().contains(testReview3));
+  }
+
 }
