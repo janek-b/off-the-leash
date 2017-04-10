@@ -13,8 +13,6 @@ public class User implements BasicMethodsInterface {
 
   public User( String name) {
     this.name = name;
-    this.id = id;
-
   }
 
   public String getName() {
@@ -35,7 +33,7 @@ public class User implements BasicMethodsInterface {
     }
   }
 
-  // @Override
+  @Override
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO users (name) VALUES (:name);";
@@ -74,6 +72,7 @@ public class User implements BasicMethodsInterface {
     }
   }
 
+  @Override
   public void delete() {
     try(Connection con = DB.sql2o.open()){
       String sql = "DELETE FROM users WHERE id = :id;";
