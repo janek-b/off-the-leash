@@ -91,4 +91,21 @@ public class ReviewTest {
     assertTrue(Review.find(testReview2.getId()).equals(testReview2));
   }
 
+  @Test
+  public void update_updatesReviewPropertiesInDB() {
+    Review testReview = new Review(1, 1, "review title", "review text");
+    testReview.save();
+    testReview.update("good review title", "very good review text");
+    assertEquals("good review title", Review.find(testReview.getId()).getTitle());
+    assertEquals("very good review text", Review.find(testReview.getId()).getContent());
+  }
+
+  @Test
+  public void delete_deletesTheObjectFromTheDB() {
+    Review testReview = new Review(1, 1, "review title", "review text");
+    testReview.save();
+    testReview.delete();
+    assertEquals(null, Review.find(testReview.getId()));
+  }
+
 }
