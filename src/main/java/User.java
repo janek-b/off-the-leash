@@ -62,4 +62,17 @@ public class User implements BasicMethodsInterface {
         return user;
     }
   }
+
+  public void update(String name) {
+    this.name = name;
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE users SET name = :name WHERE id = :id;";
+      con.createQuery(sql)
+        .addParameter("name", name)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+
+
 }

@@ -50,4 +50,12 @@ public class UserTest {
     assertEquals(user1, User.find(user1.getId()));
   }
 
+  @Test
+  public void update_updatesUser_true() {
+    User user = new User("Fred");
+    user.save();
+    user.update("Freddie");
+    assertEquals("Freddie", user.getName());
+  }
+
 }
