@@ -14,4 +14,21 @@ public class UserTest {
   @Rule
   public DatabaseRule database = new DatabaseRule();
 
+  public void User_objectInstantiatesCorrectly_True() {
+    User newUser = new User("Willow");
+    assertEquals(true, newUser instanceof User);
+  }
+
+  public void User_getNameRetrievesName_True() {
+    User newUser = new User("Willow");
+    assertEquals("Willow", newUser.getName());
+  }
+
+  public void equals_returnsTrueIfUserNameIsSame() {
+    User newUser = new User("Willow");
+    User anotherUser = new User("Willow");
+    assertTrue(newUser.equals(anotherUser));
+  }
+
+
 }
