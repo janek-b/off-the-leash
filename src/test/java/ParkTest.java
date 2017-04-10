@@ -110,4 +110,12 @@ public class ParkTest {
     assertEquals(false, Park.find(testPark.getId()).hasSmallDogsArea());
   }
 
+  @Test
+  public void delete_deletesTheObjectFromTheDB() {
+    Park testPark = new Park("park", "park-location", "medium", true, true);
+    testPark.save();
+    testPark.delete();
+    assertEquals(null, Park.find(testPark.getId()));
+  }
+
 }
