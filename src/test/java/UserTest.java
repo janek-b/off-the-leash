@@ -66,4 +66,26 @@ public class UserTest {
     assertEquals(0, User.all().size());
   }
 
+  @Test
+  public void checkIn_addsEntryToCheckinJoinTable() {
+    User user = new User("Fred");
+    user.save();
+    Park testPark = new Park("park", "park-location", "medium", true, true);
+    testPark.save();
+    user.checkIn(testPark);
+    assertEquals(testPark, user.getCheckedIn());
+  }
+
+  @Test
+  public void checkOut_updatesEntryInCheckinJoinTable() {
+    User user = new User("Fred");
+    user.save();
+    Park testPark = new Park("park", "park-location", "medium", true, true);
+    testPark.save();
+    user.checkIn(testPark);
+    assertEquals(testPark, user.getCheckedIn());
+    user.checkOut();
+    assertEquals(null, user.getCheckedIn());
+  }
+
 }

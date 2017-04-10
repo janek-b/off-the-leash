@@ -244,4 +244,13 @@ public class Park implements BasicMethodsInterface {
     }
   }
 
+  public Integer getCurrentVisitors() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT COUNT(users.id) FROM users JOIN checkins ON (users.id = checkins.userId) JOIN parks ON (checkins.parkId = parks.id) WHERE parks.id = :id AND checkins.checkout IS NULL;";
+      return con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeScalar(Integer.class);
+    }
+  }
+
 }
