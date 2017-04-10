@@ -13,9 +13,8 @@ public class Review {
   private int parkId;
   private String title;
   private String review;
-  private int rating;
 
-  public Review() {
+  public Review(int userId, int parkId, String title, String review) {
 
   }
 
