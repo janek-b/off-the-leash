@@ -16,26 +16,62 @@ public class ParkTest {
 
   @Test
   public void park_instantiatesCorrectly() {
-    Park testPark = new Park("park", "park-location", "medium", true, false);
+    Park testPark = new Park("park", "park-location", "medium", true, true);
     assertTrue(testPark instanceof Park);
   }
 
   @Test
   public void getName_returnsParkNameCorrectly() {
-    Park testPark = new Park("park", "park-location", "medium", true, false);
+    Park testPark = new Park("park", "park-location", "medium", true, true);
     assertEquals("park", testPark.getName());
   }
 
   @Test
   public void getLocation_returnsParkLocationCorrectly() {
-    Park testPark = new Park("park", "park-location", "medium", true, false);
+    Park testPark = new Park("park", "park-location", "medium", true, true);
     assertEquals("park-location", testPark.getLocation());
   }
 
   @Test
   public void getSize_returnsParkSizeCorrectly() {
-    Park testPark = new Park("park", "park-location", "medium", true, false);
+    Park testPark = new Park("park", "park-location", "medium", true, true);
     assertEquals("medium", testPark.getSize());
+  }
+
+  @Test
+  public void isFenced_returnsTrueIfParkIsFenced() {
+    Park testPark = new Park("park", "park-location", "medium", true, true);
+    assertTrue(testPark.isFenced());
+  }
+
+  @Test
+  public void hasSmallDogsArea_returnsTrueIfParkHasSeperateAreaForSmallDogs() {
+    Park testPark = new Park("park", "park-location", "medium", true, true);
+    assertTrue(testPark.hasSmallDogsArea());
+  }
+
+  @Test
+  public void equals_comparesParksBasedOnAllProperties() {
+    Park testPark1 = new Park("park", "park-location", "medium", true, true);
+    Park testPark2 = new Park("park", "park-location", "medium", true, true);
+    assertTrue(testPark1.equals(testPark2));
+  }
+
+  @Test
+  public void save_savesParkToTheDB() {
+    Park testPark = new Park("park", "park-location", "medium", true, true);
+    testPark.save();
+    assertTrue(Park.all().get(0).equals(testPark));
+  }
+
+  @Test
+  public void all_returnsAllParksFromTheDB() {
+    Park testPark1 = new Park("park", "park-location", "medium", true, true);
+    testPark1.save();
+    Park testPark2 = new Park("park", "park-location", "medium", true, true);
+    testPark2.save();
+    assertTrue(Park.all().get(0).equals(testPark1));
+    assertTrue(Park.all().get(1).equals(testPark2));
   }
 
 }

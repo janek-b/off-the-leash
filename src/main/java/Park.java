@@ -19,6 +19,8 @@ public class Park {
     this.name = name;
     this.location = location;
     this.size = size;
+    this.fenced = fenced;
+    this.small = small;
   }
 
   public String getName() {
@@ -31,6 +33,55 @@ public class Park {
 
   public String getSize() {
     return this.size;
+  }
+
+  public boolean isFenced() {
+    return this.fenced;
+  }
+
+  public boolean hasSmallDogsArea() {
+    return this.small;
+  }
+
+  public int getId() {
+    return this.id;
+  }
+
+  @Override
+  public boolean equals(Object otherPark) {
+    if (!(otherPark instanceof Park)) {
+      return false;
+    } else {
+      Park newPark = (Park) otherPark;
+      return this.getName().equals(newPark.getName()) &&
+             this.getLocation().equals(newPark.getLocation()) &&
+             this.getSize().equals(newPark.getSize()) &&
+             this.isFenced() == newPark.isFenced() &&
+             this.hasSmallDogsArea() == newPark.hasSmallDogsArea() &&
+             this.getId() == newPark.getId();
+    }
+  }
+
+  public void save() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO parks (name, location, size, fenced, small) VALUES (:name, :location, :size, :fenced, :small);";
+      this.id = (int) con.createQuery(sql, true)
+        .addParameter("name", this.name)
+        .addParameter("location", this.location)
+        .addParameter("size", this.size)
+        .addParameter("fenced", this.fenced)
+        .addParameter("small", this.small)
+        .executeUpdate()
+        .getKey();
+    }
+  }
+
+  public static List<Park> all() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM parks;";
+      return con.createQuery(sql)
+        .executeAndFetch(Park.class);
+    }
   }
 
 }
