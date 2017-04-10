@@ -32,7 +32,7 @@ public class Dog {
     return gender;
   }
 
-  public String getbreed() {
+  public String getBreed() {
     return breed;
   }
 

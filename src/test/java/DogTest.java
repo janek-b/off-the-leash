@@ -20,5 +20,15 @@ public class DogTest {
     assertEquals(true, newDog instanceof Dog);
   }
 
+  @Test
+  public void dog_testDogGettersCorrectly() {
+    Dog newDog = new Dog("Rufus", "Male", "greyhound", false, 1);
+    assertEquals("Rufus", newDog.getName());
+    assertEquals("Male", newDog.getGender());
+    assertEquals("greyhound", newDog.getBreed());
+    assertEquals(false, newDog.altered());
+    assertEquals(1, newDog.getUserId());
+  }
+
 
 }
