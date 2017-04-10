@@ -37,6 +37,34 @@ public class DogTest {
     assertTrue(newDog.equals(dog));
   }
 
+  @Test
+  public void save_addIdAndSaveIntoDatabase() {
+    Dog dog = new Dog("Rufus", "Male", "greyhound", false, 1);
+    dog.save();
+    Dog savedDog = Dog.all().get(0);
+    assertEquals(savedDog.getId(), dog.getId());
+  }
+
+  @Test
+  public void find_returnsObjectWithSameId_int() {
+    Dog dog = new Dog("Rufus", "Male", "greyhound", false, 1);
+    dog.save();
+    Dog newDog = new Dog("Rufus", "Male", "greyhound", false, 1);
+    newDog.save();
+    assertEquals(dog, Dog.find(dog.getId()));
+  }
+
+  @Test
+  public void update_updateObject_true() {
+    Dog dog = new Dog("Rufus", "Male", "greyhound", false, 1);
+    dog.save();
+    dog.update("Randy", "Female", "dalmation", true, 2);
+    assertEquals("Randy", dog.getName());
+    assertEquals("Female", dog.getGender());
+    assertEquals("dalmation", dog.getBreed());
+    assertEquals("true", dog.altered());
+    assertEquals(2, dog.getUserId());
+  }
 
 
 }
