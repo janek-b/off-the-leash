@@ -7,7 +7,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.sql.Timestamp;
 
-public class Park {
+public class Park implements BasicMethodsInterface {
   private int id;
   private String name;
   private String location;
@@ -62,6 +62,7 @@ public class Park {
     }
   }
 
+  @Override
   public void save() {
     try (Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO parks (name, location, size, fenced, small) VALUES (:name, :location, :size, :fenced, :small);";
@@ -112,6 +113,7 @@ public class Park {
     }
   }
 
+  @Override
   public void delete() {
     try (Connection con = DB.sql2o.open()) {
       String sql = "DELETE FROM parks WHERE id = :id;";
