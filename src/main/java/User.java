@@ -8,6 +8,8 @@ import java.util.TimerTask;
 import java.sql.Timestamp;
 
 public class User {
+  private int id;
+  private String name;
 
   public User() {
 

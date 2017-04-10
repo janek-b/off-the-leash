@@ -8,6 +8,12 @@ import java.util.TimerTask;
 import java.sql.Timestamp;
 
 public class Park {
+  private int id;
+  private String name;
+  private String location;
+  private String size;
+  private boolean fenced;
+  private boolean small;
 
   public Park() {
 

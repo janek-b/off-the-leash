@@ -8,6 +8,13 @@ import java.util.TimerTask;
 import java.sql.Timestamp;
 
 public class Dog {
+  private int id;
+  private int userId;
+  private String name;
+  private String gender;
+  private boolean altered;
+  private String breed;
+
 
   public Dog() {
 
