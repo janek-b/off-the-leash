@@ -14,4 +14,34 @@ public class ReviewTest {
   @Rule
   public DatabaseRule database = new DatabaseRule();
 
+  @Test
+  public void review_instantiatesCorrectly() {
+    Review testReview = new Review(1, 1, "review title", "review text");
+    assertTrue(testReview instanceof Review);
+  }
+
+  @Test
+  public void getUserId_returnsReviewUserIdCorrectly() {
+    Review testReview = new Review(1, 1, "review title", "review text");
+    assertEquals(1, testReview.getUserId());
+  }
+
+  @Test
+  public void getParkId_returnsReviewParkIdCorrectly() {
+    Review testReview = new Review(1, 1, "review title", "review text");
+    assertEquals(1, testReview.getParkId());
+  }
+
+  @Test
+  public void getTitle_returnsReviewTitleCorrectly() {
+    Review testReview = new Review(1, 1, "review title", "review text");
+    assertEquals("review title", testReview.getTitle());
+  }
+
+  @Test
+  public void getContent_returnsReviewContentCorrectly() {
+    Review testReview = new Review(1, 1, "review title", "review text");
+    assertEquals("review text", testReview.getContent());
+  }
+
 }
