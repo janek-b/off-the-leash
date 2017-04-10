@@ -81,4 +81,33 @@ public class User implements BasicMethodsInterface {
          .executeUpdate();
     }
   }
+
+  public Park getCheckedIn() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT parks.* FROM parks JOIN checkins ON (parks.id = checkins.parkId) JOIN users ON (checkins.userId = users.id) WHERE users.id = :id AND checkins.checkout IS NULL;";
+      return con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeAndFetchFirst(Park.class);
+    }
+  }
+
+  public void checkIn(Park park) {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO checkins (userId, parkId, checkin) VALUES (:userId, :parkId, now());";
+      con.createQuery(sql)
+        .addParameter("userId", this.id)
+        .addParameter("parkId", park.getId())
+        .executeUpdate();
+    }
+  }
+
+  public void checkOut(Park park) {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE checkins SET checkout = now() WHERE (userId, parkId) = (:userId, :parkId);";
+      con.createQuery(sql)
+        .addParameter("userId", this.id)
+        .addParameter("parkId", park.getId())
+        .executeUpdate();
+    }
+  }
 }
