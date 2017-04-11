@@ -306,11 +306,15 @@ public class Park implements BasicMethodsInterface {
   }
 
   public static List<Map<String, Object>> getAllCoordinates() {
-    try (Connection con = DB.sql2o.open()) {
-      String sql = "SELECT lat, lng FROM parks";
-      return con.createQuery(sql)
-        .executeAndFetchTable().asList();
+    List<Map<String, Object>> allCoordinates = new ArrayList<Map<String, Object>>();
+    List<Park> parks = Park.all();
+    for (Park park: parks) {
+      Map<String, Object> coordinates = new HashMap<String, Object>();
+      coordinates.put("lat", park.getLat());
+      coordinates.put("lng", park.getLng());
+      allCoordinates.add(coordinates);
     }
+    return allCoordinates;
   }
 
 }
