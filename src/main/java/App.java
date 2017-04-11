@@ -106,6 +106,8 @@ public class App {
     get("/parks/:id/checkin", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       Park park = Park.find(Integer.parseInt(request.params(":id")));
+      User user = request.session().attribute("user");
+      user.checkIn(park);
       model.put("user", request.session().attribute("user"));
       response.redirect(request.headers("Referer"));
       return new ModelAndView(model, layout);
@@ -114,6 +116,8 @@ public class App {
     get("/parks/:id/checkout", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       Park park = Park.find(Integer.parseInt(request.params(":id")));
+      User user = request.session().attribute("user");
+      user.checkOut();
       model.put("user", request.session().attribute("user"));
       response.redirect(request.headers("Referer"));
       return new ModelAndView(model, layout);
