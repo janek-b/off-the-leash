@@ -62,8 +62,14 @@ public class UserTest {
   public void delete_deletesUser() {
     User user = new User("Fred");
     user.save();
+    Dog dog = new Dog("Rufus", "Male", "greyhound", false, user.getId());
+    dog.save();
+    Dog newDog = new Dog("Rufus", "Male", "greyhound", false, user.getId());
+    newDog.save();
     user.delete();
-    assertEquals(0, User.all().size());
+    assertEquals(null, Dog.find(dog.getId()));
+    assertEquals(null, Dog.find(newDog.getId()));
+    assertEquals(null, User.find(user.getId()));
   }
 
   @Test
@@ -137,6 +143,15 @@ public class UserTest {
     Park[] parks = new Park[] {testPark, testPark2};
     assertTrue(user.getLeastFavoriteParks().containsAll(Arrays.asList(parks)));
     assertFalse(user.getLeastFavoriteParks().contains(testPark3));
+  }
+
+  @Test
+  public void getAllDogs_RetrievesDogsAssociatedWithUser() {
+    User user = new User ("Will");
+    user.save();
+    Dog dog = new Dog("Rufus", "Male", "greyhound", false, user.getId());
+    dog.save();
+    assertTrue(user.getAllDogs().contains(dog));
   }
 
 }
