@@ -62,6 +62,7 @@ public class UserTest {
   public void delete_deletesUser() {
     User user = new User("Fred");
     user.save();
+    Dog dog1 = new Dog()
     user.delete();
     assertEquals(0, User.all().size());
   }

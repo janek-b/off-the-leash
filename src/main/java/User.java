@@ -74,6 +74,12 @@ public class User implements BasicMethodsInterface {
 
   @Override
   public void delete() {
+    //get list of dogs for this user, loop for each and delete them
+      try(Connection con = DB.sql2o.open()) {
+        String sql = "SELECT * FROM dogs WHERE userId = :userId;";
+        
+      }
+
     try(Connection con = DB.sql2o.open()){
       String sql = "DELETE FROM users WHERE id = :id;";
       con.createQuery(sql)
