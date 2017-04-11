@@ -10,14 +10,17 @@
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
+      <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">Home</a>
+          <a class="navbar-brand" href="/">
+            <img class="img-responsive center-block" src="/images/paw-logo.png" alt="Brand"/>
+          </a>
         </div>
         <ul class="nav navbar-nav">
+          <li><a href="/">Home</a></li>
           <li><a href="/parks">Parks</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
+        <ul id="loginSection" class="nav navbar-nav navbar-right">
           <li class="dropdown">
             #if($user)
               <button class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expaned="false">Signed in as $user.getUserName()</button>
@@ -58,6 +61,19 @@
       #parse( $template )
     </div>
     <!-- end inner template-->
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <div class="container-fluid">
+        <p class="navbar-text">Copyright (c) 2017</p>
+        <p class="navbar-text">This software is licensed under the MIT license.</p>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="https://github.com/janek-b">Janek Brandt</a></li>
+          <li><a href="https://github.com/finneywhat">Chris Finney</a></li>
+          <li><a href="https://github.com/jwalsh370">Jahan Walsh</a></li>
+          <li><a href="https://github.com/gstuart">Grace Stuart</a></li>
+        </ul>
+      </div>
+    </nav>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=$MAPS_KEY&callback=initMap"></script>
   </body>
 </html>

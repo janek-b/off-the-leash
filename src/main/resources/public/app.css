@@ -13,3 +13,11 @@ body {
 #map {
   height: 400px;
 }
+
+#loginSection {
+  margin-right: 0px;
+}
+.navbar-brand > img {
+  height: 50px;
+  margin-top: -15px;
+}
