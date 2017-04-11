@@ -30,6 +30,8 @@ public class App {
     get("/admin", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("user", request.session().attribute("user"));
+      model.put("users", User.all());
+      model.put("parks", Park.all());
       model.put("template", "templates/admin.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
