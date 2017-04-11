@@ -1,5 +1,7 @@
 body {
   padding-top: 70px;
+  background-color: #1D3C31;
+  color:#A89272;
 }
 
 #loginForm {
@@ -17,6 +19,7 @@ body {
 #loginSection {
   margin-right: 0px;
 }
+
 .navbar-brand > img {
   height: 50px;
   margin-top: -15px;
