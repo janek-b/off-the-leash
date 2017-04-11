@@ -155,10 +155,11 @@ public class UserTest {
   }
 
   @Test
-  public void getUsername_retrievesUsernameAssociatedWithUser() {
+  public void getUsernameAndGetPassword_retrievesUsernameAssociatedWithUser() {
     User user = new User("Willow", "Willie", "will123");
     user.save();
     assertEquals("Willie", user.getUsername());
+    assertEquals("will123", user.getPassword());
   }
 
 }
