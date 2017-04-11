@@ -5,7 +5,7 @@
     <label for="userId">Select User To Make Admin</label>
     <select id='userId' name="userSelected" type='text'>
       #foreach($user in $users)
-        <option value="$user.getId()">$user.getName()</option>
+        <option value="$user.getId()">$user.getUsername()</option>
       #end
     </select>
     <button type="submit" class="btn">Make Admin</button>
@@ -14,7 +14,9 @@
   <h2>Current Administrators</h2>
     #foreach($user in $users)
       <ul>
-        <li><a href="/$user.getName()">$user.getName()</a></li>
+        #if($user.getAdmin())
+          <li><a href="/users/$user.getId()">$user.getUsername()</a></li>
+        #end
       </ul>
     #end
   <hr>
@@ -71,8 +73,9 @@
   <h2>All Users</h2>
     #foreach ($user in $users)
       <ul>
-        <li><a href="/$user.getName()">$user.getName()</a></li>
+        <li><a href="/users/$user.getId()">$user.getUsername()</a></li>
       </ul>
+    #end
   </hr>
 </div>
 <div class = "row">
