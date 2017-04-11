@@ -189,7 +189,10 @@ ALTER SEQUENCE reviews_id_seq OWNED BY reviews.id;
 
 CREATE TABLE users (
     id integer NOT NULL,
-    name character varying
+    name character varying,
+    username character varying,
+    password character varying,
+    admin boolean
 );
 
 
@@ -328,6 +331,8 @@ SELECT pg_catalog.setval('dogs_id_seq', 1, false);
 --
 
 COPY parks (id, name, location, size, fenced, small, upvote, downvote, lat, lng) FROM stdin;
+1	park	Portland, OR	medium	t	t	0	0	45.5230621999999983	-122.676481600000002
+2	park	Hillsboro, OR	medium	t	t	0	0	45.5228938999999997	-122.989827000000005
 \.
 
 
@@ -335,7 +340,7 @@ COPY parks (id, name, location, size, fenced, small, upvote, downvote, lat, lng)
 -- Name: parks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('parks_id_seq', 1, false);
+SELECT pg_catalog.setval('parks_id_seq', 2, true);
 
 
 --
@@ -357,7 +362,7 @@ SELECT pg_catalog.setval('reviews_id_seq', 1, false);
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY users (id, name) FROM stdin;
+COPY users (id, name, username, password, admin) FROM stdin;
 \.
 
 
