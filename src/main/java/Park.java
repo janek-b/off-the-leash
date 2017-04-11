@@ -7,6 +7,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.sql.Timestamp;
 
+import com.google.gson.Gson;
+import com.google.maps.model.GeocodingResult;
+import com.google.maps.GeoApiContext;
+import com.google.maps.GeocodingApi;
+import com.google.maps.errors.ApiException;
+import java.io.IOException;
+
 public class Park implements BasicMethodsInterface {
   private int id;
   private String name;
@@ -16,6 +23,10 @@ public class Park implements BasicMethodsInterface {
   private boolean small;
   private int upVote;
   private int downVote;
+  private double lat;
+  private double lng;
+
+  Gson gson = new Gson();
 
   public Park(String name, String location, String size, boolean fenced, boolean small) {
     this.name = name;
@@ -25,6 +36,15 @@ public class Park implements BasicMethodsInterface {
     this.small = small;
     this.upVote = 0;
     this.downVote = 0;
+    GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyAh2ZaHDDFfIKy1wLOi6bKxJ3X4Na3wtXw");
+    try {
+      GeocodingResult[] results =  GeocodingApi.geocode(context, location).await();
+      this.lat = results[0].geometry.location.lat;
+      this.lng = results[0].geometry.location.lng;
+    } catch(ApiException exception) {
+    } catch (InterruptedException exception) {
+    } catch (IOException exception) {
+    }
   }
 
   public String getName() {
@@ -57,6 +77,14 @@ public class Park implements BasicMethodsInterface {
 
   public int getDownVotes() {
     return this.downVote;
+  }
+
+  public double getLat() {
+    return this.lat;
+  }
+
+  public double getLng() {
+    return this.lng;
   }
 
   @Override
@@ -252,5 +280,13 @@ public class Park implements BasicMethodsInterface {
         .executeScalar(Integer.class);
     }
   }
+
+  // public Map<String, Object> getCoordinates() {
+  //
+  // }
+  //
+  // public static List<Map<String, Object>> getAllCoordinates() {
+  //
+  // }
 
 }

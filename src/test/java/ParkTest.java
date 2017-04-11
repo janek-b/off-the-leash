@@ -184,4 +184,12 @@ public class ParkTest {
     assertEquals((Integer) 1, testPark.getCurrentVisitors());
   }
 
+  @Test
+  public void getLat_returnsCorrectLatValue() {
+    Park testPark = new Park("park", "Portland, OR", "medium", true, true);
+    testPark.save();
+    assertEquals(45.5230622, testPark.getLat(), 0.000001);
+    assertEquals(-122.6764816, testPark.getLng(), 0.000001);
+  }
+
 }
