@@ -66,5 +66,13 @@ public class DogTest {
     assertEquals(2, dog.getUserId());
   }
 
+  @Test
+  public void delete_deletesDog_null() {
+    Dog dog = new Dog("Rufus", "Male", "greyhound", false, 1);
+    dog.save();
+    dog.delete();
+    assertEquals(null, Dog.find(dog.getId()));
+  }
+
 
 }

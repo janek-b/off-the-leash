@@ -7,7 +7,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.sql.Timestamp;
 
-public class Dog {
+public class Dog implements BasicMethodsInterface {
   private int id;
   private int userId;
   private String name;
@@ -62,6 +62,7 @@ public class Dog {
     }
   }
 
+  @Override
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO dogs (userId, name, gender, breed, altered) VALUES (:userId, :name, :gender, :breed, :altered);";
@@ -110,6 +111,16 @@ public class Dog {
          .addParameter("userId", userId)
          .addParameter("id", this.id)
          .executeUpdate();
+    }
+  }
+
+  @Override
+  public void delete() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM dogs WHERE id = :id;";
+      con.createQuery(sql)
+        .addParameter("id", id)
+        .executeUpdate();
     }
   }
 
