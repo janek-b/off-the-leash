@@ -38,7 +38,7 @@ public class Park implements BasicMethodsInterface {
     this.small = small;
     this.upVote = 0;
     this.downVote = 0;
-    GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyAh2ZaHDDFfIKy1wLOi6bKxJ3X4Na3wtXw");
+    GeoApiContext context = new GeoApiContext().setApiKey(System.getenv("MAPS_KEY"));
     try {
       GeocodingResult[] results =  GeocodingApi.geocode(context, location).await();
       this.lat = results[0].geometry.location.lat;
@@ -150,7 +150,7 @@ public class Park implements BasicMethodsInterface {
     this.size = size;
     this.fenced = fenced;
     this.small = small;
-    GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyAh2ZaHDDFfIKy1wLOi6bKxJ3X4Na3wtXw");
+    GeoApiContext context = new GeoApiContext().setApiKey(System.getenv("MAPS_KEY"));
     try {
       GeocodingResult[] results =  GeocodingApi.geocode(context, location).await();
       this.lat = results[0].geometry.location.lat;
