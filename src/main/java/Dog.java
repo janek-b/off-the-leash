@@ -57,8 +57,8 @@ public class Dog {
       return this.getName().equals(newDog.getName()) &&
       this.getGender().equals(newDog.getGender()) &&
       this.getBreed().equals(newDog.getBreed()) &&
-      // this.altered().equals(newDog.altered()) &&
-      this.getUserId() == (newDog.getUserId());
+      this.altered() == newDog.altered() &&
+      this.getUserId() == newDog.getUserId();
     }
   }
 
@@ -110,31 +110,6 @@ public class Dog {
          .addParameter("userId", userId)
          .addParameter("id", this.id)
          .executeUpdate();
-      // String name = "UPDATE dogs SET name = :name WHERE id = :id;";
-      // String gender ="UPDATE dogs SET gender = :gender WHERE id = :id;";
-      // String breed = "UPDATE dogs SET breed = :breed WHERE id = :id;";
-      // boolean altered ="UPDATE dogs SET altered = :altered WHERE id = :id;";
-      // int userId = "UPDATE dogs SET userId = :userId WHERE id = :id";
-      // con.createQuery(name)
-      //   .addParameter("name", name)
-      //   .addParameter("id", id)
-      //   .executeUpdate();
-      // con.createQuery(gender)
-      //   .addParameter("gender", gender)
-      //   .addParameter("id", id)
-      //   .executeUpdate();
-      // con.createQuery(breed)
-      //   .addParameter("breed", breed)
-      //   .addParameter("id", id)
-      //   .executeUpdate();
-      // con.createQuery(altered)
-      //   .addParameter("altered", altered)
-      //   .addParameter("id", id)
-      //   .executeUpdate();
-      // con.createQuery(userId)
-      //   .addParameter("userId", userId)
-      //   .addParameter("id", id)
-      //   .executeUpdate();
     }
   }
 
