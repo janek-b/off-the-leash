@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.sql.Timestamp;
+import java.util.Map;
+import java.util.HashMap;
 
 public class ParkTest {
 
@@ -189,7 +191,19 @@ public class ParkTest {
     Park testPark = new Park("park", "Portland, OR", "medium", true, true);
     testPark.save();
     assertEquals(45.5230622, testPark.getLat(), 0.000001);
+    assertEquals(45.5230622, Park.find(testPark.getId()).getLat(), 0.000001);
     assertEquals(-122.6764816, testPark.getLng(), 0.000001);
+    assertEquals(-122.6764816, Park.find(testPark.getId()).getLng(), 0.000001);
+  }
+
+  @Test
+  public void getCoordinates_returnsCoordinatesForPark() {
+    Park testPark = new Park("park", "Portland, OR", "medium", true, true);
+    testPark.save();
+    Map<String, Object> testCoordinates = new HashMap<String, Object>();
+    testCoordinates.put("lat", 45.5230622);
+    testCoordinates.put("lng", -122.6764816);
+    assertEquals(testCoordinates, testPark.getCoordinates());
   }
 
 }

@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.sql.Timestamp;
+import java.util.Map;
+import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.maps.model.GeocodingResult;
@@ -100,6 +102,8 @@ public class Park implements BasicMethodsInterface {
              this.hasSmallDogsArea() == newPark.hasSmallDogsArea() &&
              this.getUpVotes() == newPark.getUpVotes() &&
              this.getDownVotes() == newPark.getDownVotes() &&
+             this.getLat() == newPark.getLat() &&
+             this.getLng() == newPark.getLng() &&
              this.getId() == newPark.getId();
     }
   }
@@ -107,7 +111,7 @@ public class Park implements BasicMethodsInterface {
   @Override
   public void save() {
     try (Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO parks (name, location, size, fenced, small, upVote, downVote) VALUES (:name, :location, :size, :fenced, :small, :upVote, :downVote);";
+      String sql = "INSERT INTO parks (name, location, size, fenced, small, upVote, downVote, lat, lng) VALUES (:name, :location, :size, :fenced, :small, :upVote, :downVote, :lat, :lng);";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
         .addParameter("location", this.location)
@@ -116,6 +120,8 @@ public class Park implements BasicMethodsInterface {
         .addParameter("small", this.small)
         .addParameter("upVote", this.upVote)
         .addParameter("downVote", this.downVote)
+        .addParameter("lat", this.lat)
+        .addParameter("lng", this.lng)
         .executeUpdate()
         .getKey();
     }
@@ -144,14 +150,25 @@ public class Park implements BasicMethodsInterface {
     this.size = size;
     this.fenced = fenced;
     this.small = small;
+    GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyAh2ZaHDDFfIKy1wLOi6bKxJ3X4Na3wtXw");
+    try {
+      GeocodingResult[] results =  GeocodingApi.geocode(context, location).await();
+      this.lat = results[0].geometry.location.lat;
+      this.lng = results[0].geometry.location.lng;
+    } catch(ApiException exception) {
+    } catch (InterruptedException exception) {
+    } catch (IOException exception) {
+    }
     try (Connection con = DB.sql2o.open()) {
-      String sql = "UPDATE parks SET (name, location, size, fenced, small) = (:name, :location, :size, :fenced, :small) WHERE id = :id;";
+      String sql = "UPDATE parks SET (name, location, size, fenced, small, lat, lng) = (:name, :location, :size, :fenced, :small, :lat, :lng) WHERE id = :id;";
       con.createQuery(sql)
         .addParameter("name", this.name)
         .addParameter("location", this.location)
         .addParameter("size", this.size)
         .addParameter("fenced", this.fenced)
         .addParameter("small", this.small)
+        .addParameter("lat", this.lat)
+        .addParameter("lng", this.lng)
         .addParameter("id", this.id)
         .executeUpdate();
     }
@@ -281,10 +298,15 @@ public class Park implements BasicMethodsInterface {
     }
   }
 
-  // public Map<String, Object> getCoordinates() {
-  //
-  // }
-  //
+  public Map<String, Object> getCoordinates() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT lat, lng FROM parks WHERE id = :id;";
+      return con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeAndFetchTable().asList().get(0);
+    }
+  }
+
   // public static List<Map<String, Object>> getAllCoordinates() {
   //
   // }
