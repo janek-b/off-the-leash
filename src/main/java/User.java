@@ -14,8 +14,7 @@ public class User implements BasicMethodsInterface {
   private String password;
   private boolean admin;
 
-  public User(String name, String username, String password, boolean admin) {
-    this.name = name;
+  public User(String username, String password) {
     this.username = username;
     this.password = password;
     this.admin = false;
@@ -47,8 +46,7 @@ public class User implements BasicMethodsInterface {
       return false;
     } else {
       User user = (User) otherUser;
-      return this.getName().equals(user.getName()) &&
-             this.getUsername().equals(user.getUsername()) &&
+      return this.getUsername().equals(user.getUsername()) &&
              this.getPassword().equals(user.getPassword()) &&
              this.getAdmin() == user.getAdmin();
     }
@@ -57,9 +55,8 @@ public class User implements BasicMethodsInterface {
   @Override
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO users (name, username, password, admin) VALUES (:name, :username, :password, :admin);";
+      String sql = "INSERT INTO users (username, password, admin) VALUES (:username, :password, :admin);";
       this.id = (int) con.createQuery(sql, true)
-      .addParameter("name", this.name)
       .addParameter("username", this.username)
       .addParameter("password", this.password)
       .addParameter("admin", this.admin)
@@ -179,6 +176,19 @@ public class User implements BasicMethodsInterface {
       return con.createQuery(sql)
       .addParameter("userId", this.id)
       .executeAndFetch(Dog.class);
+    }
+  }
+
+  public static User findByUserName(String username) {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM users WHERE username = :username;";
+      User user = con.createQuery(sql)
+        .addParameter("username", username)
+        .executeAndFetchFirst(User.class);
+      if (user == null) {
+        throw new IllegalArgumentException("No user with this username");
+      }
+      return user;
     }
   }
 }

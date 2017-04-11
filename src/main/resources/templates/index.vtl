@@ -53,7 +53,7 @@
           <td><a href="/parks/$park.getId()/downvote"><span class="badge"><span class="glyphicon glyphicon-thumbs-down"></span></span></a></td>
           <td>
             #if(($user) && !($user.getCheckedIn()))
-              <a href="/parks/$parks.getId()/checkin"><span class="label label-success">Checkin</span></a>
+              <a href="/parks/$park.getId()/checkin"><span class="label label-success">Checkin</span></a>
             #elseif($user.getCheckedIn().getId() == $park.getId())
               <a href="/parks/$park.getId()/checkout"><span class="label label-warning">Checkout</span></a>
             #end

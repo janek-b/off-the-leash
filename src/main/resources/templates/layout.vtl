@@ -23,16 +23,21 @@
         <ul id="loginSection" class="nav navbar-nav navbar-right">
           <li class="dropdown">
             #if($user)
-              <button class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expaned="false">Signed in as $user.getUserName()</button>
+              <button class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expaned="false">Signed in as $user.getUsername()</button>
               <ul class="dropdown-menu">
                 <li><a href="/users/$user.getId()">Account</a></li>
                 #if($user.getAdmin())
                   <li><a href="/admin">Admin</a></li>
                 #end
+                <hr>
+                <li><a href="/logout">Logout</a></li>
               </ul>
             #else
               <button class="btn btn-default navbar-btn" id="loginLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expaned="false">Login <span class="caret"></span></button>
               <form id="loginForm" class="dropdown-menu" aria-labelledby="loginlabel" action="/login" method="post">
+                #if($wrongPass)
+                  <div class="alert alert-danger" role="alert">Incorrect Password</div>
+                #end
                 <div class="form-group">
                   <label for="username">Username</label>
                   <input type="text" name="username" class="form-control" required>

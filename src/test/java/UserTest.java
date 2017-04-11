@@ -16,26 +16,28 @@ public class UserTest {
 
   @Test
   public void User_objectInstantiatesCorrectly_True() {
-    User newUser = new User("Willow", "Willie", "will123", false);
+    User newUser = new User("Willie", "will123");
     assertEquals(true, newUser instanceof User);
   }
 
   @Test
   public void User_getNameRetrievesName_True() {
-    User newUser = new User("Willow", "Willie", "will123", false);
+    User newUser = new User("Willie", "will123");
+    newUser.save();
+    newUser.update("Willow");
     assertEquals("Willow", newUser.getName());
   }
 
   @Test
   public void equals_returnsTrueIfUserNameIsSame() {
-    User newUser = new User("Willow", "Willie", "will123", false);
-    User anotherUser = new User("Willow", "Willie", "will123", false);
+    User newUser = new User("Willie", "will123");
+    User anotherUser = new User("Willie", "will123");
     assertTrue(newUser.equals(anotherUser));
   }
 
   @Test
   public void save_savesUserInfotoDatabase() {
-    User newUser = new User("Willow", "Willie", "will123", false);
+    User newUser = new User("Willie", "will123");
     newUser.save();
     User otherUser = User.all().get(0);
     assertEquals(newUser.getId(), otherUser.getId());
@@ -43,9 +45,9 @@ public class UserTest {
 
   @Test
   public void find_returnsUserWithSameId_secondUser() {
-    User user = new User("Willow", "Willie", "will123", false);
+    User user = new User("Willie", "will123");
     user.save();
-    User user1 = new User("Frank", "franklin", "frankay", false);
+    User user1 = new User("franklin", "frankay");
     user1.save();
     System.out.println(user.getId());
     System.out.println(user1.getId());
@@ -55,7 +57,7 @@ public class UserTest {
 
   @Test
   public void update_updatesUser_true() {
-    User user = new User("Willow", "Willie", "will123", false);
+    User user = new User("Willie", "will123");
     user.save();
     user.update("Freddie");
     assertEquals("Freddie", user.getName());
@@ -63,7 +65,7 @@ public class UserTest {
 
   @Test
   public void delete_deletesUser() {
-    User user = new User("Willow", "Willie", "will123", false);
+    User user = new User("Willie", "will123");
     user.save();
     Dog dog = new Dog("Rufus", "Male", "greyhound", false, user.getId());
     dog.save();
@@ -77,7 +79,7 @@ public class UserTest {
 
   @Test
   public void checkIn_addsEntryToCheckinJoinTable() {
-    User user = new User("Willow", "Willie", "will123", false);
+    User user = new User("Willie", "will123");
     user.save();
     Park testPark = new Park("park", "Portland, OR", "medium", true, true);
     testPark.save();
@@ -87,7 +89,7 @@ public class UserTest {
 
   @Test
   public void checkOut_updatesEntryInCheckinJoinTable() {
-    User user = new User("Willow", "Willie", "will123", false);
+    User user = new User("Willie", "will123");
     user.save();
     Park testPark = new Park("park", "Portland, OR", "medium", true, true);
     testPark.save();
@@ -99,7 +101,7 @@ public class UserTest {
 
   @Test
   public void getReviews_returnsAllReviewsForAUser() {
-    User user = new User("Willow", "Willie", "will123", false);
+    User user = new User("Willie", "will123");
     user.save();
     Park testPark = new Park("park", "Portland, OR", "medium", true, true);
     testPark.save();
@@ -116,7 +118,7 @@ public class UserTest {
 
   @Test
   public void getFavoriteParks_returnsListOfParksAUserHasUpvoted() {
-    User user = new User("Willow", "Willie", "will123", false);
+    User user = new User("Willie", "will123");
     user.save();
     Park testPark = new Park("park1", "Portland, OR1", "medium1", true, true);
     testPark.save();
@@ -133,7 +135,7 @@ public class UserTest {
 
   @Test
   public void getLeastFavoriteParks_returnsListOfParksAUserHasUpvoted() {
-    User user = new User("Willow", "Willie", "will123", false);
+    User user = new User("Willie", "will123");
     user.save();
     Park testPark = new Park("park1", "Portland, OR1", "medium1", true, true);
     testPark.save();
@@ -150,7 +152,7 @@ public class UserTest {
 
   @Test
   public void getAllDogs_RetrievesDogsAssociatedWithUser() {
-    User user = new User ("Willow", "Willie", "will123", false);
+    User user = new User ("Willie", "will123");
     user.save();
     Dog dog = new Dog("Rufus", "Male", "greyhound", false, user.getId());
     dog.save();
@@ -159,7 +161,7 @@ public class UserTest {
 
   @Test
   public void getUsernameAndGetPassword_retrievesUsernameAssociatedWithUser() {
-    User user = new User("Willow", "Willie", "will123", false);
+    User user = new User("Willie", "will123");
     user.save();
     assertEquals("Willie", user.getUsername());
     assertEquals("will123", user.getPassword());
@@ -167,10 +169,16 @@ public class UserTest {
 
   @Test
   public void getAdmin_retrievesUsernameAssociatedWithUser() {
-    User user = new User("Willow", "Willie", "will123", false);
+    User user = new User("Willie", "will123");
     user.save();
     assertFalse(user.getAdmin());
   }
 
+  @Test
+  public void findByUserName_retrievesTheUserByTheirUserName() {
+    User user = new User("Willie", "will123");
+    user.save();
+    assertEquals(user, User.findByUserName("Willie"));
+  }
 
 }
