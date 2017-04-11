@@ -18,8 +18,11 @@ _Example text for the description of the project_
 ## Setup/Installation Requirements
 
 * _Clone the repository_
+* _Create a google maps api key_
+* _Add the api key as an environment variable_ `export MAPS_KEY="YOUR_API_KEY"`
 * _Run the command 'gradle run'_
 * _Open browser and go to localhost:4567_
+
 
 Database creation.
 * `CREATE DATABASE leash;`
