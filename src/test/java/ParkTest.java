@@ -124,7 +124,7 @@ public class ParkTest {
   public void upVote_increasesUpVoteCount() {
     Park testPark = new Park("park", "park-location", "medium", true, true);
     testPark.save();
-    User testUser = new User("Frank", "franklin", "frankay");
+    User testUser = new User("Frank", "franklin", "frankay", false);
     testUser.save();
     assertEquals(0, testPark.getUpVotes());
     testPark.upVote(testUser);
@@ -142,7 +142,7 @@ public class ParkTest {
   public void downVote_increasesUpVoteCount() {
     Park testPark = new Park("park", "park-location", "medium", true, true);
     testPark.save();
-    User testUser = new User("Frank", "franklin", "frankay");
+    User testUser = new User("Frank", "franklin", "frankay", false);
     testUser.save();
     assertEquals(0, testPark.getDownVotes());
     testPark.downVote(testUser);
@@ -175,9 +175,9 @@ public class ParkTest {
   public void getCurrentVisitors_returnsTheCurrentNumberOfCheckedInUsers() {
     Park testPark = new Park("park", "park-location", "medium", true, true);
     testPark.save();
-    User user1 = new User("Frank", "franklin", "frankay");
+    User user1 = new User("Frank", "franklin", "frankay", false);
     user1.save();
-    User user2 = new User("Frank", "franklin", "frankay");
+    User user2 = new User("Frank", "franklin", "frankay", false);
     user2.save();
     user1.checkIn(testPark);
     user2.checkIn(testPark);

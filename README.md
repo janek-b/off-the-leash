@@ -31,7 +31,7 @@ Database creation.
 If the above does not work, use these commands to create the DB tables.
 * `\c leash;`
 * `CREATE TABLE parks (id serial PRIMARY KEY, name varchar, location varchar, size varchar, fenced boolean, small boolean, upVote int, downVote int, lat double precision, lng double precision);`
-* `CREATE TABLE users (id serial PRIMARY KEY, name varchar);`
+* `CREATE TABLE users (id serial PRIMARY KEY, name varchar, username, varchar, password varchar, admin boolean);`
 * `CREATE TABLE dogs (id serial PRIMARY KEY, userId int, name varchar, gender varchar, altered boolean, breed varchar);`
 * `CREATE TABLE reviews (id serial PRIMARY KEY, userId int, parkId int, title varchar, content varchar);`
 * `CREATE TABLE checkins (id serial PRIMARY KEY, userId int, parkId int, checkin timestamp, checkout timestamp);`
