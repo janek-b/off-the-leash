@@ -1,3 +1,15 @@
+body {
+  padding-top: 70px;
+}
+
+#loginForm {
+  width: 250px;
+}
+
+#loginForm > .form-group {
+  margin: 15px;
+}
+
 #map {
-  height: 300px;
+  height: 400px;
 }

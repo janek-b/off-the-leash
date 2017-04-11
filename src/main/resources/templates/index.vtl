@@ -1,12 +1,18 @@
 <!--index.vtl-->
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="page-header">
+      <h1>Off The Leash</h1>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
     <div id="map"></div>
     <script>
       function initMap() {
         var portland = {lat: 45.5230622, lng: -122.6764816};
         var locations = $coordinates;
-        console.log(locations);
 
         var map = new google.maps.Map(document.getElementById('map'), {
           center: portland,
@@ -24,4 +30,23 @@
     </script>
   </div>
 </div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <h3>Local Dog Parks</h3>
+    <hr>
+    <table class="table tabel-striped">
+      <tr>
+        <th>Park name</th>
+        <th>Number of Visitors</th>
+      </tr>
+      #foreach($park in $parks)
+        <tr>
+          <td><a href="/parks/$park.getId()">$park.getName()</a></td>
+          <td><span class="label label-primary">$park.getCurrentVisitors()</span></td>
+        </tr>
+      #end
+    </table>
+  </div>
+</div>
+
 <!--index.vtl-->

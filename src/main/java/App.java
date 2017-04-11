@@ -11,7 +11,7 @@ public class App {
     // Use this setting only for development
     externalStaticFileLocation(String.format("%s/src/main/resources/public", System.getProperty("user.dir")));
 
-    staticFileLocation("/public");
+    // staticFileLocation("/public");
     String layout = "templates/layout.vtl";
 
     Gson gson = new Gson();
@@ -20,6 +20,8 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("MAPS_KEY", System.getenv("MAPS_KEY"));
       model.put("coordinates", gson.toJson(Park.getAllCoordinates()));
+      model.put("user", request.session().attribute("user"));
+      model.put("parks", Park.all());
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
