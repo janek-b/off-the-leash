@@ -12,11 +12,13 @@ public class User implements BasicMethodsInterface {
   private String name;
   private String username;
   private String password;
+  private boolean admin;
 
-  public User( String name, String username, String password) {
+  public User(String name, String username, String password, boolean admin) {
     this.name = name;
     this.username = username;
     this.password = password;
+    this.admin = false;
   }
 
   public String getUsername() {
@@ -35,22 +37,32 @@ public class User implements BasicMethodsInterface {
     return id;
   }
 
+  public boolean getAdmin() {
+    return admin;
+  }
+
   @Override
   public boolean equals(Object otherUser){
     if (!(otherUser instanceof User)) {
       return false;
     } else {
-      User newUser = (User) otherUser;
-      return this.getName().equals(newUser.getName());
+      User user = (User) otherUser;
+      return this.getName().equals(user.getName()) &&
+             this.getUsername().equals(user.getUsername()) &&
+             this.getPassword().equals(user.getPassword()) &&
+             this.getAdmin() == user.getAdmin();
     }
   }
 
   @Override
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO users (name) VALUES (:name);";
+      String sql = "INSERT INTO users (name, username, password, admin) VALUES (:name, :username, :password, :admin);";
       this.id = (int) con.createQuery(sql, true)
       .addParameter("name", this.name)
+      .addParameter("username", this.username)
+      .addParameter("password", this.password)
+      .addParameter("admin", this.admin)
       .executeUpdate()
       .getKey();
     }
@@ -76,9 +88,12 @@ public class User implements BasicMethodsInterface {
   public void update(String name) {
     this.name = name;
     try(Connection con = DB.sql2o.open()) {
-      String sql = "UPDATE users SET name = :name WHERE id = :id;";
+      String sql = "UPDATE users SET (name, username, password, admin) = (:name, :username, :password, :admin)  WHERE id = :id;";
       con.createQuery(sql)
         .addParameter("name", name)
+        .addParameter("username", this.username)
+        .addParameter("password", this.password)
+        .addParameter("admin", this.admin)
         .addParameter("id", id)
         .executeUpdate();
     }
