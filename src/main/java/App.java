@@ -22,8 +22,10 @@ public class App {
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       // GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyAh2ZaHDDFfIKy1wLOi6bKxJ3X4Na3wtXw");
-      // GeocodingResult[] results =  GeocodingApi.geocode(context, "Portland, OR").await();
+      // GeocodingResult[] results =  GeocodingApi.geocode(context, "Hillsboro, OR").await();
       // Map<String, Object> coordinates = new HashMap<String, Object>();
+      // System.out.println(results[0].geometry.location.lat);
+      // System.out.println(results[0].geometry.location.lng);
       // coordinates.put("lat", results[0].geometry.location.lat);
       // coordinates.put("lng", results[0].geometry.location.lng);
       // model.put("coordinates", gson.toJson(coordinates));

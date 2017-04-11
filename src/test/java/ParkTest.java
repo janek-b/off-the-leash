@@ -206,4 +206,22 @@ public class ParkTest {
     assertEquals(testCoordinates, testPark.getCoordinates());
   }
 
+  @Test
+  public void getAllCoordinates_returnsCoordinatesForAllParks() {
+    List<Map<String, Object>> allCoordinates = new ArrayList<Map<String, Object>>();
+    Park testPark1 = new Park("park", "Portland, OR", "medium", true, true);
+    testPark1.save();
+    Park testPark2 = new Park("park", "Hillsboro, OR", "medium", true, true);
+    testPark2.save();
+    Map<String, Object> testCoordinates1 = new HashMap<String, Object>();
+    testCoordinates1.put("lat", 45.5230622);
+    testCoordinates1.put("lng", -122.6764816);
+    allCoordinates.add(testCoordinates1);
+    Map<String, Object> testCoordinates2 = new HashMap<String, Object>();
+    testCoordinates2.put("lat", 45.5228939);
+    testCoordinates2.put("lng", -122.989827);
+    allCoordinates.add(testCoordinates2);
+    assertEquals(allCoordinates, Park.getAllCoordinates());
+  }
+
 }

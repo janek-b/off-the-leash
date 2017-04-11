@@ -299,16 +299,18 @@ public class Park implements BasicMethodsInterface {
   }
 
   public Map<String, Object> getCoordinates() {
-    try (Connection con = DB.sql2o.open()) {
-      String sql = "SELECT lat, lng FROM parks WHERE id = :id;";
-      return con.createQuery(sql)
-        .addParameter("id", this.id)
-        .executeAndFetchTable().asList().get(0);
-    }
+    Map<String, Object> coordinates = new HashMap<String, Object>();
+    coordinates.put("lat", this.lat);
+    coordinates.put("lng", this.lng);
+    return coordinates;
   }
 
-  // public static List<Map<String, Object>> getAllCoordinates() {
-  //
-  // }
+  public static List<Map<String, Object>> getAllCoordinates() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT lat, lng FROM parks";
+      return con.createQuery(sql)
+        .executeAndFetchTable().asList();
+    }
+  }
 
 }
