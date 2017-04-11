@@ -118,7 +118,9 @@ CREATE TABLE parks (
     fenced boolean,
     small boolean,
     upvote integer,
-    downvote integer
+    downvote integer,
+    lat double precision,
+    lng double precision
 );
 
 
@@ -325,7 +327,7 @@ SELECT pg_catalog.setval('dogs_id_seq', 1, false);
 -- Data for Name: parks; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY parks (id, name, location, size, fenced, small, upvote, downvote) FROM stdin;
+COPY parks (id, name, location, size, fenced, small, upvote, downvote, lat, lng) FROM stdin;
 \.
 
 
