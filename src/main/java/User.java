@@ -74,13 +74,10 @@ public class User implements BasicMethodsInterface {
 
   @Override
   public void delete() {
-    // try(Connection con = DB.sql2o.open()) {
-    //   String sql = "SELECT * FROM dogs WHERE userId = :userId;";
-    //
-    //   con.createQuery(sql)
-    //      .addParameter("userId", this.id)
-    //      .executeUpdate();
-    // }
+    List<Dog> dogList = this.getAllDogs();
+    for (Dog eachDog : dogList) {
+      eachDog.delete();
+    }
 
     try(Connection con = DB.sql2o.open()){
       String sql = "DELETE FROM users WHERE id = :id;";
