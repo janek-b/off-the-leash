@@ -318,4 +318,13 @@ public class Park implements BasicMethodsInterface {
     return allCoordinates;
   }
 
+  public List<User> getUsersCheckedIn() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT users.* FROM users JOIN checkins ON (users.id = checkins.userId) JOIN parks ON (checkins.parkId = parks.id) WHERE parks.id = :id AND checkins.checkout IS NULL;";
+      return con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeAndFetch(User.class);
+    }
+  }
+
 }

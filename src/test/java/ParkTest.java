@@ -232,4 +232,25 @@ public class ParkTest {
     assertEquals(allCoordinates, Park.getAllCoordinates());
   }
 
+  @Test
+  public void getUsersCheckedIn_returnsListOfUsersCheckedInAtAPark() {
+    Park testPark1 = new Park("park", "Portland, OR", "medium", true, true);
+    testPark1.save();
+    Park testPark2 = new Park("second park", "Portland, OR", "medium", false, false);
+    testPark2.save();
+    User user1 = new User("franklin", "frankay");
+    user1.save();
+    User user2 = new User("jerry", "jerray");
+    user2.save();
+    User user3 = new User("jerry", "jerray");
+    user3.save();
+    user1.checkIn(testPark1);
+    user2.checkIn(testPark1);
+    user3.checkIn(testPark2);
+    User[] usersPark1 = new User[] {user1, user2};
+    assertTrue(testPark1.getUsersCheckedIn().containsAll(Arrays.asList(usersPark1)));
+    assertFalse(testPark1.getUsersCheckedIn().contains(user3));
+    assertTrue(testPark2.getUsersCheckedIn().contains(user3));
+  }
+
 }

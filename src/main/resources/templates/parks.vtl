@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var portland = {lat: 45.5230622, lng: -122.6764816};
+        var locations = $coordinates;
+        console.log(locations);
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: portland,
+          scrollwheel: false,
+          zoom: 11
+        });
+
+        function addMark(location) {
+          var marker = new google.maps.Marker({
+            map: map,
+            position: location.position,
+            title: location.name
+          });
+          var infowindow = new google.maps.InfoWindow({
+            content: '<h4><a href="/parks/'+location.id+'">'+location.name+'</a></h4>'
+          });
+          marker.addListener('click', function() {
+            infowindow.open(map, marker);
+          });
+        }
+
+        locations.forEach(function(location) {
+          addMark(location);
+        });
+      }
+    </script>
+    <!-- list alphabetically -->
+    <!-- filter options -->
+    <br>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2 col-md-offset-1">
+    <div class="well">
+      <form class="" action="index.html" method="post">
+        <h4>Filter</h4>
+        <div class="form-group">
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="well">
+      <table class="table table-hover table-striped">
+        <tr>
+          <th>Park name</th>
+          <th>Size</th>
+          <th>Fenced</th>
+          <th>Small dogs area</th>
+          <th>Current Visitors</th>
+        </tr>
+        #foreach($park in $parks)
+          <tr>
+            <td class="text-capitalize"><a href="/parks/$park.getId()">$park.getName()</a></td>
+            <td class="text-capitalize">$park.getSize()</td>
+            <td>$park.isFenced()</td>
+            <td>$park.hasSmallDogsArea()</td>
+            <td><span class="label label-primary">$park.getCurrentVisitors()</span></td>
+          </tr>
+        #end
+      </table>
+    </div>
+  </div>
+</div>
