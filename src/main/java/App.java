@@ -38,6 +38,9 @@ public class App {
 
     post("/admin", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
+      User user = User.find(Integer.parseInt(request.queryParams("userSelected")));
+      user.makeAdmin();
+      response.redirect("/admin");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 

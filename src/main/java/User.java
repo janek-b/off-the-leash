@@ -191,4 +191,15 @@ public class User implements BasicMethodsInterface {
       return user;
     }
   }
+
+  public void makeAdmin() {
+    this.admin = true;
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE users SET admin = :admin WHERE id = :id;";
+      con.createQuery(sql)
+        .addParameter("admin", this.admin)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
+  }
 }
