@@ -116,7 +116,7 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       Park park = Park.find(Integer.parseInt(request.params(":id")));
       model.put("MAPS_KEY", System.getenv("MAPS_KEY"));
-      model.put("coordinates", gson.toJson(Park.getAllCoordinates()));
+      model.put("coordinates", gson.toJson(park.getCoordinates()));
       model.put("park", park);
       model.put("user", request.session().attribute("user"));
       model.put("activeUsers", park.getUsersCheckedIn());
