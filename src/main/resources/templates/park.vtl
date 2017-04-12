@@ -1,14 +1,16 @@
 <!--park.vtl-->
-<div class = "container">
   <div class = "row">
+    <h2>$park.getName() <span class="label label-primary">$park.getCurrentVisitors()</span></h2>
+    <!-- map centered on specific park -->
   </div>
   <div class = "row">
+    <h2>Park Details</h2>
+    <ul>
+      <li>Name: $park.getName()</li>
+      <li>Location: $park.getLocation()</li>
+      <li>Size: $park.getSize()</li>
+      <li>Fenced: $park.isFenced()</li>
+      <li>Small: $park.hasSmallDogsArea()</li>
+    </ul>
   </div>
-  <div class = "row">
-  </div>
-  <div class = "row">
-  </div>
-  <div class = "row">
-  </div>
-</div>
 <!--park.vtl-->

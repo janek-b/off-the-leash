@@ -2,28 +2,28 @@
   <div class = "row">
     <h2>Pack Info</h2>
     #foreach ($dog in $dogs)
-    <div class="col-md-4">
-      <!-- dog image -->
-      <!-- dog favorite -->
-    </div>
-    <div class="col-md-4">
-      <ul>
-        <li>Name: $dog.getName()</li>
-        <li>Age: $dog.getAge()</li>
-        <li>Breed: $dog.getBreed()</li>
-        <li>Altered: $dog.isAltered()</li>
-        <li>Description: $dog.getDiscription()</li>
-      </ul>
-    </div>
-    <div class="col-md-4">
-      <ul>
-        <li>Weight: $dog.getWeight()</li>
-        <li>Rabies: $dog.getRabies()</li>
-        <li>Microchip: $dog.getMicrochip()</li>
-        <li>Color: $dog.getColor()</li>
-        <li>Other: $dog.getOther()</li>
-      </ul>
-    </div>
+      <div class="col-md-2 col-md-offset-1">
+        <!-- dog image -->
+        <!-- dog favorite -->
+      </div>
+      <div class="col-md-4">
+        <ul>
+          <li>Name: $dog.getName()</li>
+          <li>Gender: $dog.getGender()</li>
+          <li>Breed: $dog.getBreed()</li>
+          <li>Altered: $dog.isAltered()</li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <!-- <ul>
+          <li>Age: $dog.getAge()</li>
+          <li>Color: $dog.getColor()</li>
+          <li>Weight: $dog.getWeight()</li>
+          <li>Rabies: $dog.getRabies()</li>
+          <li>Microchip: $dog.getMicrochip()</li>
+          <li>Description: $dog.getDiscription()</li>
+        </ul>
+      </div> -->
     #end
   </div>
   <div class = "row">
@@ -33,18 +33,18 @@
   <div class = "row">
     <h2>Parks Visited</h2>
     #foreach ($park in $parks)
-    <ul>
-      <li>  <a href="/parks/$park.getId()">$park.getName()</a></li>
-    </ul>
+      <ul>
+        <li><a href="/parks/$park.getId()">$park.getName()</a></li>
+      </ul>
     #end
   </div>
   <div class = "row">
     <h2>Friends</h2>
     <!-- how do favorited dogs show?  -->
     #foreach ($dog in $dogs)
-    <ul>
-      <li><a href="/$dog.getName()">$dog.getName()</a></li>
-    </ul>
+      <ul>
+        <li><a href="/$dog.getName()">$dog.getName()</a></li>
+      </ul>
     #end
   </div>
   <div class = "row">
