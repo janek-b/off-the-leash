@@ -83,6 +83,21 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/parks/sort", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("MAPS_KEY", System.getenv("MAPS_KEY"));
+      model.put("coordinates", gson.toJson(Park.getAllCoordinates()));
+      model.put("user", request.session().attribute("user"));
+      String sort = request.queryParams("sort");
+      if (sort.equals("rating")) {
+        // model.put("parks", Park.allByRating());
+      } else if(sort.equals("alpha")) {
+        model.put("parks", Park.all());
+      }
+      model.put("template", "templates/parks.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
 
     post("/parks/new", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
