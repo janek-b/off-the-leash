@@ -73,6 +73,16 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/parks", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("MAPS_KEY", System.getenv("MAPS_KEY"));
+      model.put("coordinates", gson.toJson(Park.getAllCoordinates()));
+      model.put("user", request.session().attribute("user"));
+      model.put("parks", Park.all());
+      model.put("template", "templates/parks.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
 
     post("/parks/new", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
