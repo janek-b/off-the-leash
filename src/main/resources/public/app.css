@@ -4,6 +4,11 @@ body {
   color:#A89272;
 }
 
+.well {
+  box-shadow: 0 2px 8px black;
+  color: black;
+}
+
 #loginForm {
   width: 250px;
 }
