@@ -73,6 +73,14 @@ public class App {
 
     post("/parks/new", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
+      String name = request.queryParams("name");
+      String location = request.queryParams("location");
+      String sizeSelected = request.queryParams("sizeSelected");
+      boolean fenced = request.queryParams("fenceSelected").equals("true");
+      boolean small = request.queryParams("smallSelected").equals("true");
+      Park newPark = new Park(name, location, sizeSelected, fenced, small);
+      newPark.save();
+      response.redirect("/admin");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
