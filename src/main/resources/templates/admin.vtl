@@ -23,7 +23,7 @@
 </div>
 <div class = "row">
   <h2>Add Park</h2>
-  <form action="/parks" method="post">
+  <form action="/parks/new" method="post">
     <div class="form-group">
       <label for="name">Enter park name</label>
       <input id="name" name="name" type="text">
@@ -32,26 +32,24 @@
       <input id="location" name="location" type="text">
       <br>
       <label for="size">Select park size</label>
-      <select class="form-control" id='size' name="sizeSelected" type='text'>
-        <option>Small: less than a city block</option>
-        <option>Medium: city block </option>
-        <option>Large: Acre, many city blocks, or more</option>
+      <select class="form-control" id='size' name="sizeSelected">
+        <option value="small">Small: less than a city block</option>
+        <option value="medium">Medium: city block </option>
+        <option value="large">Large: Acre, many city blocks, or more</option>
       </select>
       <br>
-      <select class="form-control" id='fenced' name="fenceSelected" type='text'>
-        <option>Park is fully fenced</option>
-        <option>Park is partially fenced, or without a fence</option>
+      <select class="form-control" id='fenced' name="fenceSelected">
+        <option value="true">Park is fully fenced</option>
+        <option value="false">Park is partially fenced, or without a fence</option>
       </select>
       <br>
-      <select class="form-control" id='small' name="smallSelected" type='text'>
-        <option>Seperate section for small dogs</option>
-        <option>Small dog friendly, but no seperate area</option>
-        <option>Large dogs only</option>
+      <select class="form-control" id='small' name="smallSelected">
+        <option value="true">Seperate section for small dogs</option>
+        <option value="false">Small dog friendly, but no seperate area</option>
+        <option value="false">Large dogs only</option>
       </select>
       </br>
-      <label for="streetAddress">Enter park street, city, and state address</label>
-      <input id="streetAddress" name="streetAddress" type="text">
-      <button type="submit" class="btn">Add Park                                                             </button>
+      <button type="submit" class="btn">Add Park</button>
     </div>
   </form>
   <hr>
