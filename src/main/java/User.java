@@ -48,7 +48,8 @@ public class User implements BasicMethodsInterface {
       User user = (User) otherUser;
       return this.getUsername().equals(user.getUsername()) &&
              this.getPassword().equals(user.getPassword()) &&
-             this.getAdmin() == user.getAdmin();
+             this.getAdmin() == user.getAdmin() &&
+             this.getId() == user.getId();
     }
   }
 
