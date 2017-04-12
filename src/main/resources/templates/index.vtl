@@ -57,11 +57,11 @@
       </tr>
       #foreach($park in $parks)
         <tr>
-          <td class="text-captialize"><a href="/parks/$park.getId()">$park.getName()</a></td>
-          <td class="text-captialize">$park.getSize()</td>
+          <td class="text-capitalize"><a href="/parks/$park.getId()">$park.getName()</a></td>
+          <td class="text-capitalize">$park.getSize()</td>
           <td><span class="label label-primary">$park.getCurrentVisitors()</span></td>
-          <td><a href="/parks/$park.getId()/upvote"><span class="badge"><span class="glyphicon glyphicon-thumbs-up"></span></span></a></td>
-          <td><a href="/parks/$park.getId()/downvote"><span class="badge"><span class="glyphicon glyphicon-thumbs-down"></span></span></a></td>
+          <td><span class="badge"><span class="glyphicon glyphicon-thumbs-up"></span> $park.getUpVotes()</span></td>
+          <td><span class="badge"><span class="glyphicon glyphicon-thumbs-down"></span> $park.getDownVotes()</span></td>
           <td>
             #if(($user) && !($user.getCheckedIn()))
               <a href="/parks/$park.getId()/checkin"><span class="label label-success">Checkin</span></a>
