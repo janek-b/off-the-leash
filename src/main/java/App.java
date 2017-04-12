@@ -90,7 +90,7 @@ public class App {
       model.put("user", request.session().attribute("user"));
       String sort = request.queryParams("sort");
       if (sort.equals("rating")) {
-        // model.put("parks", Park.allByRating());
+        model.put("parks", Park.allByRating());
       } else if(sort.equals("alpha")) {
         model.put("parks", Park.all());
       }
