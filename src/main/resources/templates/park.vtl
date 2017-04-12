@@ -1,16 +1,64 @@
 <!--park.vtl-->
   <div class = "row">
-    <h2>$park.getName() <span class="label label-primary">$park.getCurrentVisitors()</span></h2>
-    <!-- map centered on specific park -->
+    <div class="col-md-10 col-md-offset-1">
+      <h2>$park.getName()</h2>
+        <a href="/parks/$park.getId()/upvote"><span class="badge"><span class="glyphicon glyphicon-thumbs-up"></span></span></a>
+        <a href="/parks/$park.getId()/downvote"><span class="badge"><span class="glyphicon glyphicon-thumbs-down"></span></span></a>
+        <h4>Current Number of Visitors </h4><span class="label label-primary">$park.getCurrentVisitors()</span>
+
+        #if(($user) && !($user.getCheckedIn()))
+          <a href="/parks/$park.getId()/checkin"><span class="label label-success">Checkin</span></a>
+        #elseif($user.getCheckedIn().getId() == $park.getId())
+          <a href="/parks/$park.getId()/checkout"><span class="label label-warning">Checkout</span></a>
+        #end
+        <hr>
+
+        <!-- BEGIN MAP SECTION -->
+        <div id="map"></div>
+        <script>
+          function initMap() {
+            var portland = {lat: 45.5230622, lng: -122.6764816};
+            var locations = $coordinates;
+            console.log(locations);
+            var map = new google.maps.Map(document.getElementById('map'), {
+              center: portland,
+              scrollwheel: false,
+              zoom: 11
+            });
+
+          function addMark(location) {
+            var marker = new google.maps.Marker({
+              map: map,
+              position: location.position,
+              title: location.name
+            });
+            var infowindow = new google.maps.InfoWindow({
+              content: '<h4><a href="/parks/'+location.id+'">'+location.name+'</a></h4>'
+            });
+            marker.addListener('click', function() {
+              infowindow.open(map, marker);
+            });
+          }
+
+            locations.forEach(function(location) {
+              addMark(location);
+            });
+          }
+        </script>
+        <!-- END MAP SECTION -->
+    </div>
   </div>
   <div class = "row">
-    <h2>Park Details</h2>
-    <ul>
-      <li>Name: $park.getName()</li>
-      <li>Location: $park.getLocation()</li>
-      <li>Size: $park.getSize()</li>
-      <li>Fenced: $park.isFenced()</li>
-      <li>Small: $park.hasSmallDogsArea()</li>
-    </ul>
+    <div class="col-md-10 col-md-offset-1">
+      <h2>Park Details</h2>
+      <ul>
+        <li>Name: $park.getName()</li>
+        <li>Location: $park.getLocation()</li>
+        <li>Size: $park.getSize()</li>
+        <li>Fenced: $park.isFenced()</li>
+        <li>Small: $park.hasSmallDogsArea()</li>
+        <li>Currently checked-in:</li>
+      </ul>
+    </div>
   </div>
 <!--park.vtl-->
