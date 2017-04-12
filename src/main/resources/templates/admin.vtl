@@ -70,8 +70,7 @@
         <hr>
       </div>
       <div role="tabpanel" class="tab-pane" id="users">
-        <h2>Manage Users</h2>
-        <h3>All Users</h3>
+        <h2>All Users</h2>
           #foreach ($user in $users)
             <ul>
               <li><a href="/users/$user.getId()">$user.getUsername()</a></li>
