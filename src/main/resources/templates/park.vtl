@@ -17,32 +17,27 @@
         <div id="map"></div>
         <script>
           function initMap() {
-            var portland = {lat: 45.5230622, lng: -122.6764816};
-            var locations = $coordinates;
-            console.log(locations);
+            var location = $coordinates;
             var map = new google.maps.Map(document.getElementById('map'), {
-              center: portland,
+              center: location,
               scrollwheel: false,
               zoom: 11
             });
 
-          function addMark(location) {
-            var marker = new google.maps.Marker({
-              map: map,
-              position: location.position,
-              title: location.name
-            });
-            var infowindow = new google.maps.InfoWindow({
-              content: '<h4><a href="/parks/'+location.id+'">'+location.name+'</a></h4>'
-            });
-            marker.addListener('click', function() {
-              infowindow.open(map, marker);
-            });
-          }
-
-            locations.forEach(function(location) {
-              addMark(location);
-            });
+            function addMark(location) {
+              var marker = new google.maps.Marker({
+                map: map,
+                position: location.position,
+                title: location.name
+              });
+              var infowindow = new google.maps.InfoWindow({
+                content: '<h4><a href="/parks/'+location.id+'">'+location.name+'</a></h4>'
+              });
+              marker.addListener('click', function() {
+                infowindow.open(map, marker);
+              });
+            }
+            addMark(location)
           }
         </script>
         <!-- END MAP SECTION -->
