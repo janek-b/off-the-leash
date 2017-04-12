@@ -7,7 +7,7 @@
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#user" role="tab" data-toggle="tab">Pack Leader</a></li>
         <li role="presentation"><a href="#dogs" role="tab" data-toggle="tab">Pack Members</a></li>
-        <li role="presentation"><a href="#parks" role="tab" data-taggle="tab">Parks Visited</a></li>
+        <li role="presentation"><a href="#parks" role="tab" data-toggle="tab">Favorite Parks</a></li>
       </ul>
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="user">
@@ -87,6 +87,18 @@
               </div>
             </div>
           #end
+        </div>
+        <div role="tabpanel" class="tab-pane" id="parks">
+          <br>
+            #if ($user.getFavoriteParks().size() > 0)
+              <ol>
+                #foreach ($park in $user.getFavoriteParks())
+                  <li><a href="/parks/$park.getId()">$park.getName()</a></li>
+                #end
+              </ol>
+            #else
+              <h4>You don't have any favorite parks yet!</h4>
+            #end
         </div>
       </div>
     </div>

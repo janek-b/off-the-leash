@@ -169,6 +169,7 @@ public class App {
       if (profile.getCheckedIn() != null) {
         model.put("coordinates", gson.toJson(profile.getCheckedIn().getCoordinates()));
       }
+      model.put("parks", Park.all());
       model.put("MAPS_KEY", System.getenv("MAPS_KEY"));
       model.put("user", user);
       model.put("profile", profile);
