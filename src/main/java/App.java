@@ -38,6 +38,9 @@ public class App {
 
     post("/admin", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
+      User user = User.find(Integer.parseInt(request.queryParams("userSelected")));
+      user.makeAdmin();
+      response.redirect("/admin");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
@@ -73,6 +76,14 @@ public class App {
 
     post("/parks/new", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
+      String name = request.queryParams("name");
+      String location = request.queryParams("location");
+      String sizeSelected = request.queryParams("sizeSelected");
+      boolean fenced = request.queryParams("fenceSelected").equals("true");
+      boolean small = request.queryParams("smallSelected").equals("true");
+      Park newPark = new Park(name, location, sizeSelected, fenced, small);
+      newPark.save();
+      response.redirect("/admin");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
@@ -106,6 +117,8 @@ public class App {
     get("/parks/:id/checkin", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       Park park = Park.find(Integer.parseInt(request.params(":id")));
+      User user = request.session().attribute("user");
+      user.checkIn(park);
       model.put("user", request.session().attribute("user"));
       response.redirect(request.headers("Referer"));
       return new ModelAndView(model, layout);
@@ -114,6 +127,8 @@ public class App {
     get("/parks/:id/checkout", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       Park park = Park.find(Integer.parseInt(request.params(":id")));
+      User user = request.session().attribute("user");
+      user.checkOut();
       model.put("user", request.session().attribute("user"));
       response.redirect(request.headers("Referer"));
       return new ModelAndView(model, layout);

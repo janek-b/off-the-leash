@@ -14,18 +14,29 @@
       function initMap() {
         var portland = {lat: 45.5230622, lng: -122.6764816};
         var locations = $coordinates;
-
+        console.log(locations);
         var map = new google.maps.Map(document.getElementById('map'), {
           center: portland,
           scrollwheel: false,
           zoom: 11
         });
 
-        var marker = locations.map(function(location) {
-          return new google.maps.Marker({
+        function addMark(location) {
+          var marker = new google.maps.Marker({
             map: map,
-            position: location,
+            position: location.position,
+            title: location.name
           });
+          var infowindow = new google.maps.InfoWindow({
+            content: '<h4><a href="/parks/'+location.id+'">'+location.name+'</a></h4>'
+          });
+          marker.addListener('click', function() {
+            infowindow.open(map, marker);
+          });
+        }
+
+        locations.forEach(function(location) {
+          addMark(location);
         });
       }
     </script>

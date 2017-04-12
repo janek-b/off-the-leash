@@ -310,8 +310,9 @@ public class Park implements BasicMethodsInterface {
     List<Park> parks = Park.all();
     for (Park park: parks) {
       Map<String, Object> coordinates = new HashMap<String, Object>();
-      coordinates.put("lat", park.getLat());
-      coordinates.put("lng", park.getLng());
+      coordinates.put("name", park.getName());
+      coordinates.put("id", park.getId());
+      coordinates.put("position", park.getCoordinates());
       allCoordinates.add(coordinates);
     }
     return allCoordinates;
