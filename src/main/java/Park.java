@@ -129,7 +129,7 @@ public class Park implements BasicMethodsInterface {
 
   public static List<Park> all() {
     try (Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM parks;";
+      String sql = "SELECT * FROM parks ORDER BY name asc;";
       return con.createQuery(sql)
         .executeAndFetch(Park.class);
     }
