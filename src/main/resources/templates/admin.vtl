@@ -1,81 +1,85 @@
 <!--admin.vtl-->
 <div class = "row">
-  <h2>Add Administrator</h2>
-  <form action="/admin" method="post">
-    <label for="userId">Select User To Make Admin</label>
-    <select id='userId' name="userSelected" type='text'>
-      #foreach($user in $users)
-        <option value="$user.getId()">$user.getUsername()</option>
-      #end
-    </select>
-    <button type="submit" class="btn">Make Admin</button>
-  </form>
-  <hr>
-  <h2>Current Administrators</h2>
-    #foreach($user in $users)
-      <ul>
-        #if($user.getAdmin())
-          <li><a href="/users/$user.getId()">$user.getUsername()</a></li>
-        #end
-      </ul>
-    #end
-  <hr>
-</div>
-<div class = "row">
-  <h2>Add Park</h2>
-  <form action="/parks/new" method="post">
-    <div class="form-group">
-      <label for="name">Enter park name</label>
-      <input id="name" class="form-control" name="name" type="text">
-      <br>
-      <label for="location">Enter street address or cross street, city, and state of park</label>
-      <input id="location" class="form-control" name="location" type="text">
-      <br>
-      <label for="size">Select park size</label>
-      <select class="form-control" id='size' name="sizeSelected">
-        <option value="small">Small: less than a city block</option>
-        <option value="medium">Medium: city block </option>
-        <option value="large">Large: Acre, many city blocks, or more</option>
-      </select>
-      <br>
-      <select class="form-control" id='fenced' name="fenceSelected">
-        <option value="true">Park is fully fenced</option>
-        <option value="false">Park is partially fenced, or without a fence</option>
-      </select>
-      <br>
-      <select class="form-control" id='small' name="smallSelected">
-        <option value="true">Seperate section for small dogs</option>
-        <option value="false">Small dog friendly, but no seperate area</option>
-        <option value="false">Large dogs only</option>
-      </select>
-      </br>
-      <button type="submit" class="btn">Add Park</button>
-    </div>
-  </form>
-  <hr>
-  <h2>Current Parks</h2>
-    #foreach ($park in $parks)
-    <ul>
-      <li><a href="/parks">$park.getName()</a></li>
+  <div>
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#admins" aria-controls="admins" role="tab" data-toggle="tab">Admins</a></li>
+      <li role="presentation"><a href="#parks" aria-controls="parks" role="tab" data-toggle="tab">Parks</a></li>
+      <li role="presentation"><a href="#users" aria-controls="users" role="tab" data-toggle="tab">Users</a></li>
     </ul>
-    #end
-  <hr>
-</div>
-<div class = "row">
-  <h2>Manage Users</h2>
-  <p>Send Email To All Users</p>
-  <p>Delete User</p>
-  <hr>
-</div>
-<div class = "row">
-  <h2>All Users</h2>
-    #foreach ($user in $users)
-      <ul>
-        <li><a href="/users/$user.getId()">$user.getUsername()</a></li>
-      </ul>
-    #end
-  </hr>
-</div>
-<div class = "row">
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="admins">
+        <h2>Add Administrator</h2>
+        <form action="/admin" method="post">
+          <label for="userId">Select User To Make Admin</label>
+          <select id='userId' name="userSelected" type='text'>
+            #foreach($user in $users)
+              <option value="$user.getId()">$user.getUsername()</option>
+            #end
+          </select>
+          <button type="submit" class="btn">Make Admin</button>
+        </form>
+        <hr>
+        <h2>Current Administrators</h2>
+          #foreach($user in $users)
+            <ul>
+              #if($user.getAdmin())
+                <li><a href="/users/$user.getId()">$user.getUsername()</a></li>
+              #end
+            </ul>
+          #end
+        <hr>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="parks">
+        <h2>Add Park</h2>
+        <form action="/parks/new" method="post">
+          <div class="form-group">
+            <label for="name">Enter park name</label>
+            <input id="name" class="form-control" name="name" type="text">
+            <br>
+            <label for="location">Enter street address or cross street, city, and state of park</label>
+            <input id="location" class="form-control" name="location" type="text">
+            <br>
+            <label for="size">Select park size</label>
+            <select class="form-control" id='size' name="sizeSelected">
+              <option value="small">Small: less than a city block</option>
+              <option value="medium">Medium: city block </option>
+              <option value="large">Large: Acre, many city blocks, or more</option>
+            </select>
+            <br>
+            <select class="form-control" id='fenced' name="fenceSelected">
+              <option value="true">Park is fully fenced</option>
+              <option value="false">Park is partially fenced, or without a fence</option>
+            </select>
+            <br>
+            <select class="form-control" id='small' name="smallSelected">
+              <option value="true">Seperate section for small dogs</option>
+              <option value="false">Small dog friendly, but no seperate area</option>
+              <option value="false">Large dogs only</option>
+            </select>
+            </br>
+            <button type="submit" class="btn">Add Park</button>
+          </div>
+        </form>
+        <hr>
+        <h2>Current Parks</h2>
+          #foreach ($park in $parks)
+          <ul>
+            <li><a href="/parks">$park.getName()</a></li>
+          </ul>
+          #end
+        <hr>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="users">
+        <h2>Manage Users</h2>
+        <h3>All Users</h3>
+          #foreach ($user in $users)
+            <ul>
+              <li><a href="/users/$user.getId()">$user.getUsername()</a></li>
+            </ul>
+          #end
+        </hr>
+      </div>
+    </div>
+  </div>
 </div>
 <!--admin.vtl-->
