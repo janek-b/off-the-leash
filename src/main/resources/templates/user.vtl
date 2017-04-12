@@ -1,0 +1,84 @@
+<!--user.vtl-->
+  <div class = "row">
+    <h1>Welcome $user.getName()</h1>
+  </div>
+  <div class = "row">
+    <div>
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#user" role="tab" data-toggle="tab">Pack Leader</a></li>
+        <li role="presentation"><a href="#dogs" role="tab" data-toggle="tab">Pack Members</a></li>
+        <li role="presentation"><a href="#parks" role="tab" data-taggle="tab">Parks Visited</a></li>
+      </ul>
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="user">
+          <h2>Pack Leader Information</h2>
+          <ul>
+            <li>Full Name: $user.getName()</li>
+            <li>Login: $user.getLogin()</li>
+            <li>Password: $user.getPassword()</li>
+          </ul>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="dogs">
+          <div class="col-md-4"
+            <div class="form-group">
+              <script>
+                $(document).ready( function() {
+                      $(document).on('change', '.btn-file :file', function() {
+                    var input = $(this),
+                      label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                    input.trigger('fileselect', [label]);
+                    });
+
+                    $('.btn-file :file').on('fileselect', function(event, label) {
+
+                        var input = $(this).parents('.input-group').find(':text'),
+                            log = label;
+
+                        if( input.length ) {
+                            input.val(log);
+                        } else {
+                            if( log ) alert(log);
+                        }
+
+                    });
+                    function readURL(input) {
+                        if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+
+                            reader.onload = function (e) {
+                                $('#img-upload').attr('src', e.target.result);
+                            }
+
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+
+                    $("#imgInp").change(function(){
+                        readURL(this);
+                    });
+                  });
+              </script>
+              <label>Upload Image</label>
+              <div class="input-group">
+                  <span class="input-group-btn">
+                      <span class="btn btn-default btn-file">
+                          Browse… <input type="file" id="imgInp">
+                      </span>
+                  </span>
+                  <input type="text" class="form-control" readonly>
+              </div>
+              <img id='img-upload'/>
+            </div>
+          </div>
+          <div class="col-md-4"
+            dog details
+          </div>
+          <div class="col-md-4"
+            description
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--user.vtl-->
