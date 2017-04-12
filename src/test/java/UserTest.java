@@ -181,4 +181,12 @@ public class UserTest {
     assertEquals(user, User.findByUserName("Willie"));
   }
 
+  @Test
+  public void makeAdmin_changesUserAdminValueToTrue() {
+    User user = new User("Willie", "will123");
+    user.save();
+    user.makeAdmin();
+    assertTrue(user.getAdmin());
+  }
+
 }

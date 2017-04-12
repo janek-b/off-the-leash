@@ -213,14 +213,22 @@ public class ParkTest {
     testPark1.save();
     Park testPark2 = new Park("park", "Hillsboro, OR", "medium", true, true);
     testPark2.save();
+    Map<String, Object> location1 = new HashMap<String, Object>();
+    location1.put("name", testPark1.getName());
+    location1.put("id", testPark1.getId());
     Map<String, Object> testCoordinates1 = new HashMap<String, Object>();
     testCoordinates1.put("lat", 45.5230622);
     testCoordinates1.put("lng", -122.6764816);
-    allCoordinates.add(testCoordinates1);
+    location1.put("position", testCoordinates1);
+    allCoordinates.add(location1);
+    Map<String, Object> location2 = new HashMap<String, Object>();
+    location2.put("name", testPark2.getName());
+    location2.put("id", testPark2.getId());
     Map<String, Object> testCoordinates2 = new HashMap<String, Object>();
     testCoordinates2.put("lat", 45.5228939);
     testCoordinates2.put("lng", -122.989827);
-    allCoordinates.add(testCoordinates2);
+    location2.put("position", testCoordinates2);
+    allCoordinates.add(location2);
     assertEquals(allCoordinates, Park.getAllCoordinates());
   }
 
