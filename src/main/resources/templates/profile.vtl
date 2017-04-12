@@ -1,24 +1,33 @@
 <!--user.vtl-->
   <div class = "row">
-    <h2>Pack Info</h2>
-    #foreach ($dog in $profile.getAllDogs())
-      <div class="col-md-2 col-md-offset-1">
-        <!-- dog image -->
-        <!-- dog favorite -->
-      </div>
-      <div class="col-md-4">
-        <ul>
-          <li>Name: $dog.getName()</li>
-          <li>Gender: $dog.getGender()</li>
-          <li>Breed: $dog.getBreed()</li>
-          <li>Altered: $dog.isAltered()</li>
-        </ul>
-      </div>
-    #end
+    <div class="col-md-10 col-md-offset-1">
+      <h2>Pack Info</h2>
+      #if($profile.getAllDogs().size() > 0)
+        #foreach ($dog in $profile.getAllDogs())
+          <div class="row">
+            <div class="col-md-2 col-md-offset-1">
+              <!-- dog image -->
+              <!-- dog favorite -->
+            </div>
+            <div class="col-md-4">
+              <ul>
+                <li>Name: $dog.getName()</li>
+                <li>Gender: $dog.getGender()</li>
+                <li>Breed: $dog.getBreed()</li>
+                <li>Altered: $dog.isAltered()</li>
+              </ul>
+            </div>
+          </div>
+        #end
+      #else
+        <h4>Currently a Lone Wolf</h4>
+      #end
+      <hr>
+    </div>
   </div>
   <div class = "row">
-    <h2>Current Park</h2>
     <div class="col-md-10 col-md-offset-1">
+      <h2>Current Park</h2>
       #if($coordinates)
         <h4><a href="/parks/$profile.getCheckedIn().getId()">$profile.getCheckedIn().getName()</a></h4>
         <div id="map"></div>
@@ -28,7 +37,7 @@
             var map = new google.maps.Map(document.getElementById('map'), {
               center: location,
               scrollwheel: false,
-              zoom: 11
+              zoom: 14
             });
 
             function addMark(location) {
@@ -51,25 +60,46 @@
       #else
         <h4>Not currently at a park</h4>
       #end
+      <hr>
     </div>
   </div>
   <div class = "row">
-    <h2>Favorite Parks</h2>
-    #foreach ($park in $profile.getFavoriteParks())
-      <ul>
-        <li><a href="/parks/$park.getId()">$park.getName()</a></li>
-      </ul>
-    #end
+    <div class="col-md-10 col-md-offset-1">
+      <h2>Favorite Parks</h2>
+      #if($profile.getFavoriteParks().size() > 0)
+        #foreach ($park in $profile.getFavoriteParks())
+          <ul>
+            <li><a href="/parks/$park.getId()">$park.getName()</a></li>
+          </ul>
+        #end
+      #else
+        <h4>Pack leader does not have any favorite parks.</h4>
+      #end
+      <hr>
+    </div>
   </div>
   <div class = "row">
-    <h2>Pack Leader</h2>
-    <p>
-      #if($profile.getName())
-        $profile.getName()
-      #else
-        $profile.getUsername()
-      #end
-      <!-- maybe add city, state, zip to user.java and database.  -->
-    </p>
+    <div class="col-md-10 col-md-offset-1">
+      <h2>Pack Leader</h2>
+      <p>
+        #if($profile.getName())
+          <dl class="dl-horizontal">
+            <dt>Name:</dt>
+            <dd>$profile.getName()</dd>
+          </dl>
+          <dl class="dl-horizontal">
+            <dt>Username:</dt>
+            <dd>$profile.getUsername()</dd>
+          </dl>
+        #else
+          <dl class="dl-horizontal">
+            <dt>Username:</dt>
+            <dd>$profile.getUsername()</dd>
+          </dl>
+        #end
+        <!-- maybe add city, state, zip to user.java and database.  -->
+      </p>
+      <hr>
+    </div>
   </div>
 <!--user.vtl-->

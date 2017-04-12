@@ -138,14 +138,19 @@ public class App {
 
     get("/users/:id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
+      User user = request.session().attribute("user");
       User profile = User.find(Integer.parseInt(request.params(":id")));
       if (profile.getCheckedIn() != null) {
         model.put("coordinates", gson.toJson(profile.getCheckedIn().getCoordinates()));
       }
       model.put("MAPS_KEY", System.getenv("MAPS_KEY"));
-      model.put("user", request.session().attribute("user"));
+      model.put("user", user);
       model.put("profile", profile);
-      model.put("template", "templates/profile.vtl");
+      if (profile.equals(user)) {
+        model.put("template", "templates/user.vtl");
+      } else {
+        model.put("template", "templates/profile.vtl");
+      }
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
