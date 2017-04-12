@@ -94,6 +94,7 @@ public class App {
       model.put("coordinates", gson.toJson(Park.getAllCoordinates()));
       model.put("park", park);
       model.put("user", request.session().attribute("user"));
+      model.put("activeUsers", park.getUsersCheckedIn());
       model.put("template", "templates/park.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
