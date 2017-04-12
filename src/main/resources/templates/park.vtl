@@ -2,14 +2,17 @@
   <div class = "row">
     <div class="col-md-10 col-md-offset-1">
       <h2>$park.getName()</h2>
-        <a href="/parks/$park.getId()/upvote"><span class="badge"><span class="glyphicon glyphicon-thumbs-up"></span></span></a>
-        <a href="/parks/$park.getId()/downvote"><span class="badge"><span class="glyphicon glyphicon-thumbs-down"></span></span></a>
-        <h4>Current Number of Visitors </h4><span class="label label-primary">$park.getCurrentVisitors()</span>
+        #if($user)
+          <h4><a href="/parks/$park.getId()/upvote"><span class="label label-default"><span class="glyphicon glyphicon-thumbs-up"></span> $park.getUpVotes()</span></a> <a href="/parks/$park.getId()/downvote"><span class="label label-default"><span class="glyphicon glyphicon-thumbs-down"></span> $park.getDownVotes()</span></a></h4>
+        #else
+          <h4><span class="label label-default"><span class="glyphicon glyphicon-thumbs-up"></span> $park.getUpVotes()</span> <span class="label label-default"><span class="glyphicon glyphicon-thumbs-down"></span> $park.getDownVotes()</span></h4>
+        #end
+        <h4>Current Number of Visitors <span class="label label-primary">$park.getCurrentVisitors()</span></h4>
 
         #if(($user) && !($user.getCheckedIn()))
-          <a href="/parks/$park.getId()/checkin"><span class="label label-success">Checkin</span></a>
+          <h4><a href="/parks/$park.getId()/checkin"><span class="label label-success">Checkin</span></a></h4>
         #elseif($user.getCheckedIn().getId() == $park.getId())
-          <a href="/parks/$park.getId()/checkout"><span class="label label-warning">Checkout</span></a>
+          <h4><a href="/parks/$park.getId()/checkout"><span class="label label-warning">Checkout</span></a></h4>
         #end
         <hr>
 
