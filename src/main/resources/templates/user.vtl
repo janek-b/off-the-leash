@@ -88,6 +88,17 @@
             </div>
           #end
         </div>
+        <div role="tabpanel" class="tab-pane" id="parks">
+          #foreach($park in $parks)
+            #if($user.getCheckedIn())
+              <ul>
+                <li>$park.getName()</li>
+              </ul>
+            #else
+              <h5>You haven't checked in at any parks.</h5>
+            #end
+          #end
+        </div>
       </div>
     </div>
   </div>
