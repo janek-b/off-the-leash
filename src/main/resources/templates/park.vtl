@@ -55,14 +55,14 @@
         <li>Size: $park.getSize()</li>
         <li>Fenced: $park.isFenced()</li>
         <li>Small: $park.hasSmallDogsArea()</li>
-        <hr>
-        <h3>Currently checked-in</h3>
-        <ol>
-          #foreach ($user in $activeUsers)
-            <li><a href="/users/$user.getId()">$user.getUsername()</a></li>
-          #end
-        </ol>
       </ul>
+      <hr>
+      <h3>Currently checked-in</h3>
+      <ol>
+        #foreach ($user in $activeUsers)
+        <li><a href="/users/$user.getId()">$user.getUsername()</a></li>
+        #end
+      </ol>
     </div>
   </div>
 <!--park.vtl-->
