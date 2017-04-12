@@ -41,30 +41,17 @@
     <div class="well">
       <form class="form-inline" action="/parks/sort">
         <div class="form-group">
-          <select class="form-group" name="sort">
+          <label for="sort">Sort By:</label>
+          <select class="form-control" name="sort">
+            <option value="alpha">Name</option>
             <option value="rating">Rating</option>
-            <option value="alpha">Alphabetically</option>
           </select>
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-default">Filter</button>
         </div>
       </form>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-2 col-md-offset-1">
-    <div class="well">
-      <form class="" action="index.html" method="post">
-        <h4>Filter</h4>
-        <div class="form-group">
-        </div>
-      </form>
-    </div>
-  </div>
-  <div class="col-md-8">
-    <div class="well">
+      <br>
       <table class="table table-hover table-striped">
         <tr>
           <th>Park name</th>
@@ -72,6 +59,8 @@
           <th>Fenced</th>
           <th>Small dogs area</th>
           <th>Current Visitors</th>
+          <th></th>
+          <th></th>
         </tr>
         #foreach($park in $parks)
           <tr>
@@ -80,6 +69,8 @@
             <td>$park.isFenced()</td>
             <td>$park.hasSmallDogsArea()</td>
             <td><span class="label label-primary">$park.getCurrentVisitors()</span></td>
+            <td><span class="badge"><span class="glyphicon glyphicon-thumbs-up"></span> $park.getUpVotes()</span></td>
+            <td><span class="badge"><span class="glyphicon glyphicon-thumbs-down"></span> $park.getDownVotes()</span></td>
           </tr>
         #end
       </table>
