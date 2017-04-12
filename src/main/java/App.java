@@ -134,5 +134,13 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/users/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("user", request.session().attribute("user"));
+      model.put("profile", User.find(Integer.parseInt(request.params(":id"))));
+      model.put("template", "templates/profile.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
   }
 }
