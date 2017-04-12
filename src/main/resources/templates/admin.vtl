@@ -64,7 +64,7 @@
         <h2>Current Parks</h2>
           #foreach ($park in $parks)
           <ul>
-            <li><a href="/parks">$park.getName()</a></li>
+            <li><a href="/parks/$park.getId()">$park.getName()</a></li>
           </ul>
           #end
         <hr>
