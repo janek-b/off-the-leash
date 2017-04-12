@@ -90,6 +90,8 @@ public class App {
     get("/parks/:id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       Park park = Park.find(Integer.parseInt(request.params(":id")));
+      model.put("MAPS_KEY", System.getenv("MAPS_KEY"));
+      model.put("coordinates", gson.toJson(Park.getAllCoordinates()));
       model.put("park", park);
       model.put("user", request.session().attribute("user"));
       model.put("template", "templates/park.vtl");
