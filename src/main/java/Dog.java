@@ -14,6 +14,13 @@ public class Dog implements BasicMethodsInterface {
   private String gender;
   private boolean altered;
   private String breed;
+  // private int age;
+  // private String color;
+  // private String weight;
+  // private boolean rabies;
+  // private int microchip;
+  // private boolean altered;
+  // private String description;
 
 
   public Dog(String name, String gender, String breed, boolean altered, int userId) {
@@ -22,6 +29,7 @@ public class Dog implements BasicMethodsInterface {
     this.breed = breed;
     this.altered = altered;
     this.userId = userId;
+
   }
 
   public String getName() {
