@@ -21,17 +21,17 @@
             var map = new google.maps.Map(document.getElementById('map'), {
               center: location,
               scrollwheel: false,
-              zoom: 11
+              zoom: 14
             });
 
             function addMark(location) {
               var marker = new google.maps.Marker({
                 map: map,
-                position: location.position,
-                title: location.name
+                position: location,
+                title: "$park.getName()"
               });
               var infowindow = new google.maps.InfoWindow({
-                content: '<h4><a href="/parks/'+location.id+'">'+location.name+'</a></h4>'
+                content: '<h4><a href="/parks/$park.getId()">$park.getName()</a></h4>'
               });
               marker.addListener('click', function() {
                 infowindow.open(map, marker);

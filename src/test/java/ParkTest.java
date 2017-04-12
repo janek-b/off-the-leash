@@ -68,9 +68,9 @@ public class ParkTest {
 
   @Test
   public void all_returnsAllParksFromTheDB() {
-    Park testPark1 = new Park("park", "park-location", "medium", true, true);
+    Park testPark1 = new Park("apark", "park-location", "medium", true, true);
     testPark1.save();
-    Park testPark2 = new Park("park", "park-location", "medium", true, true);
+    Park testPark2 = new Park("bpark", "park-location", "medium", true, true);
     testPark2.save();
     assertTrue(Park.all().get(0).equals(testPark1));
     assertTrue(Park.all().get(1).equals(testPark2));
