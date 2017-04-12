@@ -1,0 +1,42 @@
+<!--user.vtl-->
+  <div class = "row">
+    <h2>Pack Info</h2>
+    #foreach ($dog in $profile.getAllDogs())
+      <div class="col-md-2 col-md-offset-1">
+        <!-- dog image -->
+        <!-- dog favorite -->
+      </div>
+      <div class="col-md-4">
+        <ul>
+          <li>Name: $dog.getName()</li>
+          <li>Gender: $dog.getGender()</li>
+          <li>Breed: $dog.getBreed()</li>
+          <li>Altered: $dog.isAltered()</li>
+        </ul>
+      </div>
+    #end
+  </div>
+  <div class = "row">
+    <h2>Current Park</h2>
+    <!-- Needs current park map  -->
+  </div>
+  <div class = "row">
+    <h2>Favorite Parks</h2>
+    #foreach ($park in $profile.getFavoriteParks())
+      <ul>
+        <li><a href="/parks/$park.getId()">$park.getName()</a></li>
+      </ul>
+    #end
+  </div>
+  <div class = "row">
+    <h2>Pack Leader</h2>
+    <p>
+      #if($profile.getName())
+        $profile.getName()
+      #else
+        $profile.getUsername()
+      #end
+      <!-- maybe add city, state, zip to user.java and database.  -->
+    </p>
+  </div>
+<!--user.vtl-->

@@ -64,14 +64,13 @@
         <h2>Current Parks</h2>
           #foreach ($park in $parks)
           <ul>
-            <li><a href="/parks">$park.getName()</a></li>
+            <li><a href="/parks/$park.getId()">$park.getName()</a></li>
           </ul>
           #end
         <hr>
       </div>
       <div role="tabpanel" class="tab-pane" id="users">
-        <h2>Manage Users</h2>
-        <h3>All Users</h3>
+        <h2>All Users</h2>
           #foreach ($user in $users)
             <ul>
               <li><a href="/users/$user.getId()">$user.getUsername()</a></li>
