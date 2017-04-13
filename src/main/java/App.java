@@ -143,6 +143,14 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    post("/parks/:id/delete", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Park park = Park.find(Integer.parseInt(request.params(":id")));
+      park.delete();
+      response.redirect(request.headers("Referer"));
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
     get("/parks/:id/upvote", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       Park park = Park.find(Integer.parseInt(request.params(":id")));
