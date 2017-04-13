@@ -2,7 +2,7 @@ body {
   padding-top: 70px;
   padding-bottom: 70px;
   background-color:#E8E8E8;
-  color:#A89272;
+  color:#333333;
 }
 
 .splash-page {
@@ -108,27 +108,9 @@ nav {
     width: 100%;
 }
 
-#dogs {
-  font-family: 'Finger Paint', cursive;
-}
-
-#dogList {
-  font-family: 'Indie Flower', cursive;
-  font-size: 2em;
-}
-
-#user, #users {
+#user, #users, #admins, #parks, #dogList, #dogs {
   font-family: 'Libre Franklin', sans-serif;
   font-size: 1.2em;
-}
-
-#admins, #parks {
-  font-family: 'Sarala', sans-serif;
-  font-size: 1.5em;
-}
-
-#userPage {
-  color: #FFB68A;
 }
 
 hr {
