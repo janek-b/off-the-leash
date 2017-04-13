@@ -1,7 +1,7 @@
 body {
   padding-top: 70px;
   padding-bottom: 70px;
-  background-color: #1D3C31;
+  background-color:#E8E8E8;
   color:#A89272;
 }
 
@@ -26,10 +26,15 @@ body {
 
 .navbar-fixed-top {
   box-shadow: 10px 0 20px black;
+  background-color: #f8efe2;
+  opacity: .7;
 }
 
 .navbar-fixed-bottom {
   box-shadow: -10px 0 20px black;
+  background-color: #f8efe2;
+  opacity: .7;
+  b
 }
 
 nav {
@@ -102,7 +107,16 @@ nav {
   font-size: 2em;
 }
 
-#user {
+#user, #users {
   font-family: 'Libre Franklin', sans-serif;
-  font-size: 2em;
+  font-size: 1.2em;
+}
+
+#admins, #parks {
+  font-family: 'Sarala', sans-serif;
+  font-size: 1.5em;
+}
+
+#userPage {
+  color: #FFB68A;
 }
