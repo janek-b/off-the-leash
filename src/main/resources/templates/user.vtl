@@ -10,7 +10,7 @@
   <div class = "row">
     <div>
       <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#user" role="tab" data-toggle="tab">Pack Leader</a></li>
+        <li role="presentation" class="active"><a href="#users" role="tab" data-toggle="tab">Pack Leader</a></li>
         <li role="presentation"><a href="#dogs" role="tab" data-toggle="tab">Pack Members</a></li>
         <li role="presentation"><a href="#parks" role="tab" data-toggle="tab">Favorite Parks</a></li>
       </ul>
@@ -159,8 +159,8 @@
           <form action="/users/$user.getId()/delete" method="post">
             <button type="submit" class="btn btn-danger pull-left">Delete</button>
           </form>
-          <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-          <button form="userEditForm" type="submit" class="btn btn-success pull-right">Save changes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button form="userEditForm" type="submit" class="btn btn-success">Save changes</button>
         </div>
       </div>
     </div>

@@ -329,7 +329,7 @@ public class Park implements BasicMethodsInterface {
 
   public static List<Park> allByRating() {
     try (Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM parks ORDER BY upVote / (CASE (upVote + downVote) WHEN 0 THEN NULL ELSE (upVote + downVote) END) desc NULLS LAST;";
+      String sql = "SELECT * FROM parks ORDER BY upVote / (CASE (upVote + downVote) WHEN 0 THEN NULL ELSE (upVote + downVote) END) desc, upVote desc NULLS LAST;";
       return con.createQuery(sql)
         .executeAndFetch(Park.class);
     }

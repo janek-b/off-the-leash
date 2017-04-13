@@ -11,6 +11,7 @@ $(function() {
     var modal = $(this)
     modal.find('.modal-title').text('Edit ' + parkName)
     modal.find('#editParkForm').attr("action", "/parks/"+parkId+"/update")
+    modal.find('#deleteParkForm').attr("action", "/parks/"+parkId+"/delete")
     modal.find('#name').val(parkName)
     modal.find('#location').val(parkLocation)
     modal.find('#size option[value="'+parkSize+'"]').prop('selected', true)
