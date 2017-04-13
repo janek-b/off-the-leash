@@ -181,5 +181,33 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    post("/users/:id/update", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      User user = User.find(Integer.parseInt(request.params(":id")));
+      User loggedInUser = request.session().attribute("user");
+      String name = request.queryParams("name");
+      String username = request.queryParams("username");
+      if (user.equals(loggedInUser)) {
+        request.session().removeAttribute("user");
+        user.update(name);
+        request.session().attribute("user", user);
+      }
+      response.redirect(request.headers("Referer"));
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/users/:id/delete", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      User user = User.find(Integer.parseInt(request.params(":id")));
+      if (user.equals(request.session().attribute("user"))) {
+        user.delete();
+        request.session().removeAttribute("user");
+        response.redirect("/");
+      } else {
+        response.redirect(request.headers("Referer"));
+      }
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
   }
 }

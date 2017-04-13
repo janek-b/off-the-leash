@@ -1,106 +1,173 @@
 <!--user.vtl-->
-  <div class = "row">
-    <h1>Welcome $user.getUsername()</h1>
-  </div>
-  <div class = "row">
-    <div>
-      <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#user" role="tab" data-toggle="tab">Pack Leader</a></li>
-        <li role="presentation"><a href="#dogs" role="tab" data-toggle="tab">Pack Members</a></li>
-        <li role="presentation"><a href="#parks" role="tab" data-toggle="tab">Favorite Parks</a></li>
-      </ul>
-      <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="user">
-          <h2>Pack Leader Information</h2>
-          <ul>
-            <li>Full Name: $user.getUsername()</li>
-            <li>Login: $user.getUsername()</li>
-            <li>Password: *****</li>
-          </ul>
-        </div>
-        <div role="tabpanel" class="tab-pane" id="dogs">
-          #foreach($dog in $user.getAllDogs())
-            <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <script>
-                    $(document).ready( function() {
-                          $(document).on('change', '.btn-file :file', function() {
-                        var input = $(this),
-                          label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                        input.trigger('fileselect', [label]);
-                        });
+<div class = "row">
+  <h1>Welcome $user.getUsername()</h1>
+</div>
+<div class = "row">
+  <div>
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#user" role="tab" data-toggle="tab">Pack Leader</a></li>
+      <li role="presentation"><a href="#dogs" role="tab" data-toggle="tab">Pack Members</a></li>
+      <li role="presentation"><a href="#parks" role="tab" data-toggle="tab">Favorite Parks</a></li>
+    </ul>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="user">
+        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#userEditModal">Edit</button>
+        <h2>Pack Leader Information</h2>
+        #if($user.getName())
+          <dl class="dl-horizontal">
+            <dt>Full Name:</dt>
+            <dd>$user.getName()</dd>
+          </dl>
+        #end
+        <dl class="dl-horizontal">
+          <dt>Username:</dt>
+          <dd>$user.getUsername()</dd>
+        </dl>
 
-                        $('.btn-file :file').on('fileselect', function(event, label) {
-
-                            var input = $(this).parents('.input-group').find(':text'),
-                                log = label;
-
-                            if( input.length ) {
-                                input.val(log);
-                            } else {
-                                if( log ) alert(log);
-                            }
-
-                        });
-                        function readURL(input) {
-                            if (input.files && input.files[0]) {
-                                var reader = new FileReader();
-
-                                reader.onload = function (e) {
-                                    $('#img-upload').attr('src', e.target.result);
-                                }
-
-                                reader.readAsDataURL(input.files[0]);
-                            }
-                        }
-
-                        $("#imgInp").change(function(){
-                            readURL(this);
-                        });
+      </div>
+      <div role="tabpanel" class="tab-pane" id="dogs">
+        #foreach($dog in $user.getAllDogs())
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <script>
+                  $(document).ready( function() {
+                        $(document).on('change', '.btn-file :file', function() {
+                      var input = $(this),
+                        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                      input.trigger('fileselect', [label]);
                       });
-                  </script>
-                  <br>
-                  <label>Upload Image of Pack Member</label>
-                  <div class="input-group">
-                      <span class="input-group-btn">
-                          <span class="btn btn-default btn-file">
-                              Browse… <input type="file" id="imgInp">
-                          </span>
-                      </span>
-                      <input type="text" class="form-control" readonly>
-                  </div>
-                  <img id='img-upload'/>
+
+                      $('.btn-file :file').on('fileselect', function(event, label) {
+
+                          var input = $(this).parents('.input-group').find(':text'),
+                              log = label;
+
+                          if( input.length ) {
+                              input.val(log);
+                          } else {
+                              if( log ) alert(log);
+                          }
+
+                      });
+                      function readURL(input) {
+                          if (input.files && input.files[0]) {
+                              var reader = new FileReader();
+
+                              reader.onload = function (e) {
+                                  $('#img-upload').attr('src', e.target.result);
+                              }
+
+                              reader.readAsDataURL(input.files[0]);
+                          }
+                      }
+
+                      $("#imgInp").change(function(){
+                          readURL(this);
+                      });
+                    });
+                </script>
+                <br>
+                <label>Upload Image of Pack Member</label>
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <span class="btn btn-default btn-file">
+                            Browse… <input type="file" id="imgInp">
+                        </span>
+                    </span>
+                    <input type="text" class="form-control" readonly>
                 </div>
-              </div>
-              <div class="col-md-4">
-                Pack Member Name: $dog.getName();
-                $dog.getName()'s Sex: $dog.getGender();
-                $dog.getName()'s Breed: $dog.getBreed();
-                #if($dog.altered())
-                  $dog.getName() <span style="font-weight:bold">is altered</span>
-                #else
-                  $dog.getName() is<span style="font-weight:bold"> not </span> altered
-                #end
-              </div>
-              <div class="col-md-4">
+                <img id='img-upload'/>
               </div>
             </div>
+            <div class="col-md-4">
+              Pack Member Name: $dog.getName();
+              $dog.getName()'s Sex: $dog.getGender();
+              $dog.getName()'s Breed: $dog.getBreed();
+              #if($dog.altered())
+                $dog.getName() <span style="font-weight:bold">is altered</span>
+              #else
+                $dog.getName() is<span style="font-weight:bold"> not </span> altered
+              #end
+            </div>
+            <div class="col-md-4">
+            </div>
+          </div>
+        #end
+      </div>
+      <div role="tabpanel" class="tab-pane" id="parks">
+        <br>
+          #if ($user.getFavoriteParks().size() > 0)
+            <ol>
+              #foreach ($park in $user.getFavoriteParks())
+                <li><a href="/parks/$park.getId()">$park.getName()</a></li>
+              #end
+            </ol>
+          #else
+            <h4>You don't have any favorite parks yet!</h4>
           #end
-        </div>
-        <div role="tabpanel" class="tab-pane" id="parks">
-          <br>
-            #if ($user.getFavoriteParks().size() > 0)
-              <ol>
-                #foreach ($park in $user.getFavoriteParks())
-                  <li><a href="/parks/$park.getId()">$park.getName()</a></li>
-                #end
-              </ol>
-            #else
-              <h4>You don't have any favorite parks yet!</h4>
-            #end
-        </div>
       </div>
     </div>
   </div>
+</div>
+
+
+<!-- User Edit Modal -->
+
+<div class="modal fade" id="userEditModal" tabindex="-1" role="dialog" aria-labelledby="userEditModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="userEditModalLabel">Edit User Info</h4>
+      </div>
+      <div class="modal-body">
+        <form id="userEditForm" action="/users/$user.getId()/update" method="post">
+          <div class="form-group">
+            <label for="name">Full name</label>
+            #if($user.getName())
+              <input class="form-control" type="text" name="name" value="$user.getName()">
+            #else
+              <input class="form-control" type="text" name="name">
+            #end
+          </div>
+          <div class="form-group">
+            <label for="username">username</label>
+            <input class="form-control" type="text" name="username" value="$user.getUsername()">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <form action="/users/$user.getId()/delete" method="post">
+          <button type="submit" class="btn btn-danger pull-left">Delete</button>
+        </form>
+        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+        <button form="userEditForm" type="submit" class="btn btn-success pull-right">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Add dog modal -->
+
+<div class="modal fade" id="addDogtModal" tabindex="-1" role="dialog" aria-labelledby="addDogModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addDogModalLabel">Add a Pack Member</h4>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!--user.vtl-->

@@ -7,8 +7,13 @@ body {
 nav {
   color: black;
 }
+
 .well {
   box-shadow: 0 2px 8px black;
+  color: black;
+}
+
+.modal {
   color: black;
 }
 
