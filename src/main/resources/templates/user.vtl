@@ -1,10 +1,10 @@
 <!--user.vtl-->
-<div class="container" id="userPage">
+<div class="container">
   <div class = "row" id="user">
     #if($user.getName())
-      <h1>Welcome $user.getName()</h1>
+    <h1>Welcome $user.getName()</h1>
     #else
-      <h1>Welcome $user.getUsername()</h1>
+    <h1>Welcome $user.getUsername()</h1>
     #end
   </div>
   <div class = "row">
@@ -18,17 +18,18 @@
         <div role="tabpanel" class="tab-pane active" id="users">
           <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#userEditModal">Edit</button>
           <h2>Pack Leader Information</h2>
-          #if($user.getName())
-          <dl class="dl-horizontal">
-            <dt>Full Name:</dt>
-            <dd>$user.getName()</dd>
-          </dl>
-          #end
-          <dl class="dl-horizontal">
-            <dt>Username:</dt>
-            <dd>$user.getUsername()</dd>
-          </dl>
-
+          <div class="well">
+            #if($user.getName())
+            <dl class="dl-horizontal">
+              <dt>Full Name:</dt>
+              <dd>$user.getName()</dd>
+            </dl>
+            #end
+            <dl class="dl-horizontal">
+              <dt>Username:</dt>
+              <dd>$user.getUsername()</dd>
+            </dl>
+          </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="dogs">
           <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addDogModal">Add a Pack Member</button>
@@ -46,9 +47,9 @@
                   <dd>$dog.getBreed()</dd>
                   <dt>Altered:</dt>
                   #if($dog.altered())
-                    <dd>Yes</dd>
+                  <dd>Yes</dd>
                   #else
-                    <dd>No</dd>
+                  <dd>No</dd>
                   #end
                 </dl>
               </div>
@@ -126,6 +127,7 @@
     </div>
   </div>
 
+
   <!-- User Edit Modal -->
 
   <div class="modal fade" id="userEditModal" tabindex="-1" role="dialog" aria-labelledby="userEditModalLabel">
@@ -159,12 +161,14 @@
           <form action="/users/$user.getId()/delete" method="post">
             <button type="submit" class="btn btn-danger pull-left">Delete</button>
           </form>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button form="userEditForm" type="submit" class="btn btn-success">Save changes</button>
+          <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+          <button form="userEditForm" type="submit" class="btn btn-success pull-right">Save changes</button>
         </div>
       </div>
     </div>
   </div>
+
+
 
   <!-- Add dog modal -->
 
