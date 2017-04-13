@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 --
 -- PostgreSQL database dump
 --
@@ -485,3 +487,4 @@ ALTER TABLE ONLY votes
 -- PostgreSQL database dump complete
 --
 
+>>>>>>> 7321037cc307a7fa16d1d64efdaacced890672e2
