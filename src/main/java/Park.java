@@ -335,4 +335,14 @@ public class Park implements BasicMethodsInterface {
     }
   }
 
+  public static List<Park> search(String input) {
+    String newInput = "%" + input + "%";
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM parks WHERE lower(name) LIKE lower(:newInput);";
+      return con.createQuery(sql)
+        .addParameter("newInput", newInput)
+        .executeAndFetch(Park.class);
+    }
+  }
+
 }
