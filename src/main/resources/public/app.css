@@ -92,3 +92,17 @@ nav {
 #img-upload{
     width: 100%;
 }
+
+#dogs {
+  font-family: 'Finger Paint', cursive;
+}
+
+#dogList {
+  font-family: 'Indie Flower', cursive;
+  font-size: 2em;
+}
+
+#user {
+  font-family: 'Libre Franklin', sans-serif;
+  font-size: 2em;
+}
