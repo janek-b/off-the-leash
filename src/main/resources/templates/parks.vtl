@@ -66,8 +66,16 @@
           <tr>
             <td class="text-capitalize"><a href="/parks/$park.getId()">$park.getName()</a></td>
             <td class="text-capitalize">$park.getSize()</td>
-            <td>$park.isFenced()</td>
-            <td>$park.hasSmallDogsArea()</td>
+            #if($park.isFenced())
+              <td>Yes</td>
+            #else
+              <td>No</td>
+            #end
+            #if($park.hasSmallDogsArea())
+              <td>Yes</td>
+            #else
+              <td>No</td>
+            #end
             <td><span class="label label-primary">$park.getCurrentVisitors()</span></td>
             <td><span class="badge"><span class="glyphicon glyphicon-thumbs-up"></span> $park.getUpVotes()</span></td>
             <td><span class="badge"><span class="glyphicon glyphicon-thumbs-down"></span> $park.getDownVotes()</span></td>
