@@ -19,7 +19,11 @@
                 <dt>Breed:</dt>
                 <dd>$dog.getBreed()</dd>
                 <dt>Altered:</dt>
-                <dd>$dog.altered()</dd>
+                #if($dog.altered())
+                  <dd>Yes</dd>
+                #else
+                  <dd>No</dd>
+                #end
               </dl>
             </div>
           </div>

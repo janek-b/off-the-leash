@@ -102,8 +102,16 @@
                   <tr>
                     <td class="text-capitalize"><a href="/parks/$park.getId()">$park.getName()</a></td>
                     <td class="text-capitalize">$park.getSize()</td>
-                    <td>$park.isFenced()</td>
-                    <td>$park.hasSmallDogsArea()</td>
+                    #if($park.isFenced())
+                      <td>Yes</td>
+                    #else
+                      <td>No</td>
+                    #end
+                    #if($park.hasSmallDogsArea())
+                      <td>Yes</td>
+                    #else
+                      <td>No</td>
+                    #end
                     <td><button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#editParkModal" data-id="$park.getId()" data-name="$park.getName()" data-location="$park.getLocation()" data-size="$park.getSize()" data-fenced="$park.isFenced()" data-small="$park.hasSmallDogsArea()">Edit</button></td>
                   </tr>
                 #end
