@@ -26,15 +26,12 @@ body {
 
 .navbar-fixed-top {
   box-shadow: 10px 0 20px black;
-  background-color: #f8efe2;
-  opacity: .7;
+  background-color: rgba(248, 239, 226, 0.7);
 }
 
 .navbar-fixed-bottom {
   box-shadow: -10px 0 20px black;
-  background-color: #f8efe2;
-  opacity: .7;
-
+  background-color: rgba(248, 239, 226, 0.7);
 }
 
 nav {
