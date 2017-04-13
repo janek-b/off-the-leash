@@ -5,17 +5,21 @@
       #if($profile.getAllDogs().size() > 0)
         #foreach ($dog in $profile.getAllDogs())
           <div class="row">
-            <div class="col-md-2 col-md-offset-1">
+            <!-- <div class="col-md-2 col-md-offset-1"> -->
               <!-- dog image -->
               <!-- dog favorite -->
-            </div>
+            <!-- </div> -->
             <div class="col-md-4">
-              <ul>
-                <li>Name: $dog.getName()</li>
-                <li>Gender: $dog.getGender()</li>
-                <li>Breed: $dog.getBreed()</li>
-                <li>Altered: $dog.isAltered()</li>
-              </ul>
+              <dl class="dl-horizontal">
+                <dt>Name:</dt>
+                <dd>$dog.getName()</dd>
+                <dt>Gender:</dt>
+                <dd>$dog.getGender()</dd>
+                <dt>Breed:</dt>
+                <dd>$dog.getBreed()</dd>
+                <dt>Altered:</dt>
+                <dd>$dog.altered()</dd>
+              </dl>
             </div>
           </div>
         #end
@@ -81,24 +85,20 @@
   <div class = "row">
     <div class="col-md-10 col-md-offset-1">
       <h2>Pack Leader</h2>
-      <p>
-        #if($profile.getName())
-          <dl class="dl-horizontal">
-            <dt>Name:</dt>
-            <dd>$profile.getName()</dd>
-          </dl>
-          <dl class="dl-horizontal">
-            <dt>Username:</dt>
-            <dd>$profile.getUsername()</dd>
-          </dl>
-        #else
-          <dl class="dl-horizontal">
-            <dt>Username:</dt>
-            <dd>$profile.getUsername()</dd>
-          </dl>
-        #end
+      #if($profile.getName())
+        <dl class="dl-horizontal">
+          <dt>Name:</dt>
+          <dd>$profile.getName()</dd>
+          <dt>Username:</dt>
+          <dd>$profile.getUsername()</dd>
+        </dl>
+      #else
+        <dl class="dl-horizontal">
+          <dt>Username:</dt>
+          <dd>$profile.getUsername()</dd>
+        </dl>
+      #end
         <!-- maybe add city, state, zip to user.java and database.  -->
-      </p>
       <hr>
     </div>
   </div>

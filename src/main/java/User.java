@@ -83,16 +83,18 @@ public class User implements BasicMethodsInterface {
     }
   }
 
-  public void update(String name) {
+  public void update(String name, String username, String password) {
     this.name = name;
+    this.username = username;
+    this.password = password;
     try(Connection con = DB.sql2o.open()) {
       String sql = "UPDATE users SET (name, username, password, admin) = (:name, :username, :password, :admin)  WHERE id = :id;";
       con.createQuery(sql)
-        .addParameter("name", name)
+        .addParameter("name", this.name)
         .addParameter("username", this.username)
         .addParameter("password", this.password)
         .addParameter("admin", this.admin)
-        .addParameter("id", id)
+        .addParameter("id", this.id)
         .executeUpdate();
     }
   }
