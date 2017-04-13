@@ -34,7 +34,7 @@ body {
   box-shadow: -10px 0 20px black;
   background-color: #f8efe2;
   opacity: .7;
-  
+
 }
 
 nav {
@@ -114,4 +114,25 @@ nav {
 #user, #users, #admins, #parks, #dogList, #dogs {
   font-family: 'Libre Franklin', sans-serif;
   font-size: 1.2em;
+}
+
+hr {
+  border-top: 1.5px solid #aaa;
+}
+
+.label-button:hover {
+  text-decoration: none;
+}
+
+.label-button:hover .glyphicon-thumbs-up,
+.label-button:hover .glyphicon-thumbs-down {
+  font-weight: bolder;
+}
+
+.label-button:hover #thumbs-up {
+  background-color: #5cb85c;
+}
+
+.label-button:hover #thumbs-down {
+  background-color: #d9534f;
 }

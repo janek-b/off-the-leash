@@ -190,9 +190,9 @@
               <td><span class="badge"><span class="glyphicon glyphicon-thumbs-down"></span> $park.getDownVotes()</span></td>
               <td>
                 #if(($user) && !($user.getCheckedIn()))
-                <a href="/parks/$park.getId()/checkin"><span class="label label-success">Checkin</span></a>
+                <a class="label-button" href="/parks/$park.getId()/checkin"><span class="label label-success">Checkin</span></a>
                 #elseif($user.getCheckedIn().getId() == $park.getId())
-                <a href="/parks/$park.getId()/checkout"><span class="label label-warning">Checkout</span></a>
+                <a class="label-button" href="/parks/$park.getId()/checkout"><span class="label label-warning">Checkout</span></a>
                 #end
               </td>
             </tr>

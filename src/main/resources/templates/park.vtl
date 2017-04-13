@@ -5,13 +5,13 @@
       <div class="panel panel-default">
         <div id="park-heading" class="panel-heading">
           #if(($user) && !($user.getCheckedIn()))
-            <h4 id="checkin-button"><a href="/parks/$park.getId()/checkin"><span class="label label-success">Checkin</span></a></h4>
+            <h4 id="checkin-button"><a class="label-button" href="/parks/$park.getId()/checkin"><span class="label label-success">Checkin</span></a></h4>
           #elseif($user.getCheckedIn().getId() == $park.getId())
-            <h4 id="checkin-button"><a href="/parks/$park.getId()/checkout"><span class="label label-warning">Checkout</span></a></h4>
+            <h4 id="checkin-button"><a class="label-button" href="/parks/$park.getId()/checkout"><span class="label label-warning">Checkout</span></a></h4>
           #end
           <h2 class="text-center">$park.getName()</h2>
           #if($user)
-            <h4><span class="text-left">Current Number of Visitors <span class="label label-primary">$park.getCurrentVisitors()</span></span><span class="pull-right"><a href="/parks/$park.getId()/upvote"><span class="label label-default"><span class="glyphicon glyphicon-thumbs-up"></span> $park.getUpVotes()</span></a> <a href="/parks/$park.getId()/downvote"><span class="label label-default"><span class="glyphicon glyphicon-thumbs-down"></span> $park.getDownVotes()</span></a></span></h4>
+            <h4><span class="text-left">Current Number of Visitors <span class="label label-primary">$park.getCurrentVisitors()</span></span><span class="pull-right"><a class="label-button" href="/parks/$park.getId()/upvote"><span id="thumbs-up" class="label label-default"><span class="glyphicon glyphicon-thumbs-up"></span> $park.getUpVotes()</span></a> <a class="label-button" href="/parks/$park.getId()/downvote"><span id="thumbs-down" class="label label-default"><span class="glyphicon glyphicon-thumbs-down"></span> $park.getDownVotes()</span></a></span></h4>
           #else
             <h4><span class="text-left">Current Number of Visitors <span class="label label-primary">$park.getCurrentVisitors()</span></span><span class="pull-right"><span class="label label-default"><span class="glyphicon glyphicon-thumbs-up"></span> $park.getUpVotes()</span> <span class="label label-default"><span class="glyphicon glyphicon-thumbs-down"></span> $park.getDownVotes()</span></span></h4>
           #end
