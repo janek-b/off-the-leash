@@ -129,3 +129,28 @@ nav {
   font-family: 'Sarala', sans-serif;
   font-size: 1.5em;
 }
+
+#userPage {
+  color: #FFB68A;
+}
+
+hr {
+  border-top: 1.5px solid #aaa;
+}
+
+.label-button:hover {
+  text-decoration: none;
+}
+
+.label-button:hover .glyphicon-thumbs-up,
+.label-button:hover .glyphicon-thumbs-down {
+  font-weight: bolder;
+}
+
+.label-button:hover #thumbs-up {
+  background-color: #5cb85c;
+}
+
+.label-button:hover #thumbs-down {
+  background-color: #d9534f;
+}

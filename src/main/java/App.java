@@ -95,10 +95,11 @@ public class App {
       model.put("coordinates", gson.toJson(Park.getAllCoordinates()));
       model.put("user", request.session().attribute("user"));
       String sort = request.queryParams("sort");
+      model.put("sort", sort);
       if (sort.equals("rating")) {
         model.put("parks", Park.allByRating());
       } else if(sort.equals("alpha")) {
-        model.put("parks", Park.all());
+        response.redirect("/parks");
       }
       model.put("template", "templates/parks.vtl");
       return new ModelAndView(model, layout);
