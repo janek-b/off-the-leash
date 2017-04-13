@@ -29,10 +29,9 @@
               <button class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expaned="false">Signed in as $user.getUsername()</button>
               <ul class="dropdown-menu">
                 #if($user.getAdmin())
-                  <li><a href="/admin">Admin</a></li>
+                  <li style="text-align:center"><a href="/admin">Admin</a></li>
                 #end
-                <hr>
-                <li><a href="/logout">Logout</a></li>
+                <li style="text-align:center"><a href="/logout">Logout</a></li>
               </ul>
             #else
               <button class="btn btn-default navbar-btn" id="loginLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expaned="false">Login <span class="caret"></span></button>
