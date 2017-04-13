@@ -2,7 +2,7 @@ body {
   padding-top: 70px;
   padding-bottom: 70px;
   background-color:#E8E8E8;
-  color:#A89272;
+  color:#333333;
 }
 
 .splash-page {
@@ -26,15 +26,12 @@ body {
 
 .navbar-fixed-top {
   box-shadow: 10px 0 20px black;
-  background-color: #f8efe2;
-  opacity: .7;
+  background-color: rgba(248, 239, 226, 0.7);
 }
 
 .navbar-fixed-bottom {
   box-shadow: -10px 0 20px black;
-  background-color: #f8efe2;
-  opacity: .7;
-  b
+  background-color: rgba(248, 239, 226, 0.7);
 }
 
 nav {
@@ -111,21 +108,28 @@ nav {
     width: 100%;
 }
 
-#dogs {
-  font-family: 'Finger Paint', cursive;
-}
-
-#dogList {
-  font-family: 'Indie Flower', cursive;
-  font-size: 2em;
-}
-
-#user, #users {
+#user, #users, #admins, #parks, #dogList, #dogs {
   font-family: 'Libre Franklin', sans-serif;
   font-size: 1.2em;
 }
 
-#admins, #parks {
-  font-family: 'Sarala', sans-serif;
-  font-size: 1.5em;
+hr {
+  border-top: 1.5px solid #aaa;
+}
+
+.label-button:hover {
+  text-decoration: none;
+}
+
+.label-button:hover .glyphicon-thumbs-up,
+.label-button:hover .glyphicon-thumbs-down {
+  font-weight: bolder;
+}
+
+.label-button:hover #thumbs-up {
+  background-color: #5cb85c;
+}
+
+.label-button:hover #thumbs-down {
+  background-color: #d9534f;
 }
