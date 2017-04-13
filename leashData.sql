@@ -359,6 +359,13 @@ COPY parks (id, name, location, size, fenced, small, upvote, downvote, lat, lng)
 4	Mt Tabor Dog Park	6336 SE Lincoln St, Portland, OR 97215	large	f	f	11	3	45.5078928000000005	-122.597968699999996
 5	Gabriel Park	SW Vermont St, Portland, OR	large	f	f	17	4	45.4761518999999979	-122.714955200000006
 3	Fernhill Park Dog Off-leash Area	4050 NE Holman St, Portland, OR 97211	large	t	f	33	11	45.5685919000000013	-122.622199300000005
+10	Alberta Park	5751 NE 22nd Ave, Portland, OR, US, 97211	medium	f	f	3	39	45.5644338000000033	-122.643489000000002
+9	North Clackamas Dog Park	5440 SE Kellogg Creek Dr, Portland, OR, US	medium	t	t	11	33	45.4266221999999971	-122.606066900000002
+8	Willamette Park Off Leash Dog Area	SW Macadam Ave & Nebraska St, Portland, OR, US, 97212	large	f	f	6	19	45.4772439999999989	-122.672154699999993
+7	Brentwood Park	 SE 60th Ave & Duke St	small	t	f	1	9	45.4758258000000026	-122.602232299999997
+6	Wallace Park	Wallace City Park (at Raleigh St), Portland, OR	large	f	f	15	41	45.5333076999999875	-122.703689499999996
+12	Wilshire Park	4049 NE 35th Ave, Portland, OR, US, 97212	medium	t	t	22	12	45.5522064999999969	-122.6286518
+11	Creston Park	4454 SE Powell Blvd, Portland, OR, US	large	f	f	7	2	45.4965632999999983	-122.616583300000002
 \.
 
 
@@ -366,7 +373,7 @@ COPY parks (id, name, location, size, fenced, small, upvote, downvote, lat, lng)
 -- Name: parks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Grace
 --
 
-SELECT pg_catalog.setval('parks_id_seq', 5, true);
+SELECT pg_catalog.setval('parks_id_seq', 12, true);
 
 
 --
@@ -389,18 +396,19 @@ SELECT pg_catalog.setval('reviews_id_seq', 1, false);
 --
 
 COPY users (id, name, username, password, admin) FROM stdin;
-12	Ryan	gothicRyan	*	f
-13	Leslie	wizzer	*	f
-14	Raymond	redman	*	f
-15	Shelly	bigmomma	*	f
-16	Jahan	ShadowMoses	*	t
-9	Billy	yellowfish	*	t
-8	Billy	yellowfish	*	t
+17	Joey	jojo	*	t
+13	Joey	jojo	*	f
+12	Carol	Karl	*	f
+14	Ryan	gothicRyan	*	f
+15	Leslie	wizzer	*	f
+16	Raymond	redman	*	t
+20	Shelly	bigmomma	*	f
+9	Jahan	databaseKiller	*	t
+8	Blake	SpacePack	*	t
 18	Billy	yellowfish	*	f
-19	Billy	yellowfish	*	f
-10	Bob	grayellow	*	t
-11	Sirius	stardog	*	t
-17	Chris	The Finney	*	t
+19	Bob	grayellow	*	f
+10	Sirius	dogstar	*	t
+11	Chris	TheFinney	*	t
 \.
 
 
@@ -408,7 +416,7 @@ COPY users (id, name, username, password, admin) FROM stdin;
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Grace
 --
 
-SELECT pg_catalog.setval('users_id_seq', 19, true);
+SELECT pg_catalog.setval('users_id_seq', 20, true);
 
 
 --
