@@ -24,7 +24,7 @@ public class UserTest {
   public void User_getNameRetrievesName_True() {
     User newUser = new User("Willie", "will123");
     newUser.save();
-    newUser.update("Willow");
+    newUser.update("Willow", "Willie", "will123");
     assertEquals("Willow", newUser.getName());
   }
 
@@ -59,8 +59,10 @@ public class UserTest {
   public void update_updatesUser_true() {
     User user = new User("Willie", "will123");
     user.save();
-    user.update("Freddie");
+    user.update("Freddie", "franklin", "frankay");
     assertEquals("Freddie", user.getName());
+    assertEquals("franklin", user.getUsername());
+    assertEquals("frankay", user.getPassword());
   }
 
   @Test

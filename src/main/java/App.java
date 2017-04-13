@@ -39,7 +39,13 @@ public class App {
     post("/admin", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       User user = User.find(Integer.parseInt(request.queryParams("userSelected")));
-      user.makeAdmin();
+      if (user.equals(request.session().attribute("user"))) {
+        request.session().removeAttribute("user");
+        user.makeAdmin();
+        request.session().attribute("user", user);
+      } else {
+        user.makeAdmin();
+      }
       response.redirect("/admin");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -184,12 +190,12 @@ public class App {
     post("/users/:id/update", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       User user = User.find(Integer.parseInt(request.params(":id")));
-      User loggedInUser = request.session().attribute("user");
       String name = request.queryParams("name");
       String username = request.queryParams("username");
-      if (user.equals(loggedInUser)) {
+      String password = request.queryParams("password");
+      if (user.equals(request.session().attribute("user"))) {
         request.session().removeAttribute("user");
-        user.update(name);
+        user.update(name, username, password);
         request.session().attribute("user", user);
       }
       response.redirect(request.headers("Referer"));
@@ -206,6 +212,21 @@ public class App {
       } else {
         response.redirect(request.headers("Referer"));
       }
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/users/:id/dogs/new", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      User user = User.find(Integer.parseInt(request.params(":id")));
+      String name = request.queryParams("name");
+      String breed = request.queryParams("breed");
+      String gender = request.queryParams("gender");
+      boolean altered = request.queryParams("altered").equals("true");
+      if (user.equals(request.session().attribute("user"))) {
+        Dog newDog = new Dog(name, gender, breed, altered, user.getId());
+        newDog.save();
+      }
+      response.redirect(request.headers("Referer"));
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 

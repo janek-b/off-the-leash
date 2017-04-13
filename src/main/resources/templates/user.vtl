@@ -1,6 +1,10 @@
 <!--user.vtl-->
 <div class = "row">
-  <h1>Welcome $user.getUsername()</h1>
+  #if($user.getName())
+    <h1>Welcome $user.getName()</h1>
+  #else
+    <h1>Welcome $user.getUsername()</h1>
+  #end
 </div>
 <div class = "row">
   <div>
@@ -26,71 +30,85 @@
 
       </div>
       <div role="tabpanel" class="tab-pane" id="dogs">
+        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addDogModal">Add a Pack Member</button>
+        <h2>Pack Members</h2>
         #foreach($dog in $user.getAllDogs())
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <script>
-                  $(document).ready( function() {
-                        $(document).on('change', '.btn-file :file', function() {
-                      var input = $(this),
-                        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                      input.trigger('fileselect', [label]);
-                      });
-
-                      $('.btn-file :file').on('fileselect', function(event, label) {
-
-                          var input = $(this).parents('.input-group').find(':text'),
-                              log = label;
-
-                          if( input.length ) {
-                              input.val(log);
-                          } else {
-                              if( log ) alert(log);
-                          }
-
-                      });
-                      function readURL(input) {
-                          if (input.files && input.files[0]) {
-                              var reader = new FileReader();
-
-                              reader.onload = function (e) {
-                                  $('#img-upload').attr('src', e.target.result);
-                              }
-
-                              reader.readAsDataURL(input.files[0]);
-                          }
-                      }
-
-                      $("#imgInp").change(function(){
-                          readURL(this);
-                      });
-                    });
-                </script>
-                <br>
-                <label>Upload Image of Pack Member</label>
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <span class="btn btn-default btn-file">
-                            Browse… <input type="file" id="imgInp">
-                        </span>
-                    </span>
-                    <input type="text" class="form-control" readonly>
-                </div>
-                <img id='img-upload'/>
+          <div class="well">
+            <div class="row">
+              <div class="col-md-4">
+                <dl class="dl-horizontal">
+                  <dt>Name:</dt>
+                  <dd>$dog.getName()</dd>
+                  <dt>Gender:</dt>
+                  <dd>$dog.getGender()</dd>
+                  <dt>Breed:</dt>
+                  <dd>$dog.getBreed()</dd>
+                  <dt>Altered:</dt>
+                  <dd>$dog.altered()</dd>
+                </dl>
+                <!-- Pack Member Name: $dog.getName();
+                $dog.getName()'s Sex: $dog.getGender();
+                $dog.getName()'s Breed: $dog.getBreed();
+                #if($dog.altered())
+                  $dog.getName() <span style="font-weight:bold">is altered</span>
+                #else
+                  $dog.getName() is<span style="font-weight:bold"> not </span> altered
+                #end -->
               </div>
-            </div>
-            <div class="col-md-4">
-              Pack Member Name: $dog.getName();
-              $dog.getName()'s Sex: $dog.getGender();
-              $dog.getName()'s Breed: $dog.getBreed();
-              #if($dog.altered())
-                $dog.getName() <span style="font-weight:bold">is altered</span>
-              #else
-                $dog.getName() is<span style="font-weight:bold"> not </span> altered
-              #end
-            </div>
-            <div class="col-md-4">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <script>
+                    $(document).ready( function() {
+                          $(document).on('change', '.btn-file :file', function() {
+                        var input = $(this),
+                          label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                        input.trigger('fileselect', [label]);
+                        });
+
+                        $('.btn-file :file').on('fileselect', function(event, label) {
+
+                            var input = $(this).parents('.input-group').find(':text'),
+                                log = label;
+
+                            if( input.length ) {
+                                input.val(log);
+                            } else {
+                                if( log ) alert(log);
+                            }
+
+                        });
+                        function readURL(input) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+
+                                reader.onload = function (e) {
+                                    $('#img-upload').attr('src', e.target.result);
+                                }
+
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
+
+                        $("#imgInp").change(function(){
+                            readURL(this);
+                        });
+                      });
+                  </script>
+                  <br>
+                  <label>Upload Image of Pack Member</label>
+                  <div class="input-group">
+                      <span class="input-group-btn">
+                          <span class="btn btn-default btn-file">
+                              Browse… <input type="file" id="imgInp">
+                          </span>
+                      </span>
+                      <input type="text" class="form-control" readonly>
+                  </div>
+                  <img id='img-upload'/>
+                </div>
+              </div>
+              <div class="col-md-4">
+              </div>
             </div>
           </div>
         #end
@@ -135,6 +153,10 @@
             <label for="username">username</label>
             <input class="form-control" type="text" name="username" value="$user.getUsername()">
           </div>
+          <div class="form-group">
+            <label for="password">password</label>
+            <input class="form-control" type="text" name="password" value="$user.getPassword()">
+          </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -152,7 +174,7 @@
 
 <!-- Add dog modal -->
 
-<div class="modal fade" id="addDogtModal" tabindex="-1" role="dialog" aria-labelledby="addDogModalLabel">
+<div class="modal fade" id="addDogModal" tabindex="-1" role="dialog" aria-labelledby="addDogModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -160,11 +182,48 @@
         <h4 class="modal-title" id="addDogModalLabel">Add a Pack Member</h4>
       </div>
       <div class="modal-body">
-
+        <form id="addDogForm" action="/users/$user.getId()/dogs/new" method="post">
+          <div class="form-grop">
+            <label for="name">Name</label>
+            <input type="text" name="name" class="form-control">
+          </div>
+          <div class="form-grop">
+            <label for="breed">Breed</label>
+            <input type="text" name="breed" class="form-control">
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="gender">Gender</label>
+                <select class="form-control" name="gender">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="altered">Altered</label>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="altered" value="true" checked>
+                    Yes
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="altered" value="false" checked>
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button form="addDogForm" type="submit" class="btn btn-success">Add Pack Member</button>
       </div>
     </div>
   </div>
