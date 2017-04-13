@@ -48,8 +48,21 @@ nav {
   color: black;
 }
 
+.panel {
+  box-shadow: 0 2px 8px black;
+}
+
 .modal {
   color: black;
+}
+
+#park-heading {
+  position: relative;
+}
+
+#checkin-button {
+  position: absolute;
+  left: 10;
 }
 
 #loginForm {
