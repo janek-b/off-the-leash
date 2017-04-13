@@ -305,6 +305,16 @@ COPY checkins (id, userid, parkid, checkin, checkout) FROM stdin;
 3	9	3	2017-04-13 09:58:59.806376	2017-04-13 09:59:07.440834
 4	9	4	2017-04-13 09:59:19.649735	2017-04-13 09:59:47.908807
 5	9	4	2017-04-13 09:59:33.535217	2017-04-13 09:59:47.908807
+6	17	3	2017-04-13 10:45:33.807731	2017-04-13 10:45:41.119245
+7	17	3	2017-04-13 10:45:40.046346	2017-04-13 10:45:41.119245
+8	17	3	2017-04-13 10:45:42.550758	\N
+9	10	4	2017-04-13 12:22:36.611656	\N
+10	11	4	2017-04-13 12:22:46.70817	\N
+11	12	4	2017-04-13 12:23:45.566718	\N
+12	13	4	2017-04-13 12:23:51.550909	\N
+13	14	5	2017-04-13 12:23:58.70291	\N
+14	15	5	2017-04-13 12:24:03.047344	\N
+15	16	3	2017-04-13 12:24:16.671981	\N
 \.
 
 
@@ -312,7 +322,7 @@ COPY checkins (id, userid, parkid, checkin, checkout) FROM stdin;
 -- Name: checkins_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Grace
 --
 
-SELECT pg_catalog.setval('checkins_id_seq', 5, true);
+SELECT pg_catalog.setval('checkins_id_seq', 15, true);
 
 
 --
@@ -323,6 +333,14 @@ COPY dogs (id, userid, name, gender, altered, breed) FROM stdin;
 3	9	Butch	male	t	Pitbull
 4	9	Daisy	female	t	French Bulldog
 5	9	Sasha	female	t	Mutt
+6	10	Hopper	female	t	Whippet
+7	10	Harriet	female	f	Boxer
+8	11	Henry	male	f	Mutt
+9	12	Bean	male	f	Mutt
+10	13	Toad	male	f	Mutt
+11	14	Dakota	male	f	Mutt
+12	15	Texas	male	f	Mutt
+13	16	California	female	f	Mutt
 \.
 
 
@@ -330,7 +348,7 @@ COPY dogs (id, userid, name, gender, altered, breed) FROM stdin;
 -- Name: dogs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Grace
 --
 
-SELECT pg_catalog.setval('dogs_id_seq', 5, true);
+SELECT pg_catalog.setval('dogs_id_seq', 13, true);
 
 
 --
@@ -338,9 +356,9 @@ SELECT pg_catalog.setval('dogs_id_seq', 5, true);
 --
 
 COPY parks (id, name, location, size, fenced, small, upvote, downvote, lat, lng) FROM stdin;
-3	Fernhill Park Dog Off-leash Area	4050 NE Holman St, Portland, OR 97211	large	t	f	1	0	45.5685919000000013	-122.622199300000005
-4	Mt Tabor Dog Park	6336 SE Lincoln St, Portland, OR 97215	large	f	f	0	1	45.5078928000000005	-122.597968699999996
-5	Gabriel Park	SW Vermont St, Portland, OR	large	f	f	0	0	45.4761518999999979	-122.714955200000006
+4	Mt Tabor Dog Park	6336 SE Lincoln St, Portland, OR 97215	large	f	f	11	3	45.5078928000000005	-122.597968699999996
+5	Gabriel Park	SW Vermont St, Portland, OR	large	f	f	17	4	45.4761518999999979	-122.714955200000006
+3	Fernhill Park Dog Off-leash Area	4050 NE Holman St, Portland, OR 97211	large	t	f	33	11	45.5685919000000013	-122.622199300000005
 \.
 
 
@@ -371,16 +389,18 @@ SELECT pg_catalog.setval('reviews_id_seq', 1, false);
 --
 
 COPY users (id, name, username, password, admin) FROM stdin;
-9	Billy Bob	grayellow	monkeybutt	t
-8	Grace	stardog1	********	t
-11	Chris	The.Finey	*	\N
-12	Ryan	gothicRyan	*	\N
-13	Steven	wizzer	*	\N
-14	Raymond	redman	*	\N
-15	Shelly	yellowfish	*	\N
-16	Leslie	bigMomma	*	\N
-17	\N	Grace	********	t
-10	Jahan	ShadowMoses	*	t
+12	Ryan	gothicRyan	*	f
+13	Leslie	wizzer	*	f
+14	Raymond	redman	*	f
+15	Shelly	bigmomma	*	f
+16	Jahan	ShadowMoses	*	t
+9	Billy	yellowfish	*	t
+8	Billy	yellowfish	*	t
+18	Billy	yellowfish	*	f
+19	Billy	yellowfish	*	f
+10	Bob	grayellow	*	t
+11	Sirius	stardog	*	t
+17	Chris	The Finney	*	t
 \.
 
 
@@ -388,7 +408,7 @@ COPY users (id, name, username, password, admin) FROM stdin;
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Grace
 --
 
-SELECT pg_catalog.setval('users_id_seq', 17, true);
+SELECT pg_catalog.setval('users_id_seq', 19, true);
 
 
 --
@@ -400,6 +420,9 @@ COPY votes (id, userid, parkid, direction) FROM stdin;
 2	6	2	down
 4	9	3	up
 5	9	4	down
+8	17	3	up
+9	17	5	down
+11	17	4	up
 \.
 
 
@@ -407,7 +430,7 @@ COPY votes (id, userid, parkid, direction) FROM stdin;
 -- Name: votes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Grace
 --
 
-SELECT pg_catalog.setval('votes_id_seq', 5, true);
+SELECT pg_catalog.setval('votes_id_seq', 11, true);
 
 
 --
