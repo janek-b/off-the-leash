@@ -205,4 +205,14 @@ public class User implements BasicMethodsInterface {
         .executeUpdate();
     }
   }
+
+  public static List<User> search(String input) {
+    String newInput = "%" + input + "%";
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM users WHERE lower(username) LIKE lower(:newInput);";
+      return con.createQuery(sql)
+        .addParameter("newInput", newInput)
+        .executeAndFetch(User.class);
+    }
+  }
 }
