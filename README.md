@@ -1,22 +1,13 @@
-# _off-the-leash_
+# _Off The Leash_
 
-#### _off-the-leash, 04-10-2017_
+#### _Epicodus Java Team Week Project. 04-10-2017_
 
 #### By _**<a href="https://github.com/janek-b">Janek Brandt</a>, <a href="https://github.com/finneywhat">Chris Finney</a>,<a href="https://github.com/jwalsh370">Jahan Walsh</a> and <a href="https://github.com/gstuart">Grace Stuart</a>**_
 
 ## Description
-_Example text for the description of the project_
-
-
-## Specifications
-
-| Behavior                   | Input Example     | Output Example    |
-| -------------------------- | -----------------:| -----------------:|
-
-
+_An application for dog park users. Allows users to locate parks in their vicinity, view their details, see logged in users who have checked in to a park, and user information._
 
 ## Setup/Installation Requirements
-
 * _Clone the repository_
 * _Create a google maps api key_
 * _Add the api key as an environment variable_ `export MAPS_KEY="YOUR_API_KEY"`
