@@ -75,9 +75,8 @@
                   <div class="form-group">
                     <label for="smallSelected">Small dogs area</label>
                     <select class="form-control" id='small' name="smallSelected">
-                      <option value="true">Seperate section for small dogs</option>
-                      <option value="false">Small dog friendly, but no seperate area</option>
-                      <option value="false">Large dogs only</option>
+                      <option value="true">Seperate area for small dogs</option>
+                      <option value="false">No seperate area for small dogs</option>
                     </select>
                   </div>
                 </div>
@@ -90,11 +89,24 @@
           <hr>
           <h2>Current Parks</h2>
           <div class="well">
-            <ul>
+            <table class="table table-striped">
+              <tr>
+                <th>Park Name</th>
+                <th>Size</th>
+                <th>Fenced</th>
+                <th>Small dogs area</th>
+                <th></th>
+              </tr>
               #foreach ($park in $parks)
-                <li class="text-capitalize"><a href="/parks/$park.getId()">$park.getName()</a></li>
+                <tr>
+                  <td class="text-capitalize"><a href="/parks/$park.getId()">$park.getName()</a></td>
+                  <td class="text-capitalize">$park.getSize()</td>
+                  <td>$park.isFenced()</td>
+                  <td>$park.hasSmallDogsArea()</td>
+                  <td><button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#editParkModal" data-id="$park.getId()" data-name="$park.getName()" data-location="$park.getLocation()" data-size="$park.getSize()" data-fenced="$park.isFenced()" data-small="$park.hasSmallDogsArea()">Edit</button></td>
+                </tr>
               #end
-            </ul>
+            </table>
           </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="users">
@@ -107,6 +119,63 @@
             </ul>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editParkModal" tabindex="-1" role="dialog" aria-labelledby="editParkModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="editParkModalLabel">Edit park</h4>
+      </div>
+      <div class="modal-body">
+        <form id="editParkForm" action="" method="post">
+          <div class="form-group">
+            <label for="name" class="control-label">Name</label>
+            <input type="text" class="form-control" name="name" id="name">
+          </div>
+          <div class="form-group">
+            <label for="location" class="control-label">Location</label>
+            <input type="text" class="form-control" name="location" id="location">
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="sizeSelected">Select park size</label>
+                <select class="form-control" id='size' name="sizeSelected">
+                  <option value="small">Small: less than a city block</option>
+                  <option value="medium">Medium: city block </option>
+                  <option value="large">Large: Acre, many city blocks, or more</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="fenceSelected">Is the park fenced</label>
+                <select class="form-control" id='fenced' name="fenceSelected">
+                  <option value="true">Fully fenced</option>
+                  <option value="false">Partially fenced, or not fenced</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="smallSelected">Small dogs area</label>
+                <select class="form-control" id='small' name="smallSelected">
+                  <option value="true">Seperate area for small dogs</option>
+                  <option value="false">No seperate area for small dogs</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button form="editParkForm" type="submit" class="btn btn-primary">Update Park</button>
       </div>
     </div>
   </div>
