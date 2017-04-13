@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="well">
+        <h2>Park results</h2>
+        #if($parks.size() > 0)
+        <table class="table table-striped">
+          <tr>
+            <th>Park name</th>
+            <th>Size</th>
+            <th>Fenced</th>
+            <th>Small dogs area</th>
+            <th>Current Visitors</th>
+            <th></th>
+            <th></th>
+          </tr>
+          #foreach($park in $parks)
+            <tr>
+              <td class="text-capitalize"><a href="/parks/$park.getId()">$park.getName()</a></td>
+              <td class="text-capitalize">$park.getSize()</td>
+              #if($park.isFenced())
+                <td>Yes</td>
+              #else
+                <td>No</td>
+              #end
+              #if($park.hasSmallDogsArea())
+                <td>Yes</td>
+              #else
+                <td>No</td>
+              #end
+              <td><span class="label label-primary">$park.getCurrentVisitors()</span></td>
+              <td><span class="badge"><span class="glyphicon glyphicon-thumbs-up"></span> $park.getUpVotes()</span></td>
+              <td><span class="badge"><span class="glyphicon glyphicon-thumbs-down"></span> $park.getDownVotes()</span></td>
+            </tr>
+          #end
+        </table>
+        #else
+          <h4>No matching parks found</h4>
+        #end
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="well">
+        <h2>User results</h2>
+        #if($users.size() > 0)
+          <ul>
+            #foreach ($user in $users)
+              <li class="text-capitalize"><a href="/users/$user.getId()">$user.getUsername()</a></li>
+            #end
+          </ul>
+        #else
+          <h4>No matching users found</h4>
+        #end
+      </div>
+    </div>
+  </div>
+</div>

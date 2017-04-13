@@ -243,5 +243,15 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/search", (request, resposne) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      String searchInput = request.queryParams("searchInput");
+      model.put("user", request.session().attribute("user"));
+      model.put("users", User.search(searchInput));
+      model.put("parks", Park.search(searchInput));
+      model.put("template", "templates/results.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
   }
 }
