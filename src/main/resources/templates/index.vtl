@@ -1,16 +1,13 @@
 <!--index.vtl-->
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
-    <div class="page-header">
-      <h1>Off The Leash</h1>
-    </div>
-  </div>
+<div class="container-fluid splash-page">
+  <h1>Off The Leash</h1>
 </div>
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
-    <!-- BEGIN MAP SECTION -->
-    <div id="map"></div>
-    <script>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <!-- BEGIN MAP SECTION -->
+      <div id="map"></div>
+      <script>
       function initMap() {
         var portland = {lat: 45.5230622, lng: -122.6764816};
         var locations = $coordinates;
@@ -39,24 +36,24 @@
           addMark(location);
         });
       }
-    </script>
-    <!-- END MAP SECTION -->
+      </script>
+      <!-- END MAP SECTION -->
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
-    <h3>Local Dog Parks</h3>
-    <div class="well">
-      <table class="table table-striped">
-        <tr>
-          <th>Park name</th>
-          <th>Size</th>
-          <th>Current Visitors</th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-        #foreach($park in $parks)
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h3>Local Dog Parks</h3>
+      <div class="well">
+        <table class="table table-striped">
+          <tr>
+            <th>Park name</th>
+            <th>Size</th>
+            <th>Current Visitors</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          #foreach($park in $parks)
           <tr>
             <td class="text-capitalize"><a href="/parks/$park.getId()">$park.getName()</a></td>
             <td class="text-capitalize">$park.getSize()</td>
@@ -65,16 +62,17 @@
             <td><span class="badge"><span class="glyphicon glyphicon-thumbs-down"></span> $park.getDownVotes()</span></td>
             <td>
               #if(($user) && !($user.getCheckedIn()))
-                <a href="/parks/$park.getId()/checkin"><span class="label label-success">Checkin</span></a>
+              <a href="/parks/$park.getId()/checkin"><span class="label label-success">Checkin</span></a>
               #elseif($user.getCheckedIn().getId() == $park.getId())
-                <a href="/parks/$park.getId()/checkout"><span class="label label-warning">Checkout</span></a>
+              <a href="/parks/$park.getId()/checkout"><span class="label label-warning">Checkout</span></a>
               #end
             </td>
           </tr>
-        #end
-      </table>
+          #end
+        </table>
+      </div>
     </div>
   </div>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=$MAPS_KEY&callback=initMap"></script>
 </div>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=$MAPS_KEY&callback=initMap"></script>
-<!--index.vtl-->
+<!-- index.vtl -->
