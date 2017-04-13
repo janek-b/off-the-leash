@@ -1,5 +1,5 @@
 <!--user.vtl-->
-<div class="container">
+<div class="container" id="userPage">
   <div class = "row" id="user">
     #if($user.getName())
       <h1>Welcome $user.getName()</h1>
@@ -15,7 +15,7 @@
         <li role="presentation"><a href="#parks" role="tab" data-toggle="tab">Favorite Parks</a></li>
       </ul>
       <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="user">
+        <div role="tabpanel" class="tab-pane active" id="users">
           <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#userEditModal">Edit</button>
           <h2>Pack Leader Information</h2>
           #if($user.getName())
