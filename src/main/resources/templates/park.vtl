@@ -2,53 +2,175 @@
 <div class="container">
   <div class = "row">
     <div class="col-md-10 col-md-offset-1">
-      <h2>$park.getName()</h2>
-        #if($user)
-          <h4><a href="/parks/$park.getId()/upvote"><span class="label label-default"><span class="glyphicon glyphicon-thumbs-up"></span> $park.getUpVotes()</span></a> <a href="/parks/$park.getId()/downvote"><span class="label label-default"><span class="glyphicon glyphicon-thumbs-down"></span> $park.getDownVotes()</span></a></h4>
-        #else
-          <h4><span class="label label-default"><span class="glyphicon glyphicon-thumbs-up"></span> $park.getUpVotes()</span> <span class="label label-default"><span class="glyphicon glyphicon-thumbs-down"></span> $park.getDownVotes()</span></h4>
-        #end
-        <h4>Current Number of Visitors <span class="label label-primary">$park.getCurrentVisitors()</span></h4>
-
-        #if(($user) && !($user.getCheckedIn()))
-          <h4><a href="/parks/$park.getId()/checkin"><span class="label label-success">Checkin</span></a></h4>
-        #elseif($user.getCheckedIn().getId() == $park.getId())
-          <h4><a href="/parks/$park.getId()/checkout"><span class="label label-warning">Checkout</span></a></h4>
-        #end
-        <hr>
-
-        <!-- BEGIN MAP SECTION -->
-        <div id="map"></div>
-        <script>
-          function initMap() {
-            var location = $coordinates;
-            var map = new google.maps.Map(document.getElementById('map'), {
-              center: location,
-              scrollwheel: false,
-              zoom: 14
-            });
-
-            function addMark(location) {
-              var marker = new google.maps.Marker({
-                map: map,
-                position: location,
-                title: "$park.getName()"
+      <div class="panel panel-default">
+        <div id="park-heading" class="panel-heading">
+          #if(($user) && !($user.getCheckedIn()))
+            <h4 id="checkin-button"><a href="/parks/$park.getId()/checkin"><span class="label label-success">Checkin</span></a></h4>
+          #elseif($user.getCheckedIn().getId() == $park.getId())
+            <h4 id="checkin-button"><a href="/parks/$park.getId()/checkout"><span class="label label-warning">Checkout</span></a></h4>
+          #end
+          <h2 class="text-center">$park.getName()</h2>
+          #if($user)
+            <h4><span class="text-left">Current Number of Visitors <span class="label label-primary">$park.getCurrentVisitors()</span></span><span class="pull-right"><a href="/parks/$park.getId()/upvote"><span class="label label-default"><span class="glyphicon glyphicon-thumbs-up"></span> $park.getUpVotes()</span></a> <a href="/parks/$park.getId()/downvote"><span class="label label-default"><span class="glyphicon glyphicon-thumbs-down"></span> $park.getDownVotes()</span></a></span></h4>
+          #else
+            <h4><span class="text-left">Current Number of Visitors <span class="label label-primary">$park.getCurrentVisitors()</span></span><span class="pull-right"><span class="label label-default"><span class="glyphicon glyphicon-thumbs-up"></span> $park.getUpVotes()</span> <span class="label label-default"><span class="glyphicon glyphicon-thumbs-down"></span> $park.getDownVotes()</span></span></h4>
+          #end
+        </div>
+        <div class="panel-body">
+          <!-- BEGIN MAP SECTION -->
+          <div id="map"></div>
+          <script>
+            function initMap() {
+              var location = $coordinates;
+              var map = new google.maps.Map(document.getElementById('map'), {
+                center: location,
+                scrollwheel: false,
+                zoom: 14
               });
-              var infowindow = new google.maps.InfoWindow({
-                content: '<h4><a href="/parks/$park.getId()">$park.getName()</a></h4>'
-              });
-              marker.addListener('click', function() {
-                infowindow.open(map, marker);
-              });
+
+              function addMark(location) {
+                var marker = new google.maps.Marker({
+                  map: map,
+                  position: location,
+                  title: "$park.getName()"
+                });
+                var infowindow = new google.maps.InfoWindow({
+                  content: '<h4><a href="/parks/$park.getId()">$park.getName()</a></h4>'
+                });
+                marker.addListener('click', function() {
+                  infowindow.open(map, marker);
+                });
+              }
+
+              var styles = {
+                default: null,
+                retro: [
+                  {elementType: 'geometry', stylers: [{color: '#ebe3cd'}]},
+                  {elementType: 'labels.text.fill', stylers: [{color: '#523735'}]},
+                  {elementType: 'labels.text.stroke', stylers: [{color: '#f5f1e6'}]},
+                  {
+                    featureType: 'administrative',
+                    elementType: 'geometry.stroke',
+                    stylers: [{color: '#c9b2a6'}]
+                  },
+                  {
+                    featureType: 'administrative.land_parcel',
+                    elementType: 'geometry.stroke',
+                    stylers: [{color: '#dcd2be'}]
+                  },
+                  {
+                    featureType: 'administrative.land_parcel',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#ae9e90'}]
+                  },
+                  {
+                    featureType: 'landscape.natural',
+                    elementType: 'geometry',
+                    stylers: [{color: '#dfd2ae'}]
+                  },
+                  {
+                    featureType: 'poi',
+                    elementType: 'geometry',
+                    stylers: [{color: '#dfd2ae'}]
+                  },
+                  {
+                    featureType: 'poi',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#93817c'}]
+                  },
+                  {
+                    featureType: 'poi.park',
+                    elementType: 'geometry.fill',
+                    stylers: [{color: '#a5b076'}]
+                  },
+                  {
+                    featureType: 'poi.park',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#447530'}]
+                  },
+                  {
+                    featureType: 'road',
+                    elementType: 'geometry',
+                    stylers: [{color: '#f5f1e6'}]
+                  },
+                  {
+                    featureType: 'road.arterial',
+                    elementType: 'geometry',
+                    stylers: [{color: '#fdfcf8'}]
+                  },
+                  {
+                    featureType: 'road.highway',
+                    elementType: 'geometry',
+                    stylers: [{color: '#f8c967'}]
+                  },
+                  {
+                    featureType: 'road.highway',
+                    elementType: 'geometry.stroke',
+                    stylers: [{color: '#e9bc62'}]
+                  },
+                  {
+                    featureType: 'road.highway.controlled_access',
+                    elementType: 'geometry',
+                    stylers: [{color: '#e98d58'}]
+                  },
+                  {
+                    featureType: 'road.highway.controlled_access',
+                    elementType: 'geometry.stroke',
+                    stylers: [{color: '#db8555'}]
+                  },
+                  {
+                    featureType: 'road.local',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#806b63'}]
+                  },
+                  {
+                    featureType: 'transit.line',
+                    elementType: 'geometry',
+                    stylers: [{color: '#dfd2ae'}]
+                  },
+                  {
+                    featureType: 'transit.line',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#8f7d77'}]
+                  },
+                  {
+                    featureType: 'transit.line',
+                    elementType: 'labels.text.stroke',
+                    stylers: [{color: '#ebe3cd'}]
+                  },
+                  {
+                    featureType: 'transit.station',
+                    elementType: 'geometry',
+                    stylers: [{color: '#dfd2ae'}]
+                  },
+                  {
+                    featureType: 'water',
+                    elementType: 'geometry.fill',
+                    stylers: [{color: '#b9d3c2'}]
+                  },
+                  {
+                    featureType: 'water',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#92998d'}]
+                  }
+                ]
+              };
+
+              map.setOptions({styles: styles['retro']});
+
+              addMark(location)
             }
-            addMark(location)
-          }
-        </script>
-        <!-- END MAP SECTION -->
+          </script>
+          <!-- END MAP SECTION -->
+        </div>
+      </div>
     </div>
   </div>
   <div class = "row">
     <div class="col-md-10 col-md-offset-1">
+      <div class="well">
+
+
       <h2>Park Details</h2>
       <dl class="dl-horizontal">
         <dt>Name:</dt>
@@ -77,6 +199,7 @@
         <li><a href="/users/$user.getId()">$user.getUsername()</a></li>
         #end
       </ol>
+      </div>
     </div>
   </div>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=$MAPS_KEY&callback=initMap"></script>
