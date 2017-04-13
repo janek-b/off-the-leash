@@ -49,13 +49,26 @@
   <div class = "row">
     <div class="col-md-10 col-md-offset-1">
       <h2>Park Details</h2>
-      <ul>
-        <li>Name: $park.getName()</li>
-        <li>Location: $park.getLocation()</li>
-        <li>Size: $park.getSize()</li>
-        <li>Fenced: $park.isFenced()</li>
-        <li>Small: $park.hasSmallDogsArea()</li>
-      </ul>
+      <dl class="dl-horizontal">
+        <dt>Name:</dt>
+        <dd>$park.getName()</dd>
+        <dt>Location:</dt>
+        <dd>$park.getLocation()</dd>
+        <dt>Size:</dt>
+        <dd>$park.getSize()</dd>
+        <dt>Fenced:</dt>
+        #if($park.isFenced())
+          <dd>Yes</dd>
+        #else
+          <dd>No</dd>
+        #end
+        <dt>Small Dog Area:</dt>
+        #if($park.hasSmallDogsArea())
+          <dd>Yes</dd>
+        #else
+          <dd>No</dd>
+        #end
+      </dl>
       <hr>
       <h3>Currently checked-in</h3>
       <ol>

@@ -44,16 +44,12 @@
                   <dt>Breed:</dt>
                   <dd>$dog.getBreed()</dd>
                   <dt>Altered:</dt>
-                  <dd>$dog.altered()</dd>
+                  #if($dog.altered())
+                    <dd>Yes</dd>
+                  #else
+                    <dd>No</dd>
+                  #end
                 </dl>
-                <!-- Pack Member Name: $dog.getName();
-                $dog.getName()'s Sex: $dog.getGender();
-                $dog.getName()'s Breed: $dog.getBreed();
-                #if($dog.altered())
-                  $dog.getName() <span style="font-weight:bold">is altered</span>
-                #else
-                  $dog.getName() is<span style="font-weight:bold"> not </span> altered
-                #end -->
               </div>
               <div class="col-md-4">
                 <div class="form-group">
