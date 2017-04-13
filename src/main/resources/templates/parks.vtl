@@ -161,8 +161,13 @@
           <div class="form-group">
             <label for="sort">Sort By:</label>
             <select class="form-control" name="sort">
-              <option value="alpha">Name</option>
-              <option value="rating">Rating</option>
+              #if($sort.equals("rating"))
+                <option value="alpha">Name</option>
+                <option selected value="rating">Rating</option>
+              #else
+                <option value="alpha">Name</option>
+                <option value="rating">Rating</option>
+              #end
             </select>
           </div>
           <div class="form-group">
