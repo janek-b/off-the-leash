@@ -19,13 +19,15 @@
         <ul class="nav navbar-nav">
           <li><a href="/">Home</a></li>
           <li><a href="/parks">Parks</a></li>
+          #if($user)
+            <li><a href="/users/$user.getId()">Profile</a></li>
+          #end
         </ul>
         <ul id="loginSection" class="nav navbar-nav navbar-right">
           <li class="dropdown">
             #if($user)
               <button class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expaned="false">Signed in as $user.getUsername()</button>
               <ul class="dropdown-menu">
-                <li><a href="/users/$user.getId()">Account</a></li>
                 #if($user.getAdmin())
                   <li><a href="/admin">Admin</a></li>
                 #end
