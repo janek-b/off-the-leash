@@ -3,63 +3,100 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+        <title>off-the-leash</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+        <link rel="stylesheet" href="/app.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="/js/scripts.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Finger+Paint|Indie+Flower|Libre+Franklin|Sarala" rel="stylesheet">
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/4.10.1/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/4.10.1/firebase-auth.js"></script>
-    <script defer src="/__/firebase/4.10.1/firebase-database.js"></script>
-    <script defer src="/__/firebase/4.10.1/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/4.10.1/firebase-storage.js"></script>
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="/__/firebase/init.js"></script>
+      </head>
+      <body>
+        <nav class="navbar navbar-fixed-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="/">
+                <img class="img-responsive center-block" src="/images/paw-logo.png" alt="Brand"/>
+              </a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li><a class="text-muted" href="/">Home</a></li>
+              <li><a class="text-muted" href="/parks">Parks</a></li>
+              #if($user)
+                <li><a class="text-muted" href="/users/$user.getId()">Profile</a></li>
+              #end
+            </ul>
+            <ul id="loginSection" class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                #if($user)
+                  <button class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expaned="false">Signed in as $user.getUsername()</button>
+                  <ul class="dropdown-menu">
+                    #if($user.getAdmin())
+                      <li style="text-align:center"><a href="/admin">Admin</a></li>
+                      <hr>
+                    #end
+                    <li style="text-align:center"><a href="/logout">Logout</a></li>
+                  </ul>
+                #else
+                  <button class="btn btn-default navbar-btn" id="loginLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expaned="false">Login <span class="caret"></span></button>
+                  <form id="loginForm" class="dropdown-menu" aria-labelledby="loginlabel" action="/login" method="post">
+                    #if($wrongPass)
+                      <div class="alert alert-danger" role="alert">Incorrect Password</div>
+                    #end
+                    <div class="form-group">
+                      <label for="username">Username</label>
+                      <input type="text" name="username" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" name="password" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-block btn-success">Login</button>
+                    </div>
+                  </form>
+                #end
+              </li>
+            </ul>
+            <form class="navbar-form navbar-right" action="/search">
+              <div class="form-group">
+                <input id="searchBox" type="text" name="searchInput" class="form-control" placeholder="Search" required>
+              </div>
+              <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+            </form>
+          </div>
+        </nav>
+        <!-- begin inner template-->
+          #parse( $template )
+        <!-- end inner template-->
+        <nav class="navbar navbar-fixed-bottom">
+          <div class="container-fluid">
+            <p class="navbar-text">Copyright (c) 2017</p>
+            <p class="navbar-text">This software is licensed under the MIT license.</p>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a class="text-muted" href="https://github.com/finneywhat" target="_blank">Chris Finney</a></li>
+              <li><a class="text-muted" href="https://github.com/gstuart" target="_blank">Grace Stuart</a></li>
+              <li><a class="text-muted" href="https://github.com/jwalsh370" target="_blank">Jahan Walsh</a></li>
+              <li><a class="text-muted" href="https://github.com/janek-b" target="_blank">Janek Brandt</a></li>
+            </ul>
+          </div>
+        </nav>
+      </body>
+      <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+        <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyCOnSzc17uPvg6_mXbwFoesYuamg8QGJFI",
+          authDomain: "offleash-1506315725417.firebaseapp.com",
+          databaseURL: "https://offleash-1506315725417.firebaseio.com",
+          projectId: "offleash-1506315725417",
+          storageBucket: "offleash-1506315725417.appspot.com",
+          messagingSenderId: "562303531162"
+        };
+        firebase.initializeApp(config);
+        </script>
+    </html>
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-        try {
-          let app = firebase.app();
-          let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
-          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-  </body>
 </html>

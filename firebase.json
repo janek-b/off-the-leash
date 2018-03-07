@@ -9,12 +9,11 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "redirects": [
-    {
-      "source": "/",
-      "destination": "/src/main/resources/templates/layout.vtl",
-      "type": 302
-    }
-  ]
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
   }
 }
