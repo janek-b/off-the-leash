@@ -1,0 +1,228 @@
+<!--user.vtl-->
+<div class="container">
+  <div class = "row">
+    <div class="col-md-10 col-md-offset-1">
+      <h2>Pack Info</h2>
+      #if($profile.getAllDogs().size() > 0)
+        #foreach ($dog in $profile.getAllDogs())
+          <div class="row">
+            <!-- <div class="col-md-2 col-md-offset-1"> -->
+              <!-- dog image -->
+              <!-- dog favorite -->
+            <!-- </div> -->
+            <div class="col-md-4">
+              <dl class="dl-horizontal">
+                <dt>Name:</dt>
+                <dd>$dog.getName()</dd>
+                <dt>Gender:</dt>
+                <dd>$dog.getGender()</dd>
+                <dt>Breed:</dt>
+                <dd>$dog.getBreed()</dd>
+                <dt>Altered:</dt>
+                #if($dog.altered())
+                  <dd>Yes</dd>
+                #else
+                  <dd>No</dd>
+                #end
+              </dl>
+            </div>
+          </div>
+        #end
+      #else
+        <h4>Currently a Lone Wolf</h4>
+      #end
+      <hr>
+    </div>
+  </div>
+  <div class = "row">
+    <div class="col-md-10 col-md-offset-1">
+      <h2>Current Park</h2>
+      #if($coordinates)
+        <h4><a href="/parks/$profile.getCheckedIn().getId()">$profile.getCheckedIn().getName()</a></h4>
+        <div id="map"></div>
+        <script>
+          function initMap() {
+            var location = $coordinates;
+            var map = new google.maps.Map(document.getElementById('map'), {
+              center: location,
+              scrollwheel: false,
+              zoom: 14
+            });
+
+            function addMark(location) {
+              var marker = new google.maps.Marker({
+                map: map,
+                position: location,
+                title: "$profile.getCheckedIn().getName()"
+              });
+              var infowindow = new google.maps.InfoWindow({
+                content: '<h4><a href="/parks/$profile.getCheckedIn().getId()">$profile.getCheckedIn().getName()</a></h4>'
+              });
+              marker.addListener('click', function() {
+                infowindow.open(map, marker);
+              });
+            }
+
+            var styles = {
+              default: null,
+              retro: [
+                {elementType: 'geometry', stylers: [{color: '#ebe3cd'}]},
+                {elementType: 'labels.text.fill', stylers: [{color: '#523735'}]},
+                {elementType: 'labels.text.stroke', stylers: [{color: '#f5f1e6'}]},
+                {
+                  featureType: 'administrative',
+                  elementType: 'geometry.stroke',
+                  stylers: [{color: '#c9b2a6'}]
+                },
+                {
+                  featureType: 'administrative.land_parcel',
+                  elementType: 'geometry.stroke',
+                  stylers: [{color: '#dcd2be'}]
+                },
+                {
+                  featureType: 'administrative.land_parcel',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#ae9e90'}]
+                },
+                {
+                  featureType: 'landscape.natural',
+                  elementType: 'geometry',
+                  stylers: [{color: '#dfd2ae'}]
+                },
+                {
+                  featureType: 'poi',
+                  elementType: 'geometry',
+                  stylers: [{color: '#dfd2ae'}]
+                },
+                {
+                  featureType: 'poi',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#93817c'}]
+                },
+                {
+                  featureType: 'poi.park',
+                  elementType: 'geometry.fill',
+                  stylers: [{color: '#a5b076'}]
+                },
+                {
+                  featureType: 'poi.park',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#447530'}]
+                },
+                {
+                  featureType: 'road',
+                  elementType: 'geometry',
+                  stylers: [{color: '#f5f1e6'}]
+                },
+                {
+                  featureType: 'road.arterial',
+                  elementType: 'geometry',
+                  stylers: [{color: '#fdfcf8'}]
+                },
+                {
+                  featureType: 'road.highway',
+                  elementType: 'geometry',
+                  stylers: [{color: '#f8c967'}]
+                },
+                {
+                  featureType: 'road.highway',
+                  elementType: 'geometry.stroke',
+                  stylers: [{color: '#e9bc62'}]
+                },
+                {
+                  featureType: 'road.highway.controlled_access',
+                  elementType: 'geometry',
+                  stylers: [{color: '#e98d58'}]
+                },
+                {
+                  featureType: 'road.highway.controlled_access',
+                  elementType: 'geometry.stroke',
+                  stylers: [{color: '#db8555'}]
+                },
+                {
+                  featureType: 'road.local',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#806b63'}]
+                },
+                {
+                  featureType: 'transit.line',
+                  elementType: 'geometry',
+                  stylers: [{color: '#dfd2ae'}]
+                },
+                {
+                  featureType: 'transit.line',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#8f7d77'}]
+                },
+                {
+                  featureType: 'transit.line',
+                  elementType: 'labels.text.stroke',
+                  stylers: [{color: '#ebe3cd'}]
+                },
+                {
+                  featureType: 'transit.station',
+                  elementType: 'geometry',
+                  stylers: [{color: '#dfd2ae'}]
+                },
+                {
+                  featureType: 'water',
+                  elementType: 'geometry.fill',
+                  stylers: [{color: '#b9d3c2'}]
+                },
+                {
+                  featureType: 'water',
+                  elementType: 'labels.text.fill',
+                  stylers: [{color: '#92998d'}]
+                }
+              ]
+            };
+
+            map.setOptions({styles: styles['retro']});
+
+            addMark(location);
+          }
+        </script>
+      #else
+        <h4>Not currently at a park</h4>
+      #end
+      <hr>
+    </div>
+  </div>
+  <div class = "row">
+    <div class="col-md-10 col-md-offset-1">
+      <h2>Favorite Parks</h2>
+      #if($profile.getFavoriteParks().size() > 0)
+        #foreach ($park in $profile.getFavoriteParks())
+          <ul>
+            <li><a href="/parks/$park.getId()">$park.getName()</a></li>
+          </ul>
+        #end
+      #else
+        <h4>Pack leader does not have any favorite parks.</h4>
+      #end
+      <hr>
+    </div>
+  </div>
+  <div class = "row">
+    <div class="col-md-10 col-md-offset-1">
+      <h2>Pack Leader</h2>
+      #if($profile.getName())
+        <dl class="dl-horizontal">
+          <dt>Name:</dt>
+          <dd>$profile.getName()</dd>
+          <dt>Username:</dt>
+          <dd>$profile.getUsername()</dd>
+        </dl>
+      #else
+        <dl class="dl-horizontal">
+          <dt>Username:</dt>
+          <dd>$profile.getUsername()</dd>
+        </dl>
+      #end
+        <!-- maybe add city, state, zip to user.java and database.  -->
+      <hr>
+    </div>
+  </div>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=$MAPS_KEY&callback=initMap"></script>
+</div>
+<!--user.vtl-->
