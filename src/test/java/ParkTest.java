@@ -202,7 +202,7 @@ public class ParkTest {
     testPark.save();
     Map<String, Object> testCoordinates = new HashMap<String, Object>();
     testCoordinates.put("lat", 45.5230622);
-    testCoordinates.put("lng", -122.6764816);
+    testCoordinates.put("lng", -122.6764815);
     assertEquals(testCoordinates, testPark.getCoordinates());
   }
 
@@ -218,7 +218,7 @@ public class ParkTest {
     location1.put("id", testPark1.getId());
     Map<String, Object> testCoordinates1 = new HashMap<String, Object>();
     testCoordinates1.put("lat", 45.5230622);
-    testCoordinates1.put("lng", -122.6764816);
+    testCoordinates1.put("lng", -122.6764815);
     location1.put("position", testCoordinates1);
     allCoordinates.add(location1);
     Map<String, Object> location2 = new HashMap<String, Object>();
@@ -226,7 +226,7 @@ public class ParkTest {
     location2.put("id", testPark2.getId());
     Map<String, Object> testCoordinates2 = new HashMap<String, Object>();
     testCoordinates2.put("lat", 45.5228939);
-    testCoordinates2.put("lng", -122.989827);
+    testCoordinates2.put("lng",-122.989827);
     location2.put("position", testCoordinates2);
     allCoordinates.add(location2);
     assertEquals(allCoordinates, Park.getAllCoordinates());

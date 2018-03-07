@@ -15,14 +15,14 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -47,7 +47,7 @@ CREATE TABLE checkins (
 );
 
 
-ALTER TABLE checkins OWNER TO "Grace";
+ALTER TABLE checkins OWNER TO "jahanwalsh";
 
 --
 -- Name: checkins_id_seq; Type: SEQUENCE; Schema: public; Owner: Grace
@@ -61,7 +61,7 @@ CREATE SEQUENCE checkins_id_seq
     CACHE 1;
 
 
-ALTER TABLE checkins_id_seq OWNER TO "Grace";
+ALTER TABLE checkins_id_seq OWNER TO "jahanwalsh";
 
 --
 -- Name: checkins_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Grace
@@ -84,7 +84,7 @@ CREATE TABLE dogs (
 );
 
 
-ALTER TABLE dogs OWNER TO "Grace";
+ALTER TABLE dogs OWNER TO "jahanwalsh";
 
 --
 -- Name: dogs_id_seq; Type: SEQUENCE; Schema: public; Owner: Grace
@@ -98,7 +98,7 @@ CREATE SEQUENCE dogs_id_seq
     CACHE 1;
 
 
-ALTER TABLE dogs_id_seq OWNER TO "Grace";
+ALTER TABLE dogs_id_seq OWNER TO "jahanwalsh";
 
 --
 -- Name: dogs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Grace
@@ -125,7 +125,7 @@ CREATE TABLE parks (
 );
 
 
-ALTER TABLE parks OWNER TO "Grace";
+ALTER TABLE parks OWNER TO "jahanwalsh";
 
 --
 -- Name: parks_id_seq; Type: SEQUENCE; Schema: public; Owner: Grace
@@ -139,7 +139,7 @@ CREATE SEQUENCE parks_id_seq
     CACHE 1;
 
 
-ALTER TABLE parks_id_seq OWNER TO "Grace";
+ALTER TABLE parks_id_seq OWNER TO "jahanwalsh";
 
 --
 -- Name: parks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Grace
@@ -161,7 +161,7 @@ CREATE TABLE reviews (
 );
 
 
-ALTER TABLE reviews OWNER TO "Grace";
+ALTER TABLE reviews OWNER TO "jahanwalsh";
 
 --
 -- Name: reviews_id_seq; Type: SEQUENCE; Schema: public; Owner: Grace
@@ -175,7 +175,7 @@ CREATE SEQUENCE reviews_id_seq
     CACHE 1;
 
 
-ALTER TABLE reviews_id_seq OWNER TO "Grace";
+ALTER TABLE reviews_id_seq OWNER TO "jahanwalsh";
 
 --
 -- Name: reviews_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Grace
@@ -197,7 +197,7 @@ CREATE TABLE users (
 );
 
 
-ALTER TABLE users OWNER TO "Grace";
+ALTER TABLE users OWNER TO "jahanwalsh";
 
 --
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: Grace
@@ -211,7 +211,7 @@ CREATE SEQUENCE users_id_seq
     CACHE 1;
 
 
-ALTER TABLE users_id_seq OWNER TO "Grace";
+ALTER TABLE users_id_seq OWNER TO "jahanwalsh";
 
 --
 -- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Grace
@@ -232,7 +232,7 @@ CREATE TABLE votes (
 );
 
 
-ALTER TABLE votes OWNER TO "Grace";
+ALTER TABLE votes OWNER TO "jahanwalsh";
 
 --
 -- Name: votes_id_seq; Type: SEQUENCE; Schema: public; Owner: Grace
@@ -246,7 +246,7 @@ CREATE SEQUENCE votes_id_seq
     CACHE 1;
 
 
-ALTER TABLE votes_id_seq OWNER TO "Grace";
+ALTER TABLE votes_id_seq OWNER TO "jahanwalsh";
 
 --
 -- Name: votes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Grace
